@@ -1,21 +1,33 @@
 package aor.SimplePlugin;
-import org.bukkit.Block;
-import org.bukkit.BlockFace;
+
 import org.bukkit.Material;
-import org.bukkit.event.block.BlockCanBuildEvent;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockListener;
-import org.bukkit.event.block.BlockPhysicsEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 
-/**
- * <pluginname> block listener
- * @author <yourname>
+/* Example Template
+ * By Adamki11s
+ * HUGE Plugin Tutorial
  */
-public class SPBlockListener extends BlockListener {
-    private final SimplePlugin plugin;
 
-    public SPBlockListener(final SimplePlugin plugin) {
-        this.plugin = plugin;
-    }
+public class SPBlockListener extends BlockListener{
 
-    //put all Block related code here
+	//You HAVE to have this!
+	public static SimplePlugin plugin;
+	
+	public SPBlockListener(SimplePlugin instance) {
+		plugin = instance;
+	}
+	//You HAVE to have this!
+
+	public void onBlockPlace(BlockPlaceEvent event){
+		
+		Player player = event.getPlayer();
+		Block block = event.getBlock();
+		Material mat = block.getType(); 
+
+		player.sendMessage("You placed a block with ID : " + mat);//Display a message to the player telling them what type of block they placed.
+
+	}
 }
