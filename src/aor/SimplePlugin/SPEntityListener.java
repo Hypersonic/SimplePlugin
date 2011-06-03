@@ -18,14 +18,4 @@ public class SPEntityListener extends EntityListener {
 		plugin = instance;
 	}
 
-	public void onEntityDamage(EntityDamageEvent event){
-		
-		if(event.getEntity() instanceof Player){
-		//If the entity being damaged is a player then...
-
-			event.setCancelled(true);
-		//Cancel the damage event, this will give the player unlimited health
-		}
-	}
-
 }
