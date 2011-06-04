@@ -25,7 +25,7 @@ public class SPPlayerListener extends PlayerListener {
 	}
 
 	public void onPlayerInteract(PlayerInteractEvent event) {
-		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+		if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			/// Blah blah blah
 			Player player = event.getPlayer();
 	//		player.sendMessage("You just right clicked something! Congratz!");
