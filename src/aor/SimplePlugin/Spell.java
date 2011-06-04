@@ -2,12 +2,22 @@
 
 package aor.SimplePlugin;
 
+import org.bukkit.entity.Player;
+
 public class Spell {
 	
-//	public String test = "Hello!";
+	public Spell() { } // Empty constructor.
+	
+	public String spellName = new String();
 	
 	public String returnHello()
 	{
-		return "Hello!";
+		return "The spell is working!";
+	}
+	
+
+	public void castSpell(Player player)
+	{
+		player.sendMessage("You're trying to cast a spell that's not set!");
 	}
 }

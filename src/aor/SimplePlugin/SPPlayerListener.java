@@ -10,7 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Location;
 import org.bukkit.World;
-import aor.SimplePlugin.Spell;
+import aor.SimplePlugin.Spells.TestSpell;
 
 public class SPPlayerListener extends PlayerListener {
 	public static SimplePlugin plugin;
@@ -23,16 +23,11 @@ public class SPPlayerListener extends PlayerListener {
 	{
 		Player player = event.getPlayer(); // Set the player object.
 		
-		SpellBook playerBook = new SpellBook();
+		SimplePlugin.playerBooks.put(player.getName(), new SpellBook()); // Add a new spellbook for the player to the hashmap.
 		
-		SimplePlugin.playerBooks.put(player.getName(), playerBook); // Add to the hashmap.
+		SimplePlugin.playerBooks.get(player.getName()).registerSpell(new TestSpell()); // Register TestSpell.
 		
-		Spell sp = new Spell();
-		
-		SimplePlugin.playerBooks.get(player.getName()).registerSpell(sp);
-		
-//		player.getServer().broadcastMessage("Ew! You're hand's wet!");
-		player.sendMessage(SimplePlugin.playerBooks.get(player.getName()).returnFirstEntry().returnHello());
+		SimplePlugin.playerBooks.get(player.getName()).returnFirstEntry().castSpell(player); // Cast the first spell in the registry.
 		
 		
 	}
