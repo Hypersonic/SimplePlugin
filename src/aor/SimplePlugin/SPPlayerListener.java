@@ -28,7 +28,7 @@ public class SPPlayerListener extends PlayerListener {
 			/// Blah blah blah
 			Player player = event.getPlayer();
 			player.sendMessage("You just right clicked something! Congratz!");
-			Block block = player.getTargetBlock(null, 100);
+			Block block = event.getClickedBlock();
 			block.setType(Material.BEDROCK);
 			
 		}
