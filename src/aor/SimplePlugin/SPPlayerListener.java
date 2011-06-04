@@ -28,7 +28,7 @@ public class SPPlayerListener extends PlayerListener {
 		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			/// Blah blah blah
 			Player player = event.getPlayer();
-			player.sendMessage("You just right clicked something! Congratz!");
+	//		player.sendMessage("You just right clicked something! Congratz!");
 			Block block = event.getClickedBlock();
 			ItemStack itemInHand = player.getItemInHand();
 			if (itemInHand.getType() == Material.GOLD_HOE) {
