@@ -21,13 +21,15 @@ public class SPBlockListener extends BlockListener{
 	}
 	//You HAVE to have this!
 
-	public void onBlockPlace(BlockPlaceEvent event){
+/*	public void onBlockPlace(BlockPlaceEvent event){
 		
 		Player player = event.getPlayer();
 		Block block = event.getBlock();
 		Material mat = block.getType(); 
+		
 
 		player.sendMessage("You placed a block with ID : " + mat);//Display a message to the player telling them what type of block they placed.
 
 	}
+	*/
 }
