@@ -1,6 +1,7 @@
 package aor.SimplePlugin;
 
+import java.util.ArrayList;
+
 public class SpellBook {
-	public static SimplePlugin plugin; // Apparantly we have to have this?
 
 }
