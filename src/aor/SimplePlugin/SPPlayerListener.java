@@ -26,7 +26,7 @@ public class SPPlayerListener extends PlayerListener {
 		}
 	}
 	
-	public void onPlayerMove(PlayerMoveEvent event){
+/*	public void onPlayerMove(PlayerMoveEvent event){
 		
 		Player player = event.getPlayer();
 		Location playerLoc = player.getLocation();
@@ -35,5 +35,6 @@ public class SPPlayerListener extends PlayerListener {
 		player.sendMessage("Your Y Coordinates : " + playerLoc.getY());
 		player.sendMessage("Your Z Coordinates : " + playerLoc.getZ());
 	}
+	*/
 
 }
