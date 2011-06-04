@@ -23,15 +23,25 @@ public class SPPlayerListener extends PlayerListener {
 	public SPPlayerListener(SimplePlugin instance) {
 		plugin = instance;
 	}
-
+	
+	public boolean clickedWithHoe(PlayerInteractEvent event) { // The function clickedWithHoe.
+		Player player = event.getPlayer();
+		ItemStack itemInHand = player.getItemInHand();
+		if (itemInHand.getType() == Material.GOLD_HOE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			/// Blah blah blah
 			Player player = event.getPlayer();
 	//		player.sendMessage("You just right clicked something! Congratz!");
 			Block block = event.getClickedBlock();
-			ItemStack itemInHand = player.getItemInHand();
-			if (itemInHand.getType() == Material.GOLD_HOE) {
+			if (clickedWithHoe(event)) {
 				block.setType(Material.BEDROCK); // Set the material to bedrock 'cause they got a GOLD HOE!
 			}
 			
