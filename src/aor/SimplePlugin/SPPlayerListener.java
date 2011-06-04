@@ -59,7 +59,13 @@ public class SPPlayerListener extends PlayerListener {
                else{
                     currentSpell.put(player,currentSpell.get(player)++);//adds one to the players current spell value as long as it is a spell
                }
-        }
+               //creates a switch that says which spell the player has selected. The variable spell stores the name, so it can be printed.
+               String spell="";
+               switch(currentSpell.get(player)){
+                    case 0: spell="name0"; break;
+                    case 1: spell="name1"; break;
+               }
+               player.sendmessage("You now have the "+spell+" spell selected");        }
     }
     
 /*  public void onPlayerMove(PlayerMoveEvent event){
