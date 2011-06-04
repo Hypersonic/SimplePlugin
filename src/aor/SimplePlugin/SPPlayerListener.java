@@ -1,3 +1,5 @@
+package aor.SimplePlugin;
+
 import java.util.HashSet;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -28,7 +30,7 @@ public class SPPlayerListener extends PlayerListener {
         //player.sendMessage("You just right clicked something! Congratz!");
         if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)&&event.getPlayer().getItemInHand().getType() == Material.GOLD_HOE && event.getPlayer().getTargetBlock(null, 256).getType() != Material.AIR) {
 			event.getPlayer().getTargetBlock(null, 256).setType(Material.BEDROCK); // Set the material to bedrock 'cause they got a GOLD HOE!
-			event.getPlayer().getWorld().strikeLightning(event.getPlayer().getTargetBlock(null, 256).getLocation());
+			event.getPlayer().getWorld().strikeLightningEffect(event.getPlayer().getTargetBlock(null, 256).getLocation());
         }
     }
     
