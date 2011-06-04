@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=instance
+comment0.target=SPPlayerListener(aor.SimplePlugin.SimplePlugin)
+comment1.params=event
+comment1.target=void\ onPlayerInteract(org.bukkit.event.player.PlayerInteractEvent)
+numComments=2
