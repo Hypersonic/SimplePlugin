@@ -2,7 +2,7 @@ SimplePlugin v0.01 -- a basic magic plugin for Minecraft servers running Bukkit.
 
 
 TODO:
-    - A "magic wand": the gold hoe (This opens up the usage of the line for aim)
+    - A "magic wand": the gold hoe
     - Permissions
     - Basic spells:
         | Alchemy: turning items into other items in a furnace. Paying for it can be whatever item is in the bottom?
