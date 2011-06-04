@@ -28,9 +28,16 @@ public class SPPlayerListener extends PlayerListener {
         /// Blah blah blah
         //Player player = event.getPlayer();
         //player.sendMessage("You just right clicked something! Congratz!");
+    	
+    	//Right clicking with golden hoe
         if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)&&event.getPlayer().getItemInHand().getType() == Material.GOLD_HOE && event.getPlayer().getTargetBlock(null, 256).getType() != Material.AIR) {
 			event.getPlayer().getTargetBlock(null, 256).setType(Material.BEDROCK); // Set the material to bedrock 'cause they got a GOLD HOE!
 			event.getPlayer().getWorld().strikeLightningEffect(event.getPlayer().getTargetBlock(null, 256).getLocation());
+        }
+        
+        //Left clicking with golden hoe
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)&&event.getPlayer().getItemInHand().getType() == Material.GOLD_HOE && event.getPlayer().getTargetBlock(null, 256).getType() != Material.AIR){
+        	event.getPlayer().sendMessage("DaDadadaaaaaaa!");
         }
     }
     
