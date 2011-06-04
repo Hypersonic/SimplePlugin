@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.block.Block;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 /* Example Template
  * By Adamki11s
  * HUGE Plugin Tutorial
@@ -24,12 +25,16 @@ public class SPPlayerListener extends PlayerListener {
 	}
 
 	public void onPlayerInteract(PlayerInteractEvent event) {
-		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+		if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			/// Blah blah blah
 			Player player = event.getPlayer();
-			player.sendMessage("You just right clicked something! Congratz!");
-			Block block = player.getTargetBlock(null, 100);
-			block.setType(Material.BEDROCK);
+	//		player.sendMessage("You just right clicked something! Congratz!");
+			Block block = event.getClickedBlock();
+			ItemStack itemInHand = player.getItemInHand();
+			if (itemInHand.getType() == Material.GOLD_HOE) {
+				block.setType(Material.BEDROCK); // Set the material to bedrock 'cause they got a GOLD HOE!
+			}
+			
 			
 		}
 	}

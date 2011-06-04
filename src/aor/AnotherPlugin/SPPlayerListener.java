@@ -1,4 +1,5 @@
- 
+package aor.AnotherPlugin;
+
 import org.bukkit.inventory.*;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -25,7 +26,7 @@ public class SPPlayerListener extends PlayerListener {
             //get the player
             Player player = event.getPlayer();
             //check if the player is holding a gold hoe
-            if((player.getItemInHand()).getType()==Material.GOLD_HOE){
+            if((player.getItemInHand()).getType()== Material.GOLD_HOE){
                 //give the player a message saying Hello World!
                 player.sendMessage("Hello World!");
             }
