@@ -1,3 +1,4 @@
+package aor.SimplePlugin;
   //Your package
 
 import java.util.logging.Logger;
