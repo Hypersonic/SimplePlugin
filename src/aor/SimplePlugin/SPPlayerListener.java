@@ -1,13 +1,14 @@
 package aor.SimplePlugin;
 
+
+
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.block.Block;
-import org.bukkit.Material;
+
 /* Example Template
  * By Adamki11s
  * HUGE Plugin Tutorial
@@ -25,8 +26,7 @@ public class SPPlayerListener extends PlayerListener {
 			/// Blah blah blah
 			Player player = event.getPlayer();
 			player.sendMessage("You just right clicked something! Congratz!");
-			Block block = Player.getTargetBlock(null, 101);
-			block.setType(BEDROCK);
+			
 			
 		}
 	}
