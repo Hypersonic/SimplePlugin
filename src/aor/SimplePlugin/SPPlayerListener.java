@@ -50,8 +50,15 @@ public class SPPlayerListener extends PlayerListener {
                                  break;
                       }
         }
-        //Left clicking with golden hoe        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)&&player.getItemInHand().getType() == Material.GOLD_HOE && player.getTargetBlock(null, 256).getType() != Material.AIR){
-        	player.sendMessage("DaDadadaaaaaaa!");
+        //Left clicking with golden hoe
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)&&player.getItemInHand().getType() == Material.GOLD_HOE && player.getTargetBlock(null, 256).getType() != Material.AIR){
+        	      player.sendMessage("DaDadadaaaaaaa!");
+               if(currentSpell.get(player)>1||currentSpell.get(player)<0){
+                    currentSpell.put(player,0);
+               }
+               else{
+                    currentSpell.put(player,currentSpell.get(player)++);
+               }
         }
     }
     
