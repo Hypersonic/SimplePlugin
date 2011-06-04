@@ -17,7 +17,7 @@ import org.bukkit.World;
  */
 public class SPPlayerListener extends PlayerListener {
     public static SimplePlugin plugin;
-    
+    public static Map<Player, int> currentSpell = new HashMap<Player, int>();
     public SPPlayerListener(SimplePlugin instance) {
         plugin = instance;
     }
@@ -26,18 +26,20 @@ public class SPPlayerListener extends PlayerListener {
     }*/
     public void onPlayerInteract(PlayerInteractEvent event) {
         /// Blah blah blah
-        //Player player = event.getPlayer();
+        Player player = event.getPlayer();
         //player.sendMessage("You just right clicked something! Congratz!");
-    	
+    	if(!currentSpell.containsKey(player){
+               currentSpell.put(player,0);
+         }
     	//Right clicking with golden hoe
-        if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)&&event.getPlayer().getItemInHand().getType() == Material.GOLD_HOE && event.getPlayer().getTargetBlock(null, 256).getType() != Material.AIR) {
-			event.getPlayer().getTargetBlock(null, 256).setType(Material.BEDROCK); // Set the material to bedrock 'cause they got a GOLD HOE!
-			event.getPlayer().getWorld().strikeLightningEffect(event.getPlayer().getTargetBlock(null, 256).getLocation());
+        if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)&&player.getItemInHand().getType() == Material.GOLD_HOE && player.getTargetBlock(null, 256).getType() != Material.AIR) {
+			player.getTargetBlock(null, 256).setType(Material.BEDROCK); // Set the material to bedrock 'cause they got a GOLD HOE!
+			player.getWorld().strikeLightningEffect(event.getPlayer().getTargetBlock(null, 256).getLocation());
         }
         
         //Left clicking with golden hoe
-        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)&&event.getPlayer().getItemInHand().getType() == Material.GOLD_HOE && event.getPlayer().getTargetBlock(null, 256).getType() != Material.AIR){
-        	event.getPlayer().sendMessage("DaDadadaaaaaaa!");
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)&&player.getItemInHand().getType() == Material.GOLD_HOE && player.getTargetBlock(null, 256).getType() != Material.AIR){
+        	player.sendMessage("DaDadadaaaaaaa!");
         }
     }
     
