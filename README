@@ -2,14 +2,18 @@ SimplePlugin v0.01 -- a basic magic plugin for Minecraft servers running Bukkit.
 
 
 TODO:
-    - A "magic wand": the fishing rod? (This opens up the usage of the line for aim)
+    - A "magic wand": the gold hoe (This opens up the usage of the line for aim)
     - Basic spells:
-        | Alchemy: turning items into other items.
+        | Alchemy: turning items into other items in a furnace. Paying for it can be whatever item is in the bottom?
         | Combat: offensive/defensive/support spells
             > Healing
             > Summoning defenses (think summoning a temporary cobblestone wall in front of you)
             > Offensive spells (think Ghast explosions)
+            > Summon Mobs
         | Building spells
+            > Summon walls or cuboids, using the materials in your inventory and some form of payment (magic points?).
         | Mining-related spells
+            > Compass points to the nearest of a certain type of ore or maybe you get the coords?
         | Warps/teleportation in general.
+            > Something like /j, /ascend, /descend and maybe something between worlds.
     - System like magic points or magic resources.
