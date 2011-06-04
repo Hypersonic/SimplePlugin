@@ -2,7 +2,6 @@
 comment0.params=instance
 comment0.target=SPPlayerListener(SimplePlugin)
 comment1.params=event
-comment1.target=boolean\ clickedWithHoe(org.bukkit.event.player.PlayerInteractEvent)
-comment2.params=event
-comment2.target=void\ onPlayerInteract(org.bukkit.event.player.PlayerInteractEvent)
-numComments=3
+comment1.target=void\ onPlayerInteract(org.bukkit.event.player.PlayerInteractEvent)
+comment1.text=ublic\ boolean\ clickedWithHoe(PlayerInteractEvent\ event)\ {\ //\ The\ function\ clickedWithHoe.\r\n\ \ \ \ \ \ \ \ return\ event.getPlayer().getItemInHand().getType()\ \=\=\ Material.GOLD_HOE;\r\n}
+numComments=2
