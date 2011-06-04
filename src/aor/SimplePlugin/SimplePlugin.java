@@ -21,7 +21,7 @@ public class SimplePlugin extends JavaPlugin {
     //ClassListeners
         private final SPPlayerListener playerListener = new SPPlayerListener(this);
 	private final SPBlockListener blockListener = new SPBlockListener(this);
-	private final SPPlayerListener entityListener = new SPPlayerListener(this);
+//	private final SPPlayerListener entityListener = new SPPlayerListener(this);
     //ClassListeners
 	
 	Logger log = Logger.getLogger("Minecraft");//Define your logger
