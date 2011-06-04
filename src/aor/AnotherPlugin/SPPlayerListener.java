@@ -6,7 +6,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.Material.*;
+import org.bukkit.Material;
 /* Example Template
  * By Adamki11s
  * HUGE Plugin Tutorial

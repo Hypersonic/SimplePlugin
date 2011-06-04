@@ -1,4 +1,4 @@
-package aor.SimplePlugin; //Your package
+  //Your package
 
 import java.util.logging.Logger;
 import org.bukkit.Server;
