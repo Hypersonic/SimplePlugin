@@ -17,6 +17,7 @@ import org.bukkit.World;
  */
 public class SPPlayerListener extends PlayerListener {
     public static SimplePlugin plugin;
+    //create a hashmap for the list of the players' currently selected spells
     public static Map<Player, int> currentSpell = new HashMap<Player, int>();
     public SPPlayerListener(SimplePlugin instance) {
         plugin = instance;
@@ -28,17 +29,28 @@ public class SPPlayerListener extends PlayerListener {
         /// Blah blah blah
         Player player = event.getPlayer();
         //player.sendMessage("You just right clicked something! Congratz!");
+         //if the player has not yet tried to do a spell, set the spell to the default of 0.
     	if(!currentSpell.containsKey(player){
                currentSpell.put(player,0);
          }
+         //a switch that goes to the correct spell, based on the one selected
     	//Right clicking with golden hoe
         if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)&&player.getItemInHand().getType() == Material.GOLD_HOE && player.getTargetBlock(null, 256).getType() != Material.AIR) {
-			player.getTargetBlock(null, 256).setType(Material.BEDROCK); // Set the material to bedrock 'cause they got a GOLD HOE!
-			player.getWorld().strikeLightningEffect(event.getPlayer().getTargetBlock(null, 256).getLocation());
+                      //starts the switch that changes what spell is executed, depending upon which is set in the hashmap
+                      switch(currentSpell.get(player)){
+                            //the first spell
+                           case 0:
+			      player.getTargetBlock(null, 256).setType(Material.BEDROCK); // Set the material to bedrock 'cause they got a GOLD HOE!
+		               player.getWorld().strikeLightningEffect(event.getPlayer().getTargetBlock(null, 256).getLocation());
+                                 break;
+                           case 1://a template for a second spell
+                                 break;
+                           default://in case an invalid spell is selected
+                                 currentSpell.put(player,0);
+                                 break;
+                      }
         }
-        
-        //Left clicking with golden hoe
-        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)&&player.getItemInHand().getType() == Material.GOLD_HOE && player.getTargetBlock(null, 256).getType() != Material.AIR){
+        //Left clicking with golden hoe        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)&&player.getItemInHand().getType() == Material.GOLD_HOE && player.getTargetBlock(null, 256).getType() != Material.AIR){
         	player.sendMessage("DaDadadaaaaaaa!");
         }
     }
