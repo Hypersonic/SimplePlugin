@@ -25,9 +25,10 @@ public class FlameArrowSpell extends Spell {
 	{ 
 		ItemStack flintandsteel = inventory.getItem(inventory.first(Material.FLINT_AND_STEEL));
 		flintandsteel.setDurability((short)(flintandsteel.getDurability() + amount)); // Set durability + amount.
+		
 		if (flintandsteel.getDurability() >= flintandsteel.getType().getMaxDurability())
 		{
-			inventory.remove(flintandsteel); // Remove all used-up flintandsteels from inventory.
+			inventory.removeItem(flintandsteel); // It's used up.
 		}
 	}
 
