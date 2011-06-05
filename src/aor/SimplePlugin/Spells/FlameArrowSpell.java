@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Slot;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.Material;
 import aor.SimplePlugin.Spell;
 
@@ -21,11 +22,13 @@ public class FlameArrowSpell extends Spell {
 	}
 	
 	public void damageFlintAndSteel(int amount, PlayerInventory inventory)
-	{ /*
+	{ 
 		ItemStack flintandsteel = inventory.getItem(inventory.first(Material.FLINT_AND_STEEL));
-		flintandsteel.setDurability((short)(flintandsteel.getDurability() - amount)); // This doesn't function. Set the DAMAGE, not durability.
-		if (flintandsteel.getDurability() == 0)
-		{ inventory.remove(flintandsteel); } // If it's out, remove it. */
+		flintandsteel.setDurability((short)(flintandsteel.getDurability() + amount)); // Set durability + amount.
+		if (flintandsteel.getDurability() >= flintandsteel.getType().getMaxDurability())
+		{
+			inventory.remove(flintandsteel); // Remove all used-up flintandsteels from inventory.
+		}
 	}
 
 	
@@ -43,7 +46,7 @@ public class FlameArrowSpell extends Spell {
 		
 		if (checkRequirements(inventory)) // The reason we don't put it here is because there may be more than just inventory requirements in the future.
 		{
-//			damageFlintAndSteel(1, inventory);
+			damageFlintAndSteel(3, inventory);
 			player.sendMessage("This would send a flame arrow, but Herbie didn't code it."); // They have the proper items.
 		}
 		else
