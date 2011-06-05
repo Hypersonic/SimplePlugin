@@ -1,6 +1,6 @@
 // A generic spell class.
 
-package aor.SimplePlugin;
+package SimplePlugin;
 
 import org.bukkit.entity.Player;
 

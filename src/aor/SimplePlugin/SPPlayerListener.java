@@ -1,4 +1,4 @@
-package aor.SimplePlugin;
+package SimplePlugin;
 
 import java.util.HashMap;
 import org.bukkit.Location;
