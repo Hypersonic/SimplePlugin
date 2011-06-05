@@ -26,8 +26,7 @@ public class SPPlayerListener extends PlayerListener {
 		SimplePlugin.playerBooks.put(player.getName(), new SpellBook()); // Add a new spellbook for the player to the hashmap.
 		
 		
-		SimplePlugin.playerBooks.get(player.getName()).registerSpell(new TestSpell()); // Register TestSpell.
-		SimplePlugin.playerBooks.get(player.getName()).registerSpell(new TestSpell2()); // Register TestSpell2.
+
 		SimplePlugin.playerBooks.get(player.getName()).registerSpell(new BedrockLightningSpell());
 		
 		
