@@ -21,18 +21,6 @@ public class FlameArrowSpell extends Spell {
 		spellDescription = "Shoots an arrow that sets stuff ON FIRE! Requires flint and steel and arrow.";
 	}
 	
-	public void damageFlintAndSteel(int amount, PlayerInventory inventory)
-	{ 
-		ItemStack flintandsteel = inventory.getItem(inventory.first(Material.FLINT_AND_STEEL));
-		flintandsteel.setDurability((short)(flintandsteel.getDurability() + amount)); // Set durability + amount.
-		
-		if (flintandsteel.getDurability() >= flintandsteel.getType().getMaxDurability())
-		{
-			inventory.removeItem(flintandsteel); // It's used up.
-		}
-	}
-
-	
 	public boolean checkRequirements(PlayerInventory inventory) // Check inventory function. I understand that this is not optimal but it is in keeping with the superclass.
 	{	
 		if (inventory.contains(Material.FLINT_AND_STEEL) && inventory.contains(Material.ARROW))
@@ -47,7 +35,7 @@ public class FlameArrowSpell extends Spell {
 		
 		if (checkRequirements(inventory)) // The reason we don't put it here is because there may be more than just inventory requirements in the future.
 		{
-			damageFlintAndSteel(3, inventory);
+			damageItem(Material.FLINT_AND_STEEL, 3, inventory);
 			player.sendMessage("This would send a flame arrow, but Herbie didn't code it."); // They have the proper items.
 		}
 		else

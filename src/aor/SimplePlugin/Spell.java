@@ -2,7 +2,10 @@
 
 package aor.SimplePlugin;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public class Spell {
 	
@@ -27,4 +30,15 @@ public class Spell {
 	{
 		player.sendMessage("You're trying to cast a spell that's not set!");
 	}
+	
+	
+	public void damageItem(Material material, int amount, PlayerInventory inventory) // Damages an item in the inventory. Removes it if it's all used up.
+	{ 
+		ItemStack item = inventory.getItem(inventory.first(material));
+		item.setDurability((short)(item.getDurability() + amount)); // Set durability + amount.
+		
+		if (item.getDurability() >= material.getMaxDurability())
+		{ inventory.removeItem(item); } // It's used up.
+	}
+	
 }
