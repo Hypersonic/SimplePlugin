@@ -3,22 +3,24 @@ package aor.SimplePlugin.Spells;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Slot;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.Material;
+import org.bukkit.Location;
+import org.bukkit.util.Vector;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
 import aor.SimplePlugin.Spell;
 
 
 
-public class FlameArrowSpell extends Spell {
+public class RapidfireArrowSpell extends Spell {
 	
 	private static final int MAXDISTANCE = 200; // Sets the maximum distance.
 
 
-	public FlameArrowSpell() // Constructor.
+	public RapidfireArrowSpell() // Constructor.
 	{
-		spellName = "Flame Arrow";
-		spellDescription = "Shoots an arrow that sets stuff ON FIRE! Requires flint and steel and arrow.";
+		spellName = "Rapidfire Arrow";
+		spellDescription = "Quickly fires off three arrows. Needs three redstone.";
 	}
 	
 	public boolean checkRequirements(PlayerInventory inventory) // TODO: Move this to the superclass entirely.
@@ -39,6 +41,13 @@ public class FlameArrowSpell extends Spell {
 			damageItem(Material.FLINT_AND_STEEL, 2, inventory);
 			ItemStack arrowStack = new ItemStack(Material.ARROW, 2);
 			removeFromInventory(inventory,arrowStack);
+			
+			Arrow arrow = player.shootArrow();
+			
+			
+			
+			
+			
 			player.sendMessage("This would send a flame arrow, but Herbie didn't code it."); // They have the proper items.
 		
 		}
