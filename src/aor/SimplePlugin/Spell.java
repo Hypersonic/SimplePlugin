@@ -11,8 +11,8 @@ public class Spell {
 	public String spellName;
 	public String getName() { return spellName; }
 	
-//	public String spellDescription;
-//	public String getDescription() { return spellDescription; }
+	public String spellDescription;
+	public String getDescription() { return spellDescription; }
 	
 	
 	public String returnHello()

@@ -51,14 +51,19 @@ public class SimplePlugin extends JavaPlugin {
 	}
 	
 	
-/*	 public boolean onCommand(Player sender, Command cmd, String commandLabel, String[] args){
+	 public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		 
-		 if(cmd.getName().equalsIgnoreCase("basic")){ // If the player typed /basic then do the following...
-		   sender.sendMessage("Your current spell is: " + sender.getName());
+		 if(cmd.getName().equalsIgnoreCase("spellinfo")){ // If the sender typed /basic then do the following...
+			 if (sender instanceof Player) // If they're a player.
+			 {
+				 Player player = (Player)sender;
+				 sender.sendMessage("Current spell: " + SimplePlugin.playerBooks.get(player.getName()).getCurrentSpell().getDescription()); // Give them the spell description.
+			 }
+			 else { sender.sendMessage("This command can only be used in-game."); } // They're not a player.
 		   return true;
 		 } //If this has happened the function will break and return true. if this hasn't happened the a value of false will be returned.
 		 return false; }
-*/
+
 
 	
 }

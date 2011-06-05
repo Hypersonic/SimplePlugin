@@ -17,13 +17,15 @@ public class FlameArrowSpell extends Spell {
 	public FlameArrowSpell() // Constructor.
 	{
 		spellName = "Flame Arrow";
-//		spellDescription = "Shoots an arrow that sets stuff ON FIRE! Requires flint and steel and arrow.";
+		spellDescription = "Shoots an arrow that sets stuff ON FIRE! Requires flint and steel and arrow.";
 	}
 	
 	public void damageFlintAndSteel(int amount, PlayerInventory inventory)
-	{
+	{ /*
 		ItemStack flintandsteel = inventory.getItem(inventory.first(Material.FLINT_AND_STEEL));
 		flintandsteel.setDurability((short)(flintandsteel.getDurability() - amount)); // This doesn't function. Set the DAMAGE, not durability.
+		if (flintandsteel.getDurability() == 0)
+		{ inventory.remove(flintandsteel); } // If it's out, remove it. */
 	}
 
 	
@@ -41,7 +43,7 @@ public class FlameArrowSpell extends Spell {
 		
 		if (checkRequirements(inventory)) // The reason we don't put it here is because there may be more than just inventory requirements in the future.
 		{
-			damageFlintAndSteel(-1, inventory);
+//			damageFlintAndSteel(1, inventory);
 			player.sendMessage("This would send a flame arrow, but Herbie didn't code it."); // They have the proper items.
 		}
 		else
