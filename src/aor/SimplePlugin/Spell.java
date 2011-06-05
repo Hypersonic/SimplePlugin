@@ -6,9 +6,14 @@ import org.bukkit.entity.Player;
 
 public class Spell {
 	
-	public Spell() { } // Empty constructor.
+	public Spell() {} // Empty constructor.
 	
-	public String spellName = new String();
+	public String spellName;
+	
+	public String getName()
+	{
+		return spellName;
+	}
 	
 	public String returnHello()
 	{
