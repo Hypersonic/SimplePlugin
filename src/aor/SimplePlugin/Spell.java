@@ -9,11 +9,10 @@ public class Spell {
 	public Spell() {} // Empty constructor.
 	
 	public String spellName;
+	public String getName() { return spellName; }
 	
-	public String getName()
-	{
-		return spellName;
-	}
+//	public String spellDescription;
+//	public String getDescription() { return spellDescription; }
 	
 	public String returnHello()
 	{

@@ -3,8 +3,15 @@ package aor.SimplePlugin;
 import java.util.ArrayList;
 import aor.SimplePlugin.Spell;
 import org.bukkit.entity.Player;
+import aor.SimplePlugin.Spells.*;
 
-public class SpellBook { // TODO: In constructor initialize all dah spells.
+public class SpellBook {
+	
+	public SpellBook(Player player) // We take player for possible permissions/op spell disable/enable.
+	{
+		registerSpell(new BedrockLightningSpell());
+	}
+	
 	ArrayList<Spell> spellRegistry = new ArrayList<Spell>();
 	
 	public int index = 0;

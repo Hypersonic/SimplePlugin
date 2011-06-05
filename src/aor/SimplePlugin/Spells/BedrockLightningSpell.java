@@ -14,6 +14,7 @@ public class BedrockLightningSpell extends Spell {
 	public BedrockLightningSpell() // Constructor.
 	{
 		spellName = "Bedrock Lightning";
+//		spellDescription = "Strikes lightning on a block, changing it to bedrock.";
 	}
 	
 	

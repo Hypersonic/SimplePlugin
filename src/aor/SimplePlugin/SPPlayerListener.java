@@ -19,18 +19,18 @@ public class SPPlayerListener extends PlayerListener {
 		plugin = instance;
 	}
 
+
+	
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
 		Player player = event.getPlayer(); // Set the player object.
-		
-		SimplePlugin.playerBooks.put(player.getName(), new SpellBook()); // Add a new spellbook for the player to the hashmap.
-		
-		
-
-		SimplePlugin.playerBooks.get(player.getName()).registerSpell(new BedrockLightningSpell());
-		
-		
-		
+		SimplePlugin.playerBooks.put(player.getName(), new SpellBook(player)); // Add a new spellbook for the player to the hashmap.		
+	}
+	
+	public void onPlayerQuit(PlayerQuitEvent event)
+	{
+		Player player = event.getPlayer(); // Set the player object.
+		SimplePlugin.playerBooks.remove(player.getName()); // Remove the player's spellbook from the hashmap.
 	}
 	
 	
