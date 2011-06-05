@@ -3,8 +3,6 @@
 package aor.SimplePlugin;
 
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 public class Spell {
 	
@@ -16,12 +14,13 @@ public class Spell {
 //	public String spellDescription;
 //	public String getDescription() { return spellDescription; }
 	
-	public void chargePlayer(Player player, int redstone, int ironingot, int goldingot, int coal) { } // TODO
 	
 	public String returnHello()
 	{
 		return "The spell is working!";
 	}
+	
+	public boolean checkRequirements(Player player) { return true; } // Checks if player has the proper requirements for the spell.
 	
 
 	public void castSpell(Player player)

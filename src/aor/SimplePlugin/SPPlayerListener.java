@@ -42,7 +42,7 @@ public class SPPlayerListener extends PlayerListener {
 		
 		
 		// Right clicking air or a block event:
-		if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK && player.getItemInHand().getType() == Material.GOLD_HOE) // If they right clicked with the gold hoe...
+		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they right clicked with the gold hoe...
 		{
 			
 			spellBook.getCurrentSpell().castSpell(player);
@@ -50,7 +50,7 @@ public class SPPlayerListener extends PlayerListener {
 		}
 		
 		// Left clicking air or a block event:
-		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && player.getItemInHand().getType() == Material.GOLD_HOE) // If they left clicked with the gold hoe.
+		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they left clicked with the gold hoe.
 		{
 			
 			spellBook.nextSpell(player); // Scroll through spells.
