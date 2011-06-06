@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.util.Vector;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
+import aor.SimplePlugin.RunnableShootArrow;
 
 import aor.SimplePlugin.SimplePlugin;
 import aor.SimplePlugin.Spell;
@@ -22,8 +23,9 @@ public class RapidfireArrowSpell extends Spell {
 	private static final int MAXDISTANCE = 200; // Sets the maximum distance.
 
 
-	public RapidfireArrowSpell() // Constructor.
+	public RapidfireArrowSpell(SimplePlugin instance) // Constructor.
 	{
+		plugin = instance;
 		spellName = "Rapidfire Arrow";
 		spellDescription = "Quickly fires off eight arrows. Needs four redstone.";
 	}
@@ -41,18 +43,16 @@ public class RapidfireArrowSpell extends Spell {
 
 		if (checkInventoryRequirements(inventory, requiredItems))
 		{
-			removeRequiredItemsFromInventory(inventory, requiredItems); // Remove the items.
-			player.shootArrow();
-			for (int i = 0; i < 7; i++) // Fire off 7 more.
+			removeFromInventory(inventory, requiredItems[1]); // Remove the redstone.
+			player.shootArrow(); // Shoot an arrow.
+			removeFromInventory(inventory, new ItemStack(Material.ARROW, 1)); // Remove an arrow. Will remove the rest in RunnableShootArrow.
+			
+			for (int i = 2; i < 15; i = i + 2) // Do this 7 times.
 			{
-				try { Thread.sleep(150); } // See online Issues page about this.
-				catch(InterruptedException ae)
-				{ System.out.println(ae); } // If sleep fails
-				
-				player.shootArrow();
+				player.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RunnableShootArrow(player), i);
 			}
 
-			player.sendMessage("Rapidfire!"); // They have the proper items.
+			player.sendMessage("Rapidfire!"); // They have the proper items. TODO: Replace with a noise.
 
 		}
 

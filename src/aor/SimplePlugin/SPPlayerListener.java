@@ -24,7 +24,7 @@ public class SPPlayerListener extends PlayerListener {
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
 		Player player = event.getPlayer(); // Set the player object.
-		SimplePlugin.playerBooks.put(player.getName(), new SpellBook(player)); // Add a new spellbook for the player to the hashmap.		
+		SimplePlugin.playerBooks.put(player.getName(), new SpellBook(player, plugin)); // Add a new spellbook for the player to the hashmap.		
 	}
 	
 	public void onPlayerQuit(PlayerQuitEvent event)

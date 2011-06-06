@@ -9,8 +9,10 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.Inventory;
 
 public class Spell {
-
-	public Spell() {} // Empty constructor.
+	
+	public static SimplePlugin plugin;
+	
+	public Spell() { } // Empty constructor.
 
 	public String spellName;
 	public String getName() { return spellName; }

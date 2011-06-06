@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import aor.SimplePlugin.SimplePlugin;
 import aor.SimplePlugin.Spell;
 import org.bukkit.block.Block;
 import org.bukkit.Material;
@@ -15,8 +16,9 @@ public class ExplosionSpell extends Spell {
 	private static final int MAXDISTANCE = 200; // Sets the maximum distance.
 
 
-	public ExplosionSpell() // Constructor.
+	public ExplosionSpell(SimplePlugin instance) // Constructor.
 	{
+		plugin = instance;
 		spellName = "Explosion";
 		spellDescription = "Causes an explosion at your target location.";
 	}

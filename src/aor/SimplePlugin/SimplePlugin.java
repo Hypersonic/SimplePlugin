@@ -70,7 +70,7 @@ public class SimplePlugin extends JavaPlugin {
 		Player[] onlinePlayers = this.getServer().getOnlinePlayers();
 		for (int i = 0; i < onlinePlayers.length; i++) // For every online players...
 		{
-			SimplePlugin.playerBooks.put(onlinePlayers[i].getName(), new SpellBook(onlinePlayers[i])); // Add a new spellbook for the player to the hashmap.
+			SimplePlugin.playerBooks.put(onlinePlayers[i].getName(), new SpellBook(onlinePlayers[i], this)); // Add a new spellbook for the player to the hashmap.
 		}
 
 		log.info("SimplePlugin enabled!");
