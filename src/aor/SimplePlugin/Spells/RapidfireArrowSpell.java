@@ -4,10 +4,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
-import org.bukkit.Location;
-import org.bukkit.util.Vector;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Arrow;
 import aor.SimplePlugin.RunnableShootArrow;
 
 import aor.SimplePlugin.SimplePlugin;
@@ -19,8 +15,6 @@ public class RapidfireArrowSpell extends Spell {
 
 
 	public static SimplePlugin plugin;
-
-	private static final int MAXDISTANCE = 200; // Sets the maximum distance.
 
 
 	public RapidfireArrowSpell(SimplePlugin instance) // Constructor.

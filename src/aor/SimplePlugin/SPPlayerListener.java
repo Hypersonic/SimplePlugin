@@ -1,16 +1,9 @@
 package aor.SimplePlugin;
 
-import java.util.HashMap;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
-import org.bukkit.block.Block;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.Location;
-import org.bukkit.World;
-import aor.SimplePlugin.Spells.*;
 
 public class SPPlayerListener extends PlayerListener {
 	public static SimplePlugin plugin;
