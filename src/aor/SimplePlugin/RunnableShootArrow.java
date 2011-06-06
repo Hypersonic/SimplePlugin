@@ -6,20 +6,28 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class RunnableShootArrow implements Runnable {
-	
+
 	public Player m_player;
-	
+
 	public RunnableShootArrow (Player player)
 	{
 		m_player = player;
 	}
-	
+
 	public void run()
 	{
-		m_player.shootArrow();
-		removeFromInventory(m_player.getInventory(), new ItemStack(Material.ARROW, 1));
+		if (m_player.getInventory().contains(Material.ARROW))
+		{
+			m_player.shootArrow();
+			removeFromInventory(m_player.getInventory(), new ItemStack(Material.ARROW, 1));
+		}
+		else
+		{
+			m_player.sendMessage("Error: You no longer have enough arrows to cast this spell.");
+		}
+
 	}
-	
+
 	public void removeFromInventory(Inventory inventory, ItemStack item) { // Removes an itemstack from the inventory. Use this for quantities of items. Based on code by nisovin.
 		int amt = item.getAmount();
 		ItemStack[] items = inventory.getContents();
