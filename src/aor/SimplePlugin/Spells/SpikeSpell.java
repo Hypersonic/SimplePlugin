@@ -23,13 +23,9 @@ public class SpikeSpell extends Spell {
 		{
 			
 			Location loc = targetBlock.getLocation();
-			loc.setX(loc.getX()-3);
-			loc.setY(loc.getY()+1);
-			for (int i = 0; i < 6;i++)
+			for (int i = 0; i < 3;i++)
 			{
-				loc.setX(loc.getX()+1);
-				loc.setZ(loc.getZ()+1);
-
+				loc.setY(loc.getY()+1);
 				(player.getWorld().getBlockAt(loc)).setType(Material.CACTUS);
 			}
 			player.getWorld().getBlockAt(loc);
