@@ -21,8 +21,20 @@ public class SpellBook {
 	ArrayList<Spell> spellRegistry = new ArrayList<Spell>();
 
 	public int index = 0;
-
-
+	
+	public Spell getSpell(String searchingShortName)
+	{
+		for (int i = 0; i < spellRegistry.size(); i++)
+		{
+			if (spellRegistry.get(i).getShortName().equalsIgnoreCase(searchingShortName))
+			{
+				return spellRegistry.get(i);
+			}
+			else { }
+		}
+		return null;
+	}
+	
 	public void registerSpell(Spell sp){
 		spellRegistry.add(sp);
 	}
