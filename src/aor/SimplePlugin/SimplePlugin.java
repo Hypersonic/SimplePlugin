@@ -3,6 +3,8 @@ package aor.SimplePlugin;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
+
+import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -11,7 +13,8 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ItemStack;
 
 
 
@@ -38,7 +41,20 @@ public class SimplePlugin extends JavaPlugin {
 	public void onEnable() {
 
 		PluginManager pm = this.getServer().getPluginManager();
-
+		
+		//Custom recipe
+		ItemStack hoe = new ItemStack(Material.GOLD_HOE,1);
+		ShapedRecipe septre = new ShapedRecipe(hoe);
+		septre.shape("123","456","789");
+		// Set the ingredients for the custom crafting recipe
+		septre.setIngredient('1', Material.STICK);
+		septre.setIngredient('2', Material.GOLD_BLOCK);
+		septre.setIngredient('3', Material.STICK);
+		septre.setIngredient('5', Material.STICK);
+		septre.setIngredient('8', Material.STICK);
+		
+		//Give it to the server. YEAAAH!
+		this.getServer().addRecipe(septre);
 
 		// Register the listeners.
 
