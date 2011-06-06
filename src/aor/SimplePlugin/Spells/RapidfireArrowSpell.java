@@ -22,6 +22,8 @@ public class RapidfireArrowSpell extends Spell {
 		plugin = instance;
 		spellName = "Rapidfire Arrow";
 		spellDescription = "Quickly fires off eight arrows. Needs four redstone.";
+		
+		setRequiredItems(new ItemStack(Material.ARROW, 8), new ItemStack(Material.REDSTONE, 4)); // We need 8 arrows and 4 redstone.
 	}
 
 
@@ -29,15 +31,9 @@ public class RapidfireArrowSpell extends Spell {
 	{
 		PlayerInventory inventory = player.getInventory();
 
-		// REQUIRED ITEMS
-		ItemStack[] requiredItems = new ItemStack[2]; // The requireditems itemstack.
-		requiredItems[0] = new ItemStack(Material.ARROW, 8); // We need 8 arrows.
-		requiredItems[1] = new ItemStack(Material.REDSTONE, 4); // We need 2 redstone.
-		// REQUIRED ITEMS
-
-		if (checkInventoryRequirements(inventory, requiredItems))
+		if (checkInventoryRequirements(inventory))
 		{
-			removeFromInventory(inventory, requiredItems[1]); // Remove the redstone.
+			removeFromInventory(inventory, requiredItems.get(1)); // Remove the redstone.
 			player.shootArrow(); // Shoot an arrow.
 			removeFromInventory(inventory, new ItemStack(Material.ARROW, 1)); // Remove an arrow. Will remove the rest in RunnableShootArrow.
 			

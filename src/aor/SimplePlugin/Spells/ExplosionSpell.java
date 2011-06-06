@@ -21,23 +21,19 @@ public class ExplosionSpell extends Spell {
 		plugin = instance;
 		spellName = "Explosion";
 		spellDescription = "Causes an explosion at your target location.";
+		
+		setRequiredItems(new ItemStack(Material.ARROW, 2), new ItemStack(Material.TNT, 1));
+		
 	}
-
 
 	public void castSpell(Player player)
 	{
 		
 		PlayerInventory inventory = player.getInventory();
 
-		// REQUIRED ITEMS
-		ItemStack[] requiredItems = new ItemStack[2]; // The requireditems itemstack.
-		requiredItems[0] = new ItemStack(Material.ARROW, 2); // We need 2 arrows.
-		requiredItems[1] = new ItemStack(Material.TNT, 1); // We need 1 TNT.
-		// REQUIRED ITEMS
-
-		if (checkInventoryRequirements(inventory, requiredItems))
+		if (checkInventoryRequirements(inventory))
 		{
-			removeRequiredItemsFromInventory(inventory, requiredItems); // Remove the items.
+			removeRequiredItemsFromInventory(inventory); // Remove the items.
 
 			
 			Block targetBlock = player.getTargetBlock(null, MAXDISTANCE); // Select the target block.

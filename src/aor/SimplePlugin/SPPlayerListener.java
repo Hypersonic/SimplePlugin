@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.Material;
+import aor.SimplePlugin.SpellBook;
 
 public class SPPlayerListener extends PlayerListener {
 	public static SimplePlugin plugin;

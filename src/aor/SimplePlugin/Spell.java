@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.Inventory;
+import java.util.ArrayList;
 
 public class Spell {
 	
@@ -26,22 +27,30 @@ public class Spell {
 		return "The spell is working!";
 	}
 
-	public boolean checkInventoryRequirements(PlayerInventory inventory, ItemStack[] requiredItems) // Checks if player has the proper requirements for the spell.
+	public ArrayList<ItemStack> requiredItems = new ArrayList<ItemStack>(); // The required items arraylist.
+	
+	public void setRequiredItems(ItemStack... items)
 	{
-		for (int i = 0; i < requiredItems.length; i++) // The loop for the requiredItems array.
+		for (int i = 0; i < items.length; i++) { requiredItems.add(items[i]); }
+	}
+	
+	
+	public boolean checkInventoryRequirements(PlayerInventory inventory) // Checks if player has the proper requirements for the spell.
+	{
+		for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
 		{
-			if (inventory.contains(requiredItems[i].getType(), requiredItems[i].getAmount())) { } // Move along if it has it.
+			if (inventory.contains(requiredItems.get(i).getType(), requiredItems.get(i).getAmount())) { } // Move along if it has it.
 			else { return false; } // If it doesn't break out and reutrn false.
 		}
 		return true; // If all conditions were met.
 	}
 	
 	
-	public void removeRequiredItemsFromInventory(PlayerInventory inventory, ItemStack[] requiredItems)
+	public void removeRequiredItemsFromInventory(PlayerInventory inventory)
 	{
-		for (int i = 0; i < requiredItems.length; i++) // The loop for the requiredItems array.
+		for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
 		{
-			removeFromInventory(inventory, requiredItems[i]); // Remove the items.
+			removeFromInventory(inventory, requiredItems.get(i)); // Remove the items.
 		}
 	}
 	
