@@ -23,9 +23,7 @@ public class SpikeSpell extends Spell {
 		{
 			
 			Location loc = targetBlock.getLocation();
-			loc.setY(loc.getY()-1);
 			(player.getWorld().getBlockAt(loc)).setType(Material.SAND);
-			loc.setY(loc.getY()+1);
 
 			for (int i = 0; i < 3;i++)
 			{
