@@ -22,6 +22,7 @@ public class RapidfireArrowSpell extends Spell {
 		plugin = instance;
 		spellName = "Rapidfire Arrow";
 		spellDescription = "Quickly fires off eight arrows. Needs four redstone.";
+		shortName = "RapidfireArrow";
 		
 		setRequiredItems(new ItemStack(Material.ARROW, 8), new ItemStack(Material.REDSTONE, 4)); // We need 8 arrows and 4 redstone.
 	}

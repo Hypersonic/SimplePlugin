@@ -17,6 +17,7 @@ public class BedrockLightningSpell extends Spell {
 		plugin = instance;
 		spellName = "Bedrock Lightning";
 		spellDescription = "Strikes lightning on a block, changing it to bedrock.";
+		shortName = "BedrockLightning";
 	}
 	
 	

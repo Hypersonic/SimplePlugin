@@ -21,6 +21,7 @@ public class ExplosionSpell extends Spell {
 		plugin = instance;
 		spellName = "Explosion";
 		spellDescription = "Causes an explosion at your target location.";
+		shortName = "Explosion";
 		
 		setRequiredItems(new ItemStack(Material.ARROW, 2), new ItemStack(Material.TNT, 1));
 		

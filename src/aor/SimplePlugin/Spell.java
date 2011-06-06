@@ -20,6 +20,9 @@ public class Spell {
 
 	public String spellDescription;
 	public String getDescription() { return spellDescription; }
+	
+	public String shortName;
+	public String getShortName() { return shortName; }
 
 
 	public String returnHello()

@@ -3,6 +3,6 @@ main: aor.SimplePlugin.SimplePlugin
 version: 1.0
 commands:
    spellinfo:
-      description: Gets the description of the current spell.
+      description: Gets the description of the current spell, or of the chosen spell.
       usage: |
-           /<command>
+           /spellinfo [spell]
