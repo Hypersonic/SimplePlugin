@@ -44,23 +44,30 @@ public class SimplePlugin extends JavaPlugin {
 		
 		//Custom recipe
 		ItemStack hoe = new ItemStack(Material.GOLD_HOE,1);
-		ShapedRecipe septre = new ShapedRecipe(hoe);
-		septre.shape("123","456","789");
+		ShapedRecipe sceptre = new ShapedRecipe(hoe);
+		sceptre.shape("123","456","789");
 		// Set the ingredients for the custom crafting recipe
-		septre.setIngredient('1', Material.STICK);
-		septre.setIngredient('2', Material.GOLD_BLOCK);
-		septre.setIngredient('3', Material.STICK);
-		septre.setIngredient('5', Material.STICK);
-		septre.setIngredient('8', Material.STICK);
+		sceptre.setIngredient('1', Material.STICK);
+		sceptre.setIngredient('2', Material.GOLD_BLOCK);
+		sceptre.setIngredient('3', Material.STICK);
+		sceptre.setIngredient('5', Material.STICK);
+		sceptre.setIngredient('8', Material.STICK);
 		
 		//Give it to the server. YEAAAH!
-		this.getServer().addRecipe(septre);
+		this.getServer().addRecipe(sceptre);
 
 		// Register the listeners.
 
 		pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Event.Priority.Normal, this);
+		
+		// Register players, if any.
+		Player[] onlinePlayers = this.getServer().getOnlinePlayers();
+		for (int i = 0; i < onlinePlayers.length; i++) // For every online players...
+		{
+			SimplePlugin.playerBooks.put(onlinePlayers[i].getName(), new SpellBook(onlinePlayers[i])); // Add a new spellbook for the player to the hashmap.
+		}
 
 
 
