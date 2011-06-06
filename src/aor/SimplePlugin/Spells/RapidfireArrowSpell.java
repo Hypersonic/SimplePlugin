@@ -45,7 +45,7 @@ public class RapidfireArrowSpell extends Spell {
 			player.shootArrow();
 			for (int i = 0; i < 7; i++) // Fire off 7 more.
 			{
-				try { Thread.sleep(150); }
+				try { Thread.sleep(150); }						//Question: Is this really a good idea? Do we know if all the spells run on the same thread? Do all instances of this spell run on the same one? This could be basically causing the plugin to stop and start over and over again... Shouldn't we be making a new thread for each player's spellbook or something? or running it in the thread that already exists for each player? -Josh
 				catch(InterruptedException ae)
 				{ System.out.println(ae); } // If sleep fails
 				
