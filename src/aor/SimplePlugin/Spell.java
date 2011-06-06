@@ -24,7 +24,25 @@ public class Spell {
 		return "The spell is working!";
 	}
 
-	public boolean checkRequirements(Player player) { return true; } // Checks if player has the proper requirements for the spell.
+	public boolean checkInventoryRequirements(PlayerInventory inventory, ItemStack[] requiredItems) // Checks if player has the proper requirements for the spell.
+	{
+		for (int i = 0; i < requiredItems.length; i++) // The loop for the requiredItems array.
+		{
+			if (inventory.contains(requiredItems[i].getType(), requiredItems[i].getAmount())) { } // Move along if it has it.
+			else { return false; } // If it doesn't break out and reutrn false.
+		}
+		return true; // If all conditions were met.
+	}
+	
+	
+	public void removeRequiredItemsFromInventory(PlayerInventory inventory, ItemStack[] requiredItems)
+	{
+		for (int i = 0; i < requiredItems.length; i++) // The loop for the requiredItems array.
+		{
+			removeFromInventory(inventory, requiredItems[i]); // Remove the items.
+		}
+	}
+	
 
 
 	public void castSpell(Player player)

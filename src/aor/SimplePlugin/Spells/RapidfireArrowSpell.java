@@ -8,11 +8,16 @@ import org.bukkit.Location;
 import org.bukkit.util.Vector;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
+
+import aor.SimplePlugin.SimplePlugin;
 import aor.SimplePlugin.Spell;
 
 
 
 public class RapidfireArrowSpell extends Spell {
+	
+	
+	public static SimplePlugin plugin;
 	
 	private static final int MAXDISTANCE = 200; // Sets the maximum distance.
 
@@ -23,37 +28,32 @@ public class RapidfireArrowSpell extends Spell {
 		spellDescription = "Quickly fires off three arrows. Needs three redstone.";
 	}
 	
-	public boolean checkRequirements(PlayerInventory inventory) // TODO: Move this to the superclass entirely.
-	{	
-		if (inventory.contains(Material.FLINT_AND_STEEL) && inventory.contains(Material.ARROW))
-		{ return true; } // They have the proper items.
-		else
-		{ return false; } // They don't.
-	}
 	
 	public void castSpell(Player player)
 	{
 		PlayerInventory inventory = player.getInventory();
 		
-		if (checkRequirements(inventory)) // The reason we don't put it here is because there may be more than just inventory requirements in the future.
+		// REQUIRED ITEMS
+		ItemStack[] requiredItems = new ItemStack[2]; // The requireditems itemstack.
+		requiredItems[0] = new ItemStack(Material.ARROW, 3); // We need 3 arrows.
+		requiredItems[1] = new ItemStack(Material.REDSTONE, 2); // We need 2 redstone.
+		// REQUIRED ITEMS
+		
+		if (checkInventoryRequirements(inventory, requiredItems))
 		{
+			removeRequiredItemsFromInventory(inventory, requiredItems); // Remove the items.
 			
-			damageItem(Material.FLINT_AND_STEEL, 2, inventory);
-			ItemStack arrowStack = new ItemStack(Material.ARROW, 2);
-			removeFromInventory(inventory,arrowStack);
+			player.shootArrow();
+			player.shootArrow();
+			player.shootArrow();
+
 			
-			Arrow arrow = player.shootArrow();
-			
-			
-			
-			
-			
-			player.sendMessage("This would send a flame arrow, but Herbie didn't code it."); // They have the proper items.
+			player.sendMessage("Rapidfire!"); // They have the proper items.
 		
 		}
 		
 		
-		else { player.sendMessage("Could not cast! This spell needs flint and steel and an arrow!"); } // They don't have the proper items.
+		else { player.sendMessage("Could not cast! Spell requires 2 redstone, 3 arrow!"); } // They don't have the proper items.
 		
 	}
 	

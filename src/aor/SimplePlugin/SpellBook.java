@@ -10,7 +10,7 @@ public class SpellBook {
 	public SpellBook(Player player) // We take player for possible permissions/op spell disable/enable.
 	{
 		registerSpell(new BedrockLightningSpell()); // Register the bedrock spell.
-		registerSpell(new RapidfireArrowSpell()); // Spell.
+		registerSpell(new RapidfireArrowSpell()); // Register the rapidfire arrow spell.
 	}
 	
 	ArrayList<Spell> spellRegistry = new ArrayList<Spell>();
