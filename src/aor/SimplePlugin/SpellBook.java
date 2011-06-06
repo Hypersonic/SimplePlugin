@@ -15,6 +15,7 @@ public class SpellBook {
 		registerSpell(new BedrockLightningSpell(plugin)); // Register the bedrock spell.
 		registerSpell(new RapidfireArrowSpell(plugin)); // Register the rapidfire arrow spell.
 		registerSpell(new ExplosionSpell(plugin)); // Register explosion spell.
+		registerSpell(new SpikeSpell(plugin));
 	}
 
 	ArrayList<Spell> spellRegistry = new ArrayList<Spell>();
