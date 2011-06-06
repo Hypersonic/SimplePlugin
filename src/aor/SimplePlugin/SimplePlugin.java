@@ -35,27 +35,31 @@ public class SimplePlugin extends JavaPlugin {
 
 
 	public void onDisable() {
-		log.info("Disabled message here, shown in console on startup");
+		log.info("SimplePlugin disabled");
 	}
 
 	public void onEnable() {
-
+		log.info("SimplePlugin enabling...");
 		PluginManager pm = this.getServer().getPluginManager();
+	
+		
 		
 		//Custom recipe
-		ItemStack hoe = new ItemStack(Material.GOLD_HOE,1);
-		ShapedRecipe sceptre = new ShapedRecipe(hoe);
-		sceptre.shape("123","456","789");
-		// Set the ingredients for the custom crafting recipe
-		sceptre.setIngredient('1', Material.STICK);
-		sceptre.setIngredient('2', Material.GOLD_BLOCK);
-		sceptre.setIngredient('3', Material.STICK);
-		sceptre.setIngredient('5', Material.STICK);
-		sceptre.setIngredient('8', Material.STICK);
-		
-		//Give it to the server. YEAAAH!
-		this.getServer().addRecipe(sceptre);
-
+			ItemStack hoe = new ItemStack(Material.GOLD_HOE,1);
+			ShapedRecipe sceptre = new ShapedRecipe(hoe);
+			sceptre.shape("123","456","789");
+			// Set the ingredients for the custom crafting recipe
+			sceptre.setIngredient('1', Material.STICK);
+			sceptre.setIngredient('2', Material.GOLD_BLOCK);
+			sceptre.setIngredient('3', Material.STICK);
+			sceptre.setIngredient('5', Material.STICK);
+			sceptre.setIngredient('8', Material.STICK);
+			
+			//Give it to the server. YEAAAH!
+			this.getServer().addRecipe(sceptre);
+		//Custom recipe
+			
+			
 		// Register the listeners.
 
 		pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Event.Priority.Normal, this);
@@ -69,7 +73,7 @@ public class SimplePlugin extends JavaPlugin {
 			SimplePlugin.playerBooks.put(onlinePlayers[i].getName(), new SpellBook(onlinePlayers[i])); // Add a new spellbook for the player to the hashmap.
 		}
 
-
+		log.info("SimplePlugin enabled!");
 
 	}
 	
