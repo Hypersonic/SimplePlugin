@@ -2,6 +2,7 @@ package aor.SimplePlugin.Spells;
 
 import org.bukkit.entity.Player;
 import aor.SimplePlugin.Spell;
+import aor.SimplePlugin.SimplePlugin;
 import org.bukkit.block.Block;
 import org.bukkit.Material;
 
@@ -11,9 +12,11 @@ public class BedrockLightningSpell extends Spell {
 	private static final int MAXDISTANCE = 200; // Sets the maximum distance.
 
 
-	public BedrockLightningSpell() // Constructor.
+	public BedrockLightningSpell(SimplePlugin instance) // Constructor.
 	{
+		plugin = instance;
 		spellName = "Bedrock Lightning";
+		spellDescription = "Strikes lightning on a block, changing it to bedrock.";
 	}
 	
 	

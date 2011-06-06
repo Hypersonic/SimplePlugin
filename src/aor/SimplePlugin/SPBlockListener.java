@@ -1,10 +1,7 @@
 package aor.SimplePlugin;
 
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
+
 import org.bukkit.event.block.BlockListener;
-import org.bukkit.event.block.BlockPlaceEvent;
 
 /* Example Template
  * By Adamki11s

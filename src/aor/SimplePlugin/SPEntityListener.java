@@ -1,9 +1,6 @@
 package aor.SimplePlugin;
 
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityListener;
 
 /* Example Template
