@@ -6,3 +6,7 @@ commands:
       description: Gets the description of the current spell, or of the chosen spell.
       usage: |
            /spellinfo [spell]
+   listspells:
+      description: Lists all of the currently available spells.
+      usage: |
+           /listspells
