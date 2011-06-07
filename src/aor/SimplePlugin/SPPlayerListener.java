@@ -34,6 +34,9 @@ public class SPPlayerListener extends PlayerListener {
 		SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
 
 		
+		if (player.getItemInHand().getType() == Material.GOLD_HOE){
+			event.setCancelled(true);	//Cancel the event. This only overrides the default gold hoe behavior, not calls to plugins.
+		}
 		
 		// Left clicking air or a block event:
 		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they right clicked with the gold hoe...
