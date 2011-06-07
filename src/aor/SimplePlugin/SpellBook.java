@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import aor.SimplePlugin.Spell;
 import org.bukkit.entity.Player;
 import aor.SimplePlugin.Spells.*;
+import org.bukkit.ChatColor;
 
 public class SpellBook {
 
@@ -21,7 +22,7 @@ public class SpellBook {
 	ArrayList<Spell> spellRegistry = new ArrayList<Spell>();
 
 	public int index = 0;
-	
+
 	public Spell getSpell(String searchingShortName)
 	{
 		for (int i = 0; i < spellRegistry.size(); i++)
@@ -34,7 +35,7 @@ public class SpellBook {
 		}
 		return null;
 	}
-	
+
 	public void registerSpell(Spell sp){
 		spellRegistry.add(sp);
 	}
@@ -54,7 +55,17 @@ public class SpellBook {
 	{
 		if (index != spellRegistry.size() - 1) { index++; } // Remember indexes start at 0.
 		else { index = 0; }
-		player.sendMessage("Selected spell: " + getCurrentSpell().getName()); // Print Selected spell: (spell name)
+		
+		if (getCurrentSpell().checkInventoryRequirements(player.getInventory())) // If they have the right items...
+		{
+			player.sendMessage("Selected spell: " + ChatColor.DARK_GREEN + getCurrentSpell().getName()); // Print spell with green.
+		}
+		else // If they don't.
+		{
+			player.sendMessage("Selected spell: " + ChatColor.DARK_RED + getCurrentSpell().getName()); // Print spell with red.
+		}
+		
+		
 		return getCurrentSpell();
 	}
 
