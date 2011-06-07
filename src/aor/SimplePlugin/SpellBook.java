@@ -14,7 +14,7 @@ public class SpellBook {
 	public SpellBook(Player player, SimplePlugin instance) // We take player for possible permissions/op spell disable/enable.
 	{
 		plugin = instance;
-		registerSpell(new RapidfireArrowSpell(plugin)); // Register the rapidfire arrow spell.
+		registerSpell(new RapidfireSpell(plugin)); // Register the rapidfire spell.
 		registerSpell(new ExplosionSpell(plugin)); // Register explosion spell.
 		registerSpell(new SpikeSpell(plugin));
 	}
