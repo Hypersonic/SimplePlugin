@@ -5,6 +5,7 @@ import aor.SimplePlugin.Spell;
 import org.bukkit.entity.Player;
 import aor.SimplePlugin.Spells.*;
 import org.bukkit.ChatColor;
+import java.lang.String;
 
 public class SpellBook {
 
@@ -35,6 +36,19 @@ public class SpellBook {
 		}
 		return null;
 	}
+	
+	public int getSpellIndex(String searchingShortName)
+	{
+		for (int i = 0; i < spellRegistry.size(); i++)
+		{
+			if (spellRegistry.get(i).getShortName().equalsIgnoreCase(searchingShortName))
+			{
+				return i;
+			}
+			else { }
+		}
+		return spellRegistry.size() + 1;
+	}
 
 	public void registerSpell(Spell sp){
 		spellRegistry.add(sp);
@@ -48,6 +62,23 @@ public class SpellBook {
 	public Spell getCurrentSpell()
 	{
 		return spellRegistry.get(index);
+	}
+	
+	public void setSpell(int setIndex)
+	{
+		index = setIndex;
+	}
+	
+	public ChatColor spellFormat(Spell spell, Player player)
+	{
+		if (spell.checkInventoryRequirements(player.getInventory()))
+		{
+			return ChatColor.DARK_GREEN;
+		}
+		else
+		{
+			return ChatColor.DARK_RED;
+		}
 	}
 
 

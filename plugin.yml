@@ -10,3 +10,7 @@ commands:
       description: Lists all of the currently available spells.
       usage: |
            /listspells
+   setspell:
+      description: Sets your current spell.
+      usage: |
+           /setspell [spell]

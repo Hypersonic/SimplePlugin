@@ -16,6 +16,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.ChatColor;
+import aor.SimplePlugin.SpellBook;
 
 
 
@@ -119,38 +120,27 @@ public class SimplePlugin extends JavaPlugin {
 		} //If this has happened the function will break and return true. if this hasn't happened the a value of false will be returned.
 
 
-		if (cmd.getName().equalsIgnoreCase("listspells")) // If the command was /listspells
+		else if (cmd.getName().equalsIgnoreCase("listspells")) // If the command was /listspells
 		{
 			if (sender instanceof Player) // If they're a player.
 			{
 				Player player = (Player)sender; // The player.
-				ArrayList<Spell> spellRegistry = SimplePlugin.playerBooks.get(player.getName()).spellRegistry; // The player's spell registry.
+				SpellBook playerBook = SimplePlugin.playerBooks.get(player.getName());
+				ArrayList<Spell> spellRegistry = playerBook.spellRegistry; // The player's spell registry.
 
 				sender.sendMessage("Currently available spells (arrow denotes selection):"); // Begin the list.
 
 				for (int i = 0; i < spellRegistry.size(); i++) // Go through the spell registry...
 				{
-					if (spellRegistry.get(i) == SimplePlugin.playerBooks.get(player.getName()).getCurrentSpell()) // If it's the current spell...
+					if (spellRegistry.get(i) == playerBook.getCurrentSpell()) // If it's the current spell...
 					{
-						if (spellRegistry.get(i).checkInventoryRequirements(player.getInventory())) // if they have the right items
-						{	
-							sender.sendMessage(ChatColor.DARK_GREEN + "   - " + spellRegistry.get(i).getName() + " <--"); // Put the arrow and green.
-						}
-						else // If they don't have the right items.
-						{
-							sender.sendMessage(ChatColor.DARK_RED + "   - " + spellRegistry.get(i).getName() + " <--"); // Put the arrow and red.
-						}
+						sender.sendMessage(playerBook.spellFormat(spellRegistry.get(i), player) + "   - " + spellRegistry.get(i).getName() + " <--"); // Put the arrow.
+						
 					}
 					else // If it's not the current spell.
 					{
-						if (spellRegistry.get(i).checkInventoryRequirements(player.getInventory())) // if they have the right items
-						{	
-							sender.sendMessage(ChatColor.DARK_GREEN + "   - " + spellRegistry.get(i).getName()); // Put the green.
-						}
-						else // If they don't have the right items.
-						{
-							sender.sendMessage(ChatColor.DARK_RED + "   - " + spellRegistry.get(i).getName()); // Put the red.
-						}
+						sender.sendMessage(playerBook.spellFormat(spellRegistry.get(i), player) + "   - " + spellRegistry.get(i).getName()); // Print with no arrow.
+						
 					}
 				}
 
@@ -160,6 +150,32 @@ public class SimplePlugin extends JavaPlugin {
 			else { sender.sendMessage("This command can only be used in-game."); return false; } // They're not a player.
 			return true;
 		}
+		
+		else if (cmd.getName().equalsIgnoreCase("setspell")) // If the command was /setspell
+		{
+			if (sender instanceof Player) // If they're a player
+			{
+				Player player = (Player)sender; // The player.
+				
+				if (this.playerBooks.get(player.getName()).getSpell(args[0]) != null) // If the argument was a spell...
+				{
+					this.playerBooks.get(player.getName()).setSpell(this.playerBooks.get(player.getName()).getSpellIndex(args[0]));
+					sender.sendMessage("Set current spell to: " + this.playerBooks.get(player.getName()).spellFormat(this.playerBooks.get(player.getName()).getSpell(args[0]), player) + this.playerBooks.get(player.getName()).getSpell(args[0]).getName());
+					return true;
+				}
+				else // The argument wasn't a spell.
+				{
+					sender.sendMessage("Invalid input!");
+					return false;
+				}
+				
+
+				
+			}
+			else { sender.sendMessage("This command can only be used in-game."); return false; } // They're not a player.
+		}
+		
+		
 
 		return false; }
 
