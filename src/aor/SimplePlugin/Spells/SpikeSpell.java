@@ -89,11 +89,11 @@ public class SpikeSpell extends Spell {
 
 				if (distance < 30) // Maximum distance is 31.
 				{
-					removeRequiredItemsFromInventory(player.getInventory()); // Remove required items here.
 					
 					
 					if (canPlaceCactus(targetBlock)) // If the space is compatable with a cactus
 					{
+						removeRequiredItemsFromInventory(player.getInventory()); // Remove required items here.
 						Material originalTargetMaterial = targetBlock.getType();
 						boolean sandstoneSupport = false;
 						
