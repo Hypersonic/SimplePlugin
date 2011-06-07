@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import java.lang.Math;
 
 import aor.SimplePlugin.Runnables.RunnableDestroyCactus;
+import aor.SimplePlugin.Runnables.RunnableBuildCactus;
 
 import aor.SimplePlugin.SimplePlugin;
 import aor.SimplePlugin.Spell;
@@ -105,14 +106,17 @@ public class SpikeSpell extends Spell {
 						
 						targetBlock.setType(Material.SAND); // Set the target block to sand.
 						
+						int b = 0; // The first event happens immediately.
+						
 						for (int i = 1; i <= 3; i++) // For each space above it
 						{
-							targetBlock.getRelative(0, i, 0).setType(Material.CACTUS); // Make cactus. Go forth and make cactus.
 							
+							player.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RunnableBuildCactus(targetBlock.getRelative(0, i, 0)), b);
 							
+							b = b + 1; // The cacti are built once every 0.1 seconds (2 server ticks).
 						}
 						
-						player.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RunnableDestroyCactus(targetBlock, originalTargetMaterial, sandstoneSupport), 300);
+						player.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RunnableDestroyCactus(targetBlock, originalTargetMaterial, sandstoneSupport), 300); // We will destroy cactus in 15 seconds.
 						
 						player.sendMessage("SPIKES SPIKES SPIKES BABY");
 
