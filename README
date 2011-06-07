@@ -21,6 +21,9 @@ TODO:
     - Some spells only work in certain worlds? or cost different amounts in different worlds?
 
 SPELLS (a list of ideas by Michael and Brendan):
+
+Key:
+--Spell = created!
     Healing Spells:
   For healing spells: We can have various roman numerals indicating the strength of the spell, like “Heal IV”. We also need to find a way to let it target other players, while 
 
@@ -43,7 +46,7 @@ Possibly: We could do heal over time spells, like a targeted player gains 10 hea
 
   Defensive Spells: 
   Decoy: Spawns a cow and makes mobs in a 5-block radius of the cow attack it.
-  Spikes: Summons a 6-block long cactus wall where the player is pointing for 10 seconds.
+--Spikes: Summons a 6-block long cactus wall where the player is pointing for 10 seconds.
   Net: Costs 10 string, freezes mobs in a 5-block radius around the player for 10 seconds.
 
    Transmutations:
