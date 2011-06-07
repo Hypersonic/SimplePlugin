@@ -1,4 +1,4 @@
-package aor.SimplePlugin;
+package aor.SimplePlugin.Runnables;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

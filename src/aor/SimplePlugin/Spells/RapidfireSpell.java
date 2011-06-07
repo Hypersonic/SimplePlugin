@@ -4,24 +4,25 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
-import aor.SimplePlugin.RunnableShootArrow;
 
 import aor.SimplePlugin.SimplePlugin;
 import aor.SimplePlugin.Spell;
+import aor.SimplePlugin.Runnables.RunnableShootArrow;
 
 
 
-public class RapidfireArrowSpell extends Spell {
+public class RapidfireSpell extends Spell {
 
 
 	public static SimplePlugin plugin;
 
 
-	public RapidfireArrowSpell(SimplePlugin instance) // Constructor.
+	public RapidfireSpell(SimplePlugin instance) // Constructor.
 	{
 		plugin = instance;
-		spellName = "Rapidfire Arrow";
+		spellName = "Rapidfire";
 		spellDescription = "Quickly fires off eight arrows. Needs four redstone.";
+		shortName = "Rapidfire";
 		
 		setRequiredItems(new ItemStack(Material.ARROW, 8), new ItemStack(Material.REDSTONE, 4)); // We need 8 arrows and 4 redstone.
 	}
