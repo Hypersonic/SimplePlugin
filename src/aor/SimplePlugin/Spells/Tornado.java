@@ -35,11 +35,11 @@ public class Tornado extends Spell {
 		{
 			removeRequiredItemsFromInventory(inventory);
 			addItem(newItemStack(Material.BUCKET, 1));
-			Entity[] nearbyEntities;
-			nearbyEntieies = getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
+			List<Entity> nearbyEntities;
+			nearbyEntities = getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
 			for (int i=0; i<nearbyEntities.length; i++) {
 				Vector newVelocity = new Vector((randomGen.nextFloat() * 1.5 - 0.75), randomGen.nextFloat() / 2.5 , randomGen.nextFloat() * 1.5 - 0.75); //Generate a random vector
-				Entity.setVelocity(newVelocity); //Sets the entity's velocity
+				nearbyEntities.get(i).setVelocity(newVelocity);
 			}
 		}
 		
