@@ -19,7 +19,7 @@ public class SpikeFortSpell extends Spell {
 		plugin = instance;
 		spellName = "Spike Fort";
 		spellDescription = "Summons a fortification of cacti on command.  Needs 64 cacti, 25 sand, 20 sandstone.";
-		shortName = "SpikeWall";
+		shortName = "SpikeFort";
 
 		setRequiredItems(new ItemStack(Material.CACTUS, 64), new ItemStack(Material.SAND, 25), new ItemStack(Material.SANDSTONE, 20)); // 64 cactus, 25 sandblock, 20 sandstone.
 	}
