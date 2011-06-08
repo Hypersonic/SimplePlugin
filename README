@@ -40,7 +40,7 @@ Possibly: We could do heal over time spells, like a targeted player gains 10 hea
   Cone of Cold: Causes the blocks in front of the player in some form of cone-shape to turn to ice, freezing mobs in the player’s line of sight in place for 10 seconds. Requires 10 snow blocks.
   Flare: Lights the blocks in a 5-block radius of the target block (would need to find a way to make the fires hurt mobs but not wood)
   Sacrifice: Kills the player, but also kills mobs around the player in a 10-block radius circle. Good for fighting with a group, as a last sacrifice.
-  Tornado: Shoots entities within a 5-block radius of the target point into the air.
+--Tornado: Shoots entities within a 5-block radius of the target point into the air.
   Lightning: Pretty self-explanatory. Try to make it not harm environment. Doesn't start fires?
   Inferno: Essentially level 2 of flare. Same radius as flare, but with a greater cost and a longer lifetime/more damage.
 
@@ -55,9 +55,9 @@ Possibly: We could do heal over time spells, like a targeted player gains 10 hea
    World Spells:
   All World Spells should require an obelisk of sandstone topped with 1 gold block to cast. These cannot be built by players, and must be built and designated by admins. All world spells will be announced, for example: “x_Shanghai_x has cast Blizzard!”
   Blizzard: Forces a 2-minute snow. Costs 2 stacks of snow blocks and 1 water bucket.
-  Midas Touch: World spell, requiring 10 gold blocks to do. Turns any blocks the player contacts within the next minute to gold. They turn back when the minute is up.
-  Day: Makes it day. Requires a clock and 1 white wool. Too cheap.
-  Night: Makes it night. Requires a clock and 1 black wool. Sort of a troll spell. Too cheap.
+  Midas Touch: World spell, requiring 10 gold blocks to do. Turns any blocks the player contacts within the next minute to gold. They turn back when the minute is up. Useless but fun.
+  Day: Makes it day. Requires a clock and 64 white wool.
+  Night: Makes it night. Requires a clock and 64 black wool. Sort of a troll spell.
   Social life: Unobtainable. 
 
     Support: these are spells that change the target’s status. If they do not point at a player, the affect the casting player?
