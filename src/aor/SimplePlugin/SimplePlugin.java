@@ -78,6 +78,11 @@ public class SimplePlugin extends JavaPlugin {
 		log.info("SimplePlugin enabled!");
 
 	}
+	
+	public HashMap<String, SpellBook> getPlayerBooks()
+	{
+		return SimplePlugin.playerBooks;
+	}
 
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
