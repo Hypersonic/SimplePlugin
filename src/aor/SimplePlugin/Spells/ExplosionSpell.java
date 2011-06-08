@@ -8,7 +8,7 @@ import aor.SimplePlugin.SimplePlugin;
 import aor.SimplePlugin.Spell;
 import org.bukkit.block.Block;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.CraftWorld;
+//import org.bukkit.craftbukkit.CraftWorld;
 
 
 public class ExplosionSpell extends Spell {
@@ -51,7 +51,7 @@ public class ExplosionSpell extends Spell {
 
 	public void createExplosion(Block targetBlock, int size)
 	{
-		((CraftWorld)targetBlock.getWorld()).getHandle().createExplosion(null, targetBlock.getLocation().getX(), targetBlock.getLocation().getY(), targetBlock.getLocation().getZ(), size, false);
+		//((CraftWorld)targetBlock.getWorld()).getHandle().createExplosion(null, targetBlock.getLocation().getX(), targetBlock.getLocation().getY(), targetBlock.getLocation().getZ(), size, false);
 	}
 
 

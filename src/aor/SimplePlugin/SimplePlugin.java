@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.ChatColor;
@@ -21,31 +20,16 @@ import aor.SimplePlugin.SpellBook;
 
 
 public class SimplePlugin extends JavaPlugin {
-
-
 	static HashMap<String, SpellBook> playerBooks = new HashMap<String, SpellBook>();
-
-
-
 	//ClassListeners
 	private final SPPlayerListener playerListener = new SPPlayerListener(this);
-	private final SPBlockListener blockListener = new SPBlockListener(this);
-	//	private final SPPlayerListener entityListener = new SPPlayerListener(this);
-	//ClassListeners
-
 	Logger log = Logger.getLogger("Minecraft");//Define your logger
-
-
 	public void onDisable() {
 		log.info("SimplePlugin disabled");
 	}
-
 	public void onEnable() {
 		log.info("SimplePlugin enabling...");
 		PluginManager pm = this.getServer().getPluginManager();
-
-
-
 		//Custom recipe
 		ItemStack hoe = new ItemStack(Material.GOLD_HOE,1);
 		ShapedRecipe sceptre = new ShapedRecipe(hoe);
@@ -56,18 +40,13 @@ public class SimplePlugin extends JavaPlugin {
 		sceptre.setIngredient('3', Material.STICK);
 		sceptre.setIngredient('5', Material.STICK);
 		sceptre.setIngredient('8', Material.STICK);
-
 		//Give it to the server. YEAAAH!
 		this.getServer().addRecipe(sceptre);
 		//Custom recipe
-
-
 		// Register the listeners.
-
 		pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Event.Priority.Normal, this);
-
 		// Register players, if any.
 		Player[] onlinePlayers = this.getServer().getOnlinePlayers();
 		for (int i = 0; i < onlinePlayers.length; i++) // For every online players...
@@ -77,6 +56,11 @@ public class SimplePlugin extends JavaPlugin {
 
 		log.info("SimplePlugin enabled!");
 
+	}
+	
+	public HashMap<String, SpellBook> getPlayerBooks()
+	{
+		return SimplePlugin.playerBooks;
 	}
 
 
