@@ -1,10 +1,14 @@
-package src.aor.SimplePlugin.Spells;
+package aor.SimplePlugin.Spells;
+
+import java.util.List;
+import java.util.Random;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 import org.bukkit.Material;
 import aor.SimplePlugin.RunnableShootArrow;
 
@@ -29,16 +33,17 @@ public class Tornado extends Spell {
 	
 	public void castSpell (Player player)
 	{
+		Random gen = new Random();
 		PlayerInventory inventory = player.getInventory();
 
 		if (checkInventoryRequirements(inventory))
 		{
 			removeRequiredItemsFromInventory(inventory);
-			addItem(newItemStack(Material.BUCKET, 1));
+			player.getInventory().addItem(new ItemStack(Material.BUCKET, 1));
 			List<Entity> nearbyEntities;
-			nearbyEntities = getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
-			for (int i=0; i<nearbyEntities.length; i++) {
-				Vector newVelocity = new Vector((randomGen.nextFloat() * 1.5 - 0.75), randomGen.nextFloat() / 2.5 , randomGen.nextFloat() * 1.5 - 0.75); //Generate a random vector
+			nearbyEntities = player.getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
+			for (int i=0; i<nearbyEntities.size(); i++) {
+				Vector newVelocity = new Vector((gen.nextFloat() * 1.5 - 0.75), gen.nextFloat() / 2.5 , gen.nextFloat() * 1.5 - 0.75); //Generate a random vector
 				nearbyEntities.get(i).setVelocity(newVelocity);
 			}
 		}
