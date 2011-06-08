@@ -57,7 +57,9 @@ public class Spell {
 		}
 	}
 	
-
+	public void replaceItemInInventory(PlayerInventory inventory,ItemStack itemToBeReplaced,ItemStack itemToReplaceItWith){
+		inventory.setItem(inventory.first(itemToBeReplaced), itemToReplaceItWith);
+	}
 
 	public void castSpell(Player player)
 	{
