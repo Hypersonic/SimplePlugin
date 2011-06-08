@@ -5,12 +5,10 @@ import java.util.Random;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.bukkit.Material;
-import aor.SimplePlugin.RunnableShootArrow;
 
 import aor.SimplePlugin.SimplePlugin;
 import aor.SimplePlugin.Spell;
