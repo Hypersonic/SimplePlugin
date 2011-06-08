@@ -17,9 +17,9 @@ public class SpikeSpell extends Spell {
 	public SpikeSpell(SimplePlugin instance) // Constructor.
 	{
 		plugin = instance;
-		spellName = "Spikes";
+		spellName = "Spike";
 		spellDescription = "Summons a cactus on command. Needs 4 cacti, 1 sand.";
-		shortName = "Spikes";
+		shortName = "Spike";
 
 		setRequiredItems(new ItemStack(Material.CACTUS, 4), new ItemStack(Material.SAND, 1)); // 4 cactus, 1 sandblock.
 	}
