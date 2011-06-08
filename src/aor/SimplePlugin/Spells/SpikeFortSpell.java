@@ -10,8 +10,7 @@ import org.bukkit.entity.Player;
 
 import aor.SimplePlugin.SimplePlugin;
 import aor.SimplePlugin.Spell;
-import aor.SimplePlugin.Runnables.RunnableBuildWallCactus;
-import aor.SimplePlugin.Runnables.RunnableDestroyCactus;
+import aor.SimplePlugin.Runnables.RunnableBuildFortCactus;
 
 public class SpikeFortSpell extends Spell {
 
@@ -19,10 +18,10 @@ public class SpikeFortSpell extends Spell {
 	{
 		plugin = instance;
 		spellName = "Spike Fort";
-		spellDescription = "Summons a fortification of cacti on command.  Needs 35 cacti, 9 sand, 8 sandstone.";
+		spellDescription = "Summons a fortification of cacti on command.  Needs 64 cacti, 25 sand, 20 sandstone.";
 		shortName = "SpikeWall";
 
-		setRequiredItems(new ItemStack(Material.CACTUS, 35), new ItemStack(Material.SAND, 9), new ItemStack(Material.SANDSTONE, 8)); // 35 cactus, 9 sandblock, 8 sandstone.
+		setRequiredItems(new ItemStack(Material.CACTUS, 64), new ItemStack(Material.SAND, 25), new ItemStack(Material.SANDSTONE, 20)); // 64 cactus, 25 sandblock, 20 sandstone.
 	}
 
 	public double distanceBetween(Location locA, Location locB)
@@ -40,7 +39,7 @@ public class SpikeFortSpell extends Spell {
 
 	public Block[] blockSquare(Location center)
 	{
-		Block[] blocks = new Block[8];
+		Block[] blocks = new Block[20];
 
 		World world = center.getWorld();
 
@@ -52,6 +51,19 @@ public class SpikeFortSpell extends Spell {
 		blocks[0] = world.getBlockAt(center.getBlockX(), center.getBlockY(), center.getBlockZ() - 2);
 		blocks[6] = world.getBlockAt(blocks[0].getLocation().getBlockX() - 2, blocks[0].getLocation().getBlockY(), blocks[0].getLocation().getBlockZ());
 		blocks[7] = world.getBlockAt(center.getBlockX() - 2, center.getBlockY(), center.getBlockZ());
+		
+		blocks[8] = world.getBlockAt(center.getBlockX() - 1, center.getBlockY(), center.getBlockZ() + 3);
+		blocks[9] = world.getBlockAt(center.getBlockX() - 3, center.getBlockY(), center.getBlockZ() + 3);
+		blocks[10] = world.getBlockAt(center.getBlockX() + 1, center.getBlockY(), center.getBlockZ() + 3);
+		blocks[11] = world.getBlockAt(center.getBlockX() + 3, center.getBlockY(), center.getBlockZ() + 3);
+		blocks[12] = world.getBlockAt(center.getBlockX() - 3, center.getBlockY(), center.getBlockZ() + 1);
+		blocks[13] = world.getBlockAt(center.getBlockX() - 3, center.getBlockY(), center.getBlockZ() - 1);
+		blocks[14] = world.getBlockAt(center.getBlockX() - 3, center.getBlockY(), center.getBlockZ() - 3);
+		blocks[15] = world.getBlockAt(center.getBlockX() - 1, center.getBlockY(), center.getBlockZ() - 3);
+		blocks[16] = world.getBlockAt(center.getBlockX() + 1, center.getBlockY(), center.getBlockZ() - 3);
+		blocks[17] = world.getBlockAt(center.getBlockX() + 3, center.getBlockY(), center.getBlockZ() - 3);
+		blocks[18] = world.getBlockAt(center.getBlockX() + 3, center.getBlockY(), center.getBlockZ() - 1);
+		blocks[19] = world.getBlockAt(center.getBlockX() + 3, center.getBlockY(), center.getBlockZ() + 1);
 
 		return blocks;
 
@@ -64,8 +76,8 @@ public class SpikeFortSpell extends Spell {
 		if (checkInventoryRequirements(player.getInventory()))
 		{
 			
-			removeFromInventory(player.getInventory(), new ItemStack(Material.SAND, 1)); // Take out the extra items.
-			removeFromInventory(player.getInventory(), new ItemStack(Material.CACTUS, 3)); // Take out the extra items.
+			removeFromInventory(player.getInventory(), new ItemStack(Material.SAND, 5)); // Take out the extra items.
+			removeFromInventory(player.getInventory(), new ItemStack(Material.CACTUS, 4)); // Take out the extra items.
 			
 			Block[] blocks = blockSquare(new Location(player.getWorld(), player.getLocation().getBlockX(), player.getLocation().getBlockY() - 1, player.getLocation().getBlockZ())); // Get the block square.
 
@@ -73,12 +85,12 @@ public class SpikeFortSpell extends Spell {
 
 			for (int i = 0; i < blocks.length; i++)
 			{
-				player.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RunnableBuildWallCactus(blocks[i], player, plugin), b);
-				b = b + 2; // Once every 0.1 seconds.
+				player.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RunnableBuildFortCactus(blocks[i], player, plugin), b);
+				b = b + 1; // Once every server tick.
 			}
 		}
 
-		else { player.sendMessage("Could not cast! Requires 35 cacti, 9 sand, 8 sandstone."); } // They don't have the required items.
+		else { player.sendMessage("Could not cast! Requires 64 cacti, 25 sand, 20 sandstone."); } // They don't have the required items.
 	}
 	
 	

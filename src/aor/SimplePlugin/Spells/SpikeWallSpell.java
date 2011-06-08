@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import aor.SimplePlugin.SimplePlugin;
 import aor.SimplePlugin.Spell;
 import aor.SimplePlugin.Runnables.RunnableBuildWallCactus;
-import aor.SimplePlugin.Runnables.RunnableDestroyCactus;
 
 public class SpikeWallSpell extends Spell {
 
