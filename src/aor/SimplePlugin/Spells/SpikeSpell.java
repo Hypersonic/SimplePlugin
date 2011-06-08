@@ -116,8 +116,6 @@ public class SpikeSpell extends Spell {
 						}
 						
 						player.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RunnableDestroyCactus(targetBlock, originalTargetMaterial, sandstoneSupport), 300); // We will destroy cactus in 15 seconds.
-						
-						player.sendMessage("SPIKES SPIKES SPIKES BABY");
 
 					}
 					else
