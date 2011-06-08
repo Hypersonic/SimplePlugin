@@ -73,6 +73,10 @@ public class Spell {
 		if (item.getDurability() >= material.getMaxDurability())
 		{ inventory.removeItem(item); } // It's used up.
 	}
+	
+	public void replaceItemInInventory(PlayerInventory inventory,ItemStack itemToBeReplaced,ItemStack itemToReplaceItWith){
+		inventory.setItem(inventory.first(itemToBeReplaced), itemToReplaceItWith);
+	}
 
 	public void removeFromInventory(Inventory inventory, ItemStack item) { // Removes an itemstack from the inventory. Use this for quantities of items. Based on code by nisovin.
 		int amt = item.getAmount();
