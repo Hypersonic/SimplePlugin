@@ -1,24 +1,25 @@
-package src.aor.SimplePlugin.Spells;
+package aor.SimplePlugin.Spells;
 
-import org.bukkit.entity.Player;
+//import org.bukkit.entity.Player;
+//import aor.SimplePlugin.Spell;
+//import org.bukkit.block.Block;
+//import org.bukkit.Location;
+//import org.bukkit.Material;
 import aor.SimplePlugin.Spell;
-import org.bukkit.block.Block;
-import org.bukkit.Location;
-import org.bukkit.Material;
 
 
-public class FireballSpell extends Spell {
+public class BWSpellAttempt extends Spell {
 	
-	private static final int MAXDISTANCE = 100; // Sets the maximum distance.
+	//private static final int MAXDISTANCE = 100; // Sets the maximum distance.
 
-
-	public FireballSpell() // Constructor.
+	public String spellName;
+	public BWSpellAttempt() // Constructor.
 	{
 		spellName = "Fireball";
 	}
 	
 	
-	public void castSpell(Player player)
+	/*public void castSpell(Player player)
 	{
 		Block targetBlock = player.getTargetBlock(null, MAXDISTANCE); // Select the target block.
 		if (targetBlock.getType() != Material.AIR){ // No placing bedrock midair!
@@ -27,4 +28,6 @@ public class FireballSpell extends Spell {
 		} else {
 			player.sendMessage("Invalid Target!");
 		}
+	}*/
+}
 	
