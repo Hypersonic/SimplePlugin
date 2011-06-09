@@ -39,7 +39,8 @@ public class DecoySpell extends Spell {
 
 		if (checkInventoryRequirements(inventory))
 		{
-			
+			removeRequiredItemsFromInventory(inventory); // Remove the items.
+
 			Block targetBlock = player.getTargetBlock(null, MAXDISTANCE); // Select the target block.
 			
 			if (targetBlock.getType() != Material.AIR) // No cows midair!
@@ -54,7 +55,7 @@ public class DecoySpell extends Spell {
 							((Creature) currentCreature).setTarget(cow);
 						}
 					} catch (Exception e){
-						e.printStackTrace();
+						e.printStackTrace();	//If there is an error, we want reports!
 					}
 				}
 			}
