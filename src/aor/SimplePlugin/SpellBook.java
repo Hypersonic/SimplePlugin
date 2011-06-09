@@ -21,6 +21,7 @@ public class SpellBook {
 		registerSpell(new SpikeWallSpell(plugin));
 		registerSpell(new SpikeFortSpell(plugin));
 		registerSpell(new DecoySpell(plugin));
+		registerSpell(new NetSpell(plugin));
 	}
 
 	ArrayList<Spell> spellRegistry = new ArrayList<Spell>();
