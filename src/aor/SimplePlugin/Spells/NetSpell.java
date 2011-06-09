@@ -28,7 +28,7 @@ public class NetSpell extends Spell {
 		shortName = "Net";
 
 
-		setRequiredItems(new ItemStack(Material.LEATHER, 0)); // We need 4 leather and 1 porkchop.
+		setRequiredItems(new ItemStack(Material.STRING, 10)); // We need 10 string.
 	}
 
 	public void castSpell(Player player) {
@@ -58,7 +58,7 @@ public class NetSpell extends Spell {
 			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new NetRunnables(blockLocs), 200L);
 
 		} else {
-			player.sendMessage("Could not cast! Spell requires 4 leather and 1 raw porkchop.");
+			player.sendMessage("Could not cast! Spell requires 10 string.");
 		} // They don't have the proper items.
 
 	}
