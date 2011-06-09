@@ -31,8 +31,7 @@ public class SPPlayerListener extends PlayerListener {
 	public void onPlayerInteract(PlayerInteractEvent event) {
 
 		Player player = event.getPlayer(); // Set the player object.
-		SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
-
+		
 		
 		if (player.getItemInHand().getType() == Material.GOLD_HOE){
 			event.setCancelled(true);	//Cancel the event. This only overrides the default gold hoe behavior, not calls to plugins.
@@ -41,18 +40,15 @@ public class SPPlayerListener extends PlayerListener {
 		// Left clicking air or a block event:
 		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they right clicked with the gold hoe...
 		{
-			
+			SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
 			spellBook.getCurrentSpell().castSpell(player);
-
 		}
 		
 		// Right clicking air or a block event:
 		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they left clicked with the gold hoe.
 		{
-			
+			SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
 			spellBook.nextSpell(player); // Scroll through spells.
-			
 		}
 	}
-
 }

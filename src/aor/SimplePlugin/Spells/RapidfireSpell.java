@@ -1,5 +1,7 @@
 package aor.SimplePlugin.Spells;
 
+import java.util.ArrayList;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ItemStack;
@@ -23,10 +25,11 @@ public class RapidfireSpell extends Spell {
 		spellName = "Rapidfire";
 		spellDescription = "Quickly fires off eight arrows. Needs four redstone.";
 		shortName = "Rapidfire";
-		
-		setRequiredItems(new ItemStack(Material.ARROW, 8), new ItemStack(Material.REDSTONE, 4)); // We need 8 arrows and 4 redstone.
+		ArrayList<ItemStack[]> requiredItems=new ArrayList<ItemStack[]>();
+		requiredItems.add(new ItemStack[]{new ItemStack(Material.ARROW, 8),new ItemStack(Material.AIR)});
+		requiredItems.add(new ItemStack[]{new ItemStack(Material.REDSTONE, 4),new ItemStack(Material.AIR)});
+		setRequiredItems(requiredItems); // We need 8 arrows and 4 redstone.
 	}
-
 
 	public void castSpell(Player player)
 	{
@@ -34,7 +37,7 @@ public class RapidfireSpell extends Spell {
 
 		if (checkInventoryRequirements(inventory))
 		{
-			removeFromInventory(inventory, requiredItems.get(1)); // Remove the redstone.
+			removeFromInventory(inventory, requiredItems.get(1)[0]); // Remove the redstone.
 			player.shootArrow(); // Shoot an arrow.
 			removeFromInventory(inventory, new ItemStack(Material.ARROW, 1)); // Remove an arrow. Will remove the rest in RunnableShootArrow.
 			

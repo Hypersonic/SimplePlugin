@@ -30,40 +30,56 @@ public class Spell {
 		return "The spell is working!";
 	}
 
-	public ArrayList<ItemStack> requiredItems = new ArrayList<ItemStack>(); // The required items arraylist.
+	public ArrayList<ItemStack[]> requiredItems = new ArrayList<ItemStack[]>(); // The required items arraylist of arrays.
 	
-	public void setRequiredItems(ItemStack... items)
+	public void setRequiredItems(ArrayList<ItemStack[]> items)
 	{
-		for (int i = 0; i < items.length; i++) { requiredItems.add(items[i]); }
+		for (int i = 0; i < items.size()/2; i++) {
+			requiredItems.add(items.get(i));
+		}
 	}
-	
 	
 	public boolean checkInventoryRequirements(PlayerInventory inventory) // Checks if player has the proper requirements for the spell.
 	{
 		for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
 		{
-			if (inventory.contains(requiredItems.get(i).getType(), requiredItems.get(i).getAmount())) { } // Move along if it has it.
-			else { return false; } // If it doesn't break out and reutrn false.
+			if (!inventory.contains(new ItemStack(requiredItems.get(i)[0].getType()), requiredItems.get(i)[0].getAmount())) {
+				return false;
+			}  // If it doesn't return false.
 		}
 		return true; // If all conditions were met.
 	}
 	
-	
-	public void removeRequiredItemsFromInventory(PlayerInventory inventory)
+	public boolean removeRequiredItemsFromInventory(PlayerInventory inventory)
 	{
-		for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
-		{
-			removeFromInventory(inventory, requiredItems.get(i)); // Remove the items.
+		if(checkInventoryRequirements(inventory)){
+			for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
+			{
+				if(requiredItems.get(0)[1].getType()==Material.AIR){
+					inventory.remove(requiredItems.get(0)[0]);
+				}
+				else{
+					for(int amountRemaining=requiredItems.get(i)[0].getAmount();amountRemaining>0;){
+						if(inventory.getItem(inventory.first(requiredItems.get(i)[0])).getAmount()>=requiredItems.get(i)[0].getAmount()){
+							inventory.getItem(inventory.first(requiredItems.get(i)[0])).setAmount(inventory.getItem(inventory.first(requiredItems.get(i)[0])).getAmount()-amountRemaining);
+							amountRemaining=0;
+						}
+						else if(inventory.getItem(inventory.first(requiredItems.get(i)[0])).getAmount()<requiredItems.get(i)[0].getAmount()){
+							amountRemaining-=inventory.getItem(inventory.first(requiredItems.get(i)[0])).getAmount();
+							inventory.remove(inventory.first(requiredItems.get(i)[0]));
+						}
+						inventory.setItem(inventory.first(requiredItems.get(i)[0]), requiredItems.get(i)[1]);// Remove the items.
+					}
+				}
+			}
+			return true;
 		}
+		return false;
 	}
-	
-
-
 	public void castSpell(Player player)
 	{
 		player.sendMessage("You're trying to cast a spell that's not set!");
 	}
-
 
 	public void damageItem(Material material, int amount, PlayerInventory inventory) // Damages an item in the inventory. Removes it if it's all used up.
 	{ 
@@ -74,10 +90,7 @@ public class Spell {
 		{ inventory.removeItem(item); } // It's used up.
 	}
 	
-	public void replaceItemInInventory(PlayerInventory inventory,ItemStack itemToBeReplaced,ItemStack itemToReplaceItWith){
-		inventory.setItem(inventory.first(itemToBeReplaced), itemToReplaceItWith);
-	}
-
+	//There is already a built in bukkit function that does this! inventory.remove(ItemStack);
 	public void removeFromInventory(Inventory inventory, ItemStack item) { // Removes an itemstack from the inventory. Use this for quantities of items. Based on code by nisovin.
 		int amt = item.getAmount();
 		ItemStack[] items = inventory.getContents();
@@ -97,6 +110,4 @@ public class Spell {
 		}
 		inventory.setContents(items);
 	}
-
-
 }

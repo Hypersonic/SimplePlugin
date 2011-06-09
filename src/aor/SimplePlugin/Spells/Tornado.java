@@ -1,5 +1,6 @@
 package aor.SimplePlugin.Spells;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,8 +25,10 @@ public class Tornado extends Spell {
 		plugin = instance;
 		spellName = "Tornado";
 		spellDescription = "Flings mobs around the player into the air.";
-		
-		setRequiredItems(new ItemStack(Material.WATER_BUCKET, 1), new ItemStack(Material.REDSTONE, 4)); // We need 1 bucket of water and 4 redstone.
+		ArrayList<ItemStack[]> requiredItems=new ArrayList<ItemStack[]>();
+		requiredItems.add(new ItemStack[]{new ItemStack(Material.WATER_BUCKET, 1),new ItemStack(Material.BUCKET,1)});
+		requiredItems.add(new ItemStack[]{new ItemStack(Material.REDSTONE, 4),new ItemStack(Material.AIR)});
+		setRequiredItems(requiredItems);
 	}
 	
 	
@@ -34,10 +37,8 @@ public class Tornado extends Spell {
 		Random gen = new Random();
 		PlayerInventory inventory = player.getInventory();
 
-		if (checkInventoryRequirements(inventory))
+		if (removeRequiredItemsFromInventory(inventory))
 		{
-			removeRequiredItemsFromInventory(inventory);
-			player.getInventory().addItem(new ItemStack(Material.BUCKET, 1));
 			List<Entity> nearbyEntities;
 			nearbyEntities = player.getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
 			for (int i=0; i<nearbyEntities.size(); i++) {

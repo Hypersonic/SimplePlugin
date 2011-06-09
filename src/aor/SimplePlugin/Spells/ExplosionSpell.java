@@ -1,5 +1,7 @@
 package aor.SimplePlugin.Spells;
 
+import java.util.ArrayList;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -22,9 +24,10 @@ public class ExplosionSpell extends Spell {
 		spellName = "Explosion";
 		spellDescription = "Causes an explosion at your target location.";
 		shortName = "Explosion";
-		
-		setRequiredItems(new ItemStack(Material.ARROW, 2), new ItemStack(Material.TNT, 1));
-		
+		ArrayList<ItemStack[]> requiredItems=new ArrayList<ItemStack[]>();
+		requiredItems.add(new ItemStack[]{new ItemStack(Material.ARROW, 2),new ItemStack(Material.AIR)});
+		requiredItems.add(new ItemStack[]{new ItemStack(Material.TNT, 1),new ItemStack(Material.AIR)});
+		setRequiredItems(requiredItems);
 	}
 
 	public void castSpell(Player player)

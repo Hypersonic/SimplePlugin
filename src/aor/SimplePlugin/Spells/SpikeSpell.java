@@ -6,6 +6,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import java.lang.Math;
+import java.util.ArrayList;
 
 import aor.SimplePlugin.Runnables.RunnableDestroyCactus;
 import aor.SimplePlugin.Runnables.RunnableBuildCactus;
@@ -20,8 +21,10 @@ public class SpikeSpell extends Spell {
 		spellName = "Spike";
 		spellDescription = "Summons a cactus on command. Needs 4 cacti, 1 sand.";
 		shortName = "Spike";
-
-		setRequiredItems(new ItemStack(Material.CACTUS, 4), new ItemStack(Material.SAND, 1)); // 4 cactus, 1 sandblock.
+		ArrayList<ItemStack[]> requiredItems=new ArrayList<ItemStack[]>();
+		requiredItems.add(new ItemStack[]{new ItemStack(Material.CACTUS, 4),new ItemStack(Material.AIR)});
+		requiredItems.add(new ItemStack[]{new ItemStack(Material.SAND, 1),new ItemStack(Material.AIR)});
+		setRequiredItems(requiredItems);
 	}
 
 	public boolean canPlaceCactus(Block targetBlock)
