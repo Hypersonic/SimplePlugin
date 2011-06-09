@@ -24,6 +24,7 @@ public class Tornado extends Spell {
 		plugin = instance;
 		spellName = "Tornado";
 		spellDescription = "Flings mobs around the player into the air.";
+		shortName = "Tornado";
 		
 		setRequiredItems(new ItemStack(Material.WATER_BUCKET, 1), new ItemStack(Material.REDSTONE, 4)); // We need 1 bucket of water and 4 redstone.
 	}
