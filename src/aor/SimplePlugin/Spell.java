@@ -31,6 +31,14 @@ public class Spell implements Runnable{
 			requiredItems.add(items.get(i));
 		}
 	}
+	public void setRequiredItems(ItemStack... items){
+		for (int i = 0; i < items.length; i++) {
+			requiredItems.add(items[i]);
+		}
+	}
+	public void addRequiredItem(ItemStack item){
+		requiredItems.add(item);
+	}
 	public void run(){
 		
 	}
