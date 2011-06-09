@@ -51,7 +51,6 @@ public class ExplosionSpell extends Spell {
 				player.sendMessage("Could not cast! Invalid block type!");
 			}
 		}
-		
 		else { player.sendMessage("Could not cast! Spell requires 2 arrows, 1 TNT!"); } // They don't have the proper items.
 
 	}
