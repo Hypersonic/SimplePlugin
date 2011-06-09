@@ -25,9 +25,9 @@ public class Tornado extends Spell {
 		plugin = instance;
 		spellName = "Tornado";
 		spellDescription = "Flings mobs around the player into the air.";
-		ArrayList<ItemStack[]> requiredItems=new ArrayList<ItemStack[]>();
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.WATER_BUCKET, 1),new ItemStack(Material.BUCKET,1)});
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.REDSTONE, 4),new ItemStack(Material.AIR)});
+		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
+		requiredItems.add(new ItemStack(Material.WATER_BUCKET, 1));
+		requiredItems.add(new ItemStack(Material.REDSTONE, 4));
 		setRequiredItems(requiredItems);
 	}
 	

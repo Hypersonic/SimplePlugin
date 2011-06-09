@@ -21,9 +21,9 @@ public class SpikeSpell extends Spell {
 		spellName = "Spike";
 		spellDescription = "Summons a cactus on command. Needs 4 cacti, 1 sand.";
 		shortName = "Spike";
-		ArrayList<ItemStack[]> requiredItems=new ArrayList<ItemStack[]>();
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.CACTUS, 4),new ItemStack(Material.AIR)});
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.SAND, 1),new ItemStack(Material.AIR)});
+		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
+		requiredItems.add(new ItemStack(Material.CACTUS, 4));
+		requiredItems.add(new ItemStack(Material.SAND, 1));
 		setRequiredItems(requiredItems);
 	}
 

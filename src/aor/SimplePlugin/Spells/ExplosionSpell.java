@@ -24,9 +24,9 @@ public class ExplosionSpell extends Spell {
 		spellName = "Explosion";
 		spellDescription = "Causes an explosion at your target location.";
 		shortName = "Explosion";
-		ArrayList<ItemStack[]> requiredItems=new ArrayList<ItemStack[]>();
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.ARROW, 2),new ItemStack(Material.AIR)});
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.TNT, 1),new ItemStack(Material.AIR)});
+		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
+		requiredItems.add(new ItemStack(Material.ARROW, 2));
+		requiredItems.add(new ItemStack(Material.TNT, 1));
 		setRequiredItems(requiredItems);
 	}
 

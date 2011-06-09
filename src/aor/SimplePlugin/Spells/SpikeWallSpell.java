@@ -22,10 +22,10 @@ public class SpikeWallSpell extends Spell {
 		spellName = "Spike Wall";
 		spellDescription = "Summons a wall of cacti on command.  Needs 35 cacti, 9 sand, 8 sandstone.";
 		shortName = "SpikeWall";
-		ArrayList<ItemStack[]> requiredItems=new ArrayList<ItemStack[]>();
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.CACTUS, 35),new ItemStack(Material.AIR)});
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.SAND, 9),new ItemStack(Material.AIR)});
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.SANDSTONE, 8),new ItemStack(Material.AIR)});
+		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
+		requiredItems.add(new ItemStack(Material.CACTUS, 35));
+		requiredItems.add(new ItemStack(Material.SAND, 9));
+		requiredItems.add(new ItemStack(Material.SANDSTONE, 8));
 		setRequiredItems(requiredItems);
 	}
 

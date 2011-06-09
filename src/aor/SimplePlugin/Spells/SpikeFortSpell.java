@@ -22,10 +22,10 @@ public class SpikeFortSpell extends Spell {
 		spellName = "Spike Fort";
 		spellDescription = "Summons a fortification of cacti on command.  Needs 64 cacti, 25 sand, 20 sandstone.";
 		shortName = "SpikeFort";
-		ArrayList<ItemStack[]> requiredItems=new ArrayList<ItemStack[]>();
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.CACTUS, 64),new ItemStack(Material.AIR)});
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.SAND, 25),new ItemStack(Material.AIR)});
-		requiredItems.add(new ItemStack[]{new ItemStack(Material.SANDSTONE, 20),new ItemStack(Material.AIR)});
+		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
+		requiredItems.add(new ItemStack(Material.CACTUS, 64));
+		requiredItems.add(new ItemStack(Material.SAND, 25));
+		requiredItems.add(new ItemStack(Material.SANDSTONE, 20));
 		setRequiredItems(requiredItems);
 	}
 
