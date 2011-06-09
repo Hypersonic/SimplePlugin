@@ -27,7 +27,7 @@ public class Spell implements Runnable{
 	
 	public void setRequiredItems(ArrayList<ItemStack> items)
 	{
-		for (int i = 0; i < items.size()/2; i++) {
+		for (int i = 0; i < items.size(); i++) {
 			requiredItems.add(items.get(i));
 		}
 	}
@@ -58,12 +58,13 @@ public class Spell implements Runnable{
 		if(checkInventoryRequirements(inventory)){
 			for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
 			{
-				removeFromInventory(inventory,requiredItems.get(0));
+				removeFromInventory(inventory,requiredItems.get(i));
 			}
 			return true;
 		}
 		return false;
 	}
+
 	public void castSpell(Player player)
 	{
 		player.sendMessage("You're trying to cast a spell that's not set!");

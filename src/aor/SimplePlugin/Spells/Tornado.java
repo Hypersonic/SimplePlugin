@@ -29,6 +29,7 @@ public class Tornado extends Spell {
 		requiredItems.add(new ItemStack(Material.WATER_BUCKET, 1));
 		requiredItems.add(new ItemStack(Material.REDSTONE, 4));
 		setRequiredItems(requiredItems);
+		shortName = "Tornado";// We need 1 bucket of water and 4 redstone.
 	}
 	
 	
@@ -42,7 +43,7 @@ public class Tornado extends Spell {
 			List<Entity> nearbyEntities;
 			nearbyEntities = player.getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
 			for (int i=0; i<nearbyEntities.size(); i++) {
-				Vector newVelocity = new Vector((gen.nextFloat() * 1.5 - 0.75), gen.nextFloat() / 2.5 , gen.nextFloat() * 1.5 - 0.75); //Generate a random vector
+				Vector newVelocity = new Vector((gen.nextFloat() * 1), gen.nextFloat() * 1.5, gen.nextFloat() * 1); //Generate a random vector
 				nearbyEntities.get(i).setVelocity(newVelocity);
 			}
 		}

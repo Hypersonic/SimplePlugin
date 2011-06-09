@@ -37,14 +37,18 @@ public class ExplosionSpell extends Spell {
 
 		if (checkInventoryRequirements(inventory))
 		{
-			removeRequiredItemsFromInventory(inventory); // Remove the items.
+			 // Remove the items.
 
 			
 			Block targetBlock = player.getTargetBlock(null, MAXDISTANCE); // Select the target block.
 			
 			if (targetBlock.getType() != Material.AIR) // No explosions midair!
 			{
+				removeRequiredItemsFromInventory(inventory);
 				createExplosion(targetBlock, 5);
+			}
+			else{
+				player.sendMessage("Could not cast! Invalid block type!");
 			}
 		}
 		

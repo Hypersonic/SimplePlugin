@@ -37,7 +37,7 @@ public class RapidfireSpell extends Spell {
 
 		if (checkInventoryRequirements(inventory))
 		{
-			removeFromInventory(inventory, requiredItems.get(1)); // Remove the redstone.
+			removeRequiredItemFromInventory(inventory, 1); // Remove the redstone.
 			player.shootArrow(); // Shoot an arrow.
 			removeFromInventory(inventory, new ItemStack(Material.ARROW, 1)); // Remove an arrow. Will remove the rest in RunnableShootArrow.
 			
