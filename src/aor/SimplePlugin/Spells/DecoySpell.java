@@ -27,7 +27,7 @@ public class DecoySpell extends Spell {
 		spellName = "Decoy";
 		spellDescription = "Spawns a cow, and causes all mobs within a 5 block radius to attack it.";
 		
-		setRequiredItems(new ItemStack(Material.WATER_BUCKET, 1), new ItemStack(Material.REDSTONE, 4)); // We need 1 bucket of water and 4 redstone.
+		setRequiredItems(new ItemStack(Material.LEATHER, 4), new ItemStack(Material.PORK, 1)); // We need 4 leather and 1 porkchop.
 	}
 	
 	
@@ -53,7 +53,7 @@ public class DecoySpell extends Spell {
 			
 			
 		} else {
-			player.sendMessage("Could not cast! Spell requires 1 water bucket and 4 redstone.");
+			player.sendMessage("Could not cast! Spell requires 4 leather and 1 raw porkchop.");
 			} // They don't have the proper items.
 		
 	}
