@@ -3,6 +3,8 @@ package aor.SimplePlugin.Spells;
 import java.util.List;
 
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.entity.CraftItem;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -45,8 +47,15 @@ public class DecoySpell extends Spell {
 				LivingEntity cow = player.getWorld().spawnCreature(targetBlock.getLocation(), CreatureType.COW);
 				List<Entity> nearCow = cow.getNearbyEntities(10, 10, 10);
 				for (int i = 0; i < nearCow.size();i++){
-					Creature currentCreature = (Creature) nearCow.get(i);
-					currentCreature.setTarget(cow);
+					Entity currentCreature = nearCow.get(i);
+					try {
+						if (currentCreature.getClass() != CraftPlayer.class && currentCreature.getClass() != CraftItem.class) //You can't make no player or item target nothin'!
+						{
+							((Creature) currentCreature).setTarget(cow);
+						}
+					} catch (Exception e){
+						e.printStackTrace();
+					}
 				}
 			}
 

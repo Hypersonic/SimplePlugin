@@ -20,6 +20,7 @@ public class SpellBook {
 		registerSpell(new Tornado(plugin));
 		registerSpell(new SpikeWallSpell(plugin));
 		registerSpell(new SpikeFortSpell(plugin));
+		registerSpell(new DecoySpell(plugin));
 	}
 
 	ArrayList<Spell> spellRegistry = new ArrayList<Spell>();
