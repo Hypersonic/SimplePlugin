@@ -17,11 +17,11 @@ public class SpellBook {
 		registerSpell(new RapidfireSpell(plugin)); // Register the rapidfire spell.
 		registerSpell(new ExplosionSpell(plugin)); // Register explosion spell.
 		registerSpell(new SpikeSpell(plugin));
-		registerSpell(new Tornado(plugin));
 		registerSpell(new SpikeWallSpell(plugin));
 		registerSpell(new SpikeFortSpell(plugin));
 		registerSpell(new DecoySpell(plugin));
 		registerSpell(new NetSpell(plugin));
+		registerSpell(new Tornado(plugin));
 	}
 
 	ArrayList<Spell> spellRegistry = new ArrayList<Spell>();

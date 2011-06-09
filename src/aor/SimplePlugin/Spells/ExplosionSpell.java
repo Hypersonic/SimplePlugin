@@ -1,5 +1,7 @@
 package aor.SimplePlugin.Spells;
 
+import java.util.ArrayList;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -22,9 +24,10 @@ public class ExplosionSpell extends Spell {
 		spellName = "Explosion";
 		spellDescription = "Causes an explosion at your target location.";
 		shortName = "Explosion";
-		
-		setRequiredItems(new ItemStack(Material.ARROW, 2), new ItemStack(Material.TNT, 1));
-		
+		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
+		requiredItems.add(new ItemStack(Material.ARROW, 2));
+		requiredItems.add(new ItemStack(Material.TNT, 1));
+		setRequiredItems(requiredItems);
 	}
 
 	public void castSpell(Player player)
@@ -34,17 +37,20 @@ public class ExplosionSpell extends Spell {
 
 		if (checkInventoryRequirements(inventory))
 		{
-			removeRequiredItemsFromInventory(inventory); // Remove the items.
+			 // Remove the items.
 
 			
 			Block targetBlock = player.getTargetBlock(null, MAXDISTANCE); // Select the target block.
 			
 			if (targetBlock.getType() != Material.AIR) // No explosions midair!
 			{
+				removeRequiredItemsFromInventory(inventory);
 				createExplosion(targetBlock, 5);
 			}
+			else{
+				player.sendMessage("Could not cast! Invalid block type!");
+			}
 		}
-		
 		else { player.sendMessage("Could not cast! Spell requires 2 arrows, 1 TNT!"); } // They don't have the proper items.
 
 	}

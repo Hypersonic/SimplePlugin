@@ -1,6 +1,8 @@
 package aor.SimplePlugin.Spells;
 
 
+import java.util.ArrayList;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -20,8 +22,11 @@ public class SpikeWallSpell extends Spell {
 		spellName = "Spike Wall";
 		spellDescription = "Summons a wall of cacti on command.  Needs 35 cacti, 9 sand, 8 sandstone.";
 		shortName = "SpikeWall";
-
-		setRequiredItems(new ItemStack(Material.CACTUS, 35), new ItemStack(Material.SAND, 9), new ItemStack(Material.SANDSTONE, 8)); // 35 cactus, 9 sandblock, 8 sandstone.
+		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
+		requiredItems.add(new ItemStack(Material.CACTUS, 35));
+		requiredItems.add(new ItemStack(Material.SAND, 9));
+		requiredItems.add(new ItemStack(Material.SANDSTONE, 8));
+		setRequiredItems(requiredItems);
 	}
 
 	public double distanceBetween(Location locA, Location locB)

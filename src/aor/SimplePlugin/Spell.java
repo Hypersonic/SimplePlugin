@@ -6,10 +6,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.Inventory;
 import java.util.ArrayList;
 
-public class Spell {
+public class Spell implements Runnable{
 	
 	public static SimplePlugin plugin;
 	
@@ -24,48 +23,52 @@ public class Spell {
 	public String shortName;
 	public String getShortName() { return shortName; }
 
-
-	public String returnHello()
+	public ArrayList<ItemStack> requiredItems = new ArrayList<ItemStack>(); // The required items arraylist of arrays.
+	
+	public void setRequiredItems(ArrayList<ItemStack> items)
 	{
-		return "The spell is working!";
+		for (int i = 0; i < items.size(); i++) {
+			requiredItems.add(items.get(i));
+		}
 	}
-
-	public ArrayList<ItemStack> requiredItems = new ArrayList<ItemStack>(); // The required items arraylist.
-	
-	public void setRequiredItems(ItemStack... items)
-	{
-		for (int i = 0; i < items.length; i++) { requiredItems.add(items[i]); }
+	public void run(){
+		
 	}
-	
-	
+	public void delayedRun(int time){
+		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin,this, (long)time);
+	}
 	public boolean checkInventoryRequirements(PlayerInventory inventory) // Checks if player has the proper requirements for the spell.
 	{
 		for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
 		{
-			if (inventory.contains(requiredItems.get(i).getType(), requiredItems.get(i).getAmount())) { } // Move along if it has it.
-			else { return false; } // If it doesn't break out and reutrn false.
+			if (!inventory.contains(requiredItems.get(i).getType(), requiredItems.get(i).getAmount())) {
+				return false;
+			}  // If it doesn't return false.
 		}
 		return true; // If all conditions were met.
 	}
-	
-	
-	public void removeRequiredItemsFromInventory(PlayerInventory inventory)
-	{
-		for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
-		{
-			removeFromInventory(inventory, requiredItems.get(i)); // Remove the items.
+	public boolean removeRequiredItemFromInventory(PlayerInventory inventory,int index){
+		if(requiredItems.size()>index){
+				return removeFromInventory(inventory,requiredItems.get(index))!=-1;
 		}
+		return false;
 	}
-	
-	public void replaceItemInInventory(PlayerInventory inventory,ItemStack itemToBeReplaced,ItemStack itemToReplaceItWith){
-		inventory.setItem(inventory.first(itemToBeReplaced), itemToReplaceItWith);
+	public boolean removeRequiredItemsFromInventory(PlayerInventory inventory)
+	{
+		if(checkInventoryRequirements(inventory)){
+			for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
+			{
+				removeFromInventory(inventory,requiredItems.get(i));
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public void castSpell(Player player)
 	{
 		player.sendMessage("You're trying to cast a spell that's not set!");
 	}
-
 
 	public void damageItem(Material material, int amount, PlayerInventory inventory) // Damages an item in the inventory. Removes it if it's all used up.
 	{ 
@@ -75,26 +78,33 @@ public class Spell {
 		if (item.getDurability() >= material.getMaxDurability())
 		{ inventory.removeItem(item); } // It's used up.
 	}
-	
-	public void removeFromInventory(Inventory inventory, ItemStack item) { // Removes an itemstack from the inventory. Use this for quantities of items. Based on code by nisovin.
-		int amt = item.getAmount();
-		ItemStack[] items = inventory.getContents();
-		for (int i = 0; i < items.length; i++) {
-			if (items[i] != null && items[i].getType() == item.getType() && items[i].getDurability() == item.getDurability()) {
-				if (items[i].getAmount() > amt) {
-					items[i].setAmount(items[i].getAmount() - amt);
-					break;
-				} else if (items[i].getAmount() == amt) {
-					items[i] = null;
-					break;
-				} else {
-					amt -= items[i].getAmount();
-					items[i] = null;
-				}
+	public void replaceInInventory(PlayerInventory inventory, ItemStack itemToRemove, ItemStack itemToReplaceWith){
+		addItemToIndex(inventory,itemToReplaceWith,removeFromInventory(inventory,itemToRemove));
+	}
+	public boolean addItemSafely(PlayerInventory inventory, ItemStack item){
+		if(inventory.firstEmpty()!=-1){
+			addItemToIndex(inventory,item,inventory.firstEmpty());
+			return true;
+		}
+		return false;
+	}
+	public void addItemToIndex(PlayerInventory inventory, ItemStack item,int index){
+		inventory.setItem(index, item);
+	}
+	public int removeFromInventory(PlayerInventory inventory, ItemStack item) { // Removes an itemstack from the inventory. Use this for quantities of items.
+		int amountLeft=item.getAmount();
+		while(amountLeft>0){
+			int firstFound=inventory.first(item.getType());
+			if(inventory.getItem(firstFound).getAmount()>=amountLeft){
+				inventory.getItem(firstFound).setAmount(inventory.getItem(firstFound).getAmount()-amountLeft);
+				amountLeft=0;
+				return firstFound;
+			}
+			else{
+				amountLeft-=inventory.getItem(inventory.first(item.getType())).getAmount();
+				inventory.clear(inventory.first(item.getType()));
 			}
 		}
-		inventory.setContents(items);
+		return -1;
 	}
-
-
 }
