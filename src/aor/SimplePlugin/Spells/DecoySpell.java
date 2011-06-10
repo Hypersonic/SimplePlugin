@@ -39,12 +39,14 @@ public class DecoySpell extends Spell {
 
 		if (checkInventoryRequirements(inventory))
 		{
-			removeRequiredItemsFromInventory(inventory); // Remove the items.
 
 			Block targetBlock = player.getTargetBlock(null, MAXDISTANCE); // Select the target block.
 			
 			if (targetBlock.getType() != Material.AIR) // No cows midair!
 			{
+				
+				removeRequiredItemsFromInventory(inventory); // Remove the items.
+
 				LivingEntity cow = player.getWorld().spawnCreature(targetBlock.getLocation(), CreatureType.COW);
 				List<Entity> nearCow = cow.getNearbyEntities(10, 10, 10);
 				for (int i = 0; i < nearCow.size();i++){
