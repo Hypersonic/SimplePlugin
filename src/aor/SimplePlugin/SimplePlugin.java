@@ -15,6 +15,8 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.ChatColor;
 import aor.SimplePlugin.SpellBook;
+import aor.SimplePlugin.Spells.ExampleSpell;
+import aor.SimplePlugin.Spells.ExampleSpell2;
 import aor.SimplePlugin.Spells.ExplosionSpell;
 import aor.SimplePlugin.Spells.RapidfireSpell;
 import aor.SimplePlugin.Spells.SpikeFortSpell;
@@ -104,6 +106,8 @@ public class SimplePlugin extends JavaPlugin {
 		spellList.add(new SpikeWallSpell(this));
 		spellList.add(new SpikeFortSpell(this));
 		spellList.add(new Tornado(this));
+		spellList.add(new ExampleSpell());
+		spellList.add(new ExampleSpell2());
 		for(int i=0;i<spellList.size();i++){
 			if(spellList.get(i).onBlockBreak){
 				spellOnBlockBreakList.add(i);

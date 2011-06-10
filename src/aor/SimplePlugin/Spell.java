@@ -14,6 +14,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import java.util.ArrayList;
 
+/**
+ * This is the main spell class that all spells must extend.
+ * @author Jay
+ *
+ */
 public class Spell implements Runnable{
 	
 	public static SimplePlugin plugin;
@@ -83,11 +88,12 @@ public class Spell implements Runnable{
 		}
 	}
 	/**
-	 * is run when the delayedRun function is used. It is here so that no errors are produced when delayedRun is used and a run function has not been defined in the spell
-	 * separate runnables ust complicate things and might be able to produce memory leaks. Instead, add the arguments to an arraylist for each argument. then use the run
+	 * Is run when the delayedRun function is used. It is here so that no errors are produced when delayedRun is used and a run function has not been defined in the spell.
+	 * separate runnables just complicate things and might be able to produce memory leaks. Instead, add the arguments to an arraylist for each argument. then use the run
 	 * function in the spell and use the arguments and remove the index 0, so that the next run uses the next set of arguments. If you have multiple things you want to
 	 * run, put an if and some else ifs that check the value of another arraylist of ints that determines which one to run and have separate array lists for the other set
-	 * of arguments. Its really not that complicated. See the example/template spell for something easier to understand.
+	 * of arguments. Its really not that complicated. See the example/template spell for something easier to understand. If you need to use different delays, create a second
+	 * arraylist with the amount of time until the arguments are supposed to be used and insert arguments at the right point.
 	 */
 	public void run(){
 		
@@ -232,247 +238,125 @@ public class Spell implements Runnable{
 		return -1;
 	}
 	public boolean onBlockBreak=false;
-	public void onBlockBreak(BlockBreakEvent event){
-		
-	}
+	public void onBlockBreak(BlockBreakEvent event){}
 	public boolean onBlockBurn=false;
-	public void onBlockBurn(BlockBurnEvent event) {
-		
-	}
+	public void onBlockBurn(BlockBurnEvent event) {}
 	public boolean onBlockCanBuild=false;
-	public void onBlockCanBuild(BlockCanBuildEvent event) {
-		
-	}
+	public void onBlockCanBuild(BlockCanBuildEvent event) {}
 	public boolean onBlockDamage=false;
-	public void onBlockDamage(BlockDamageEvent event) {
-		
-	}
+	public void onBlockDamage(BlockDamageEvent event) {}
 	public boolean onBlockDispence=false;
-	public void onBlockDispense(BlockDispenseEvent event) {
-		
-	}
+	public void onBlockDispense(BlockDispenseEvent event) {}
 	public boolean onBlockFromTo=false;
-	public void onBlockFromTo(BlockFromToEvent event) {
-		
-	}
+	public void onBlockFromTo(BlockFromToEvent event) {}
 	public boolean onBlockIgnite=false;
-	public void onBlockIgnite(BlockIgniteEvent event) {
-		
-	}
+	public void onBlockIgnite(BlockIgniteEvent event) {}
 	public boolean onBlockPhysics=false;
-	public void onBlockPhysics(BlockPhysicsEvent event) {
-		
-	}
+	public void onBlockPhysics(BlockPhysicsEvent event) {}
 	public boolean onBlockPlace=false;
-	public void onBlockPlace(BlockPlaceEvent event) {
-		
-	}
+	public void onBlockPlace(BlockPlaceEvent event) {}
 	public boolean onBlockRedstoneChange=false;
-	public void onBlockRedstoneChange(BlockRedstoneEvent event) {
-		
-	}
+	public void onBlockRedstoneChange(BlockRedstoneEvent event) {}
 	public boolean onLeavesDecay=false;
-	public void onLeavesDecay(LeavesDecayEvent event) {
-		
-	}
+	public void onLeavesDecay(LeavesDecayEvent event) {}
 	public boolean onSignChange=false;
-	public void onSignChange(SignChangeEvent event) {
-		
-	}
+	public void onSignChange(SignChangeEvent event) {}
 	public boolean onSnowForm=false;
-	public void onSnowForm(SnowFormEvent event) {
-		
-	}
+	public void onSnowForm(SnowFormEvent event) {}
 	public boolean onInventoryOpen=false;
-	public void onInventoryOpen(PlayerInventoryEvent event){
-		
-	}
+	public void onInventoryOpen(PlayerInventoryEvent event){}
 	public boolean onItemHeldChange=false;
-	public void onItemHeldChange(PlayerItemHeldEvent event){
-		
-	}
+	public void onItemHeldChange(PlayerItemHeldEvent event){}
 	public boolean onPlayerAnimation=false;
-	public void onPlayerAnimation(PlayerAnimationEvent event){
-		
-	}
+	public void onPlayerAnimation(PlayerAnimationEvent event){}
 	public boolean onPlayerBedEnter=false;
-	public void onPlayerBedEnter(PlayerBedEnterEvent event){
-		
-	}
+	public void onPlayerBedEnter(PlayerBedEnterEvent event){}
 	public boolean onPlayerBedLeave=false;
-	public void onPlayerBedLeave(PlayerBedLeaveEvent event){
-		
-	}
+	public void onPlayerBedLeave(PlayerBedLeaveEvent event){}
 	public boolean onPlayerBucketEmpty=false;
-	public void onPlayerBucketEmpty(PlayerBucketEmptyEvent event){
-		
-	}
+	public void onPlayerBucketEmpty(PlayerBucketEmptyEvent event){}
 	public boolean onPlayerBucketFill=false;
-	public void onPlayerBucketFill(PlayerBucketFillEvent event){
-		
-	}
+	public void onPlayerBucketFill(PlayerBucketFillEvent event){}
 	public boolean onPlayerChat=false;
-	public void onPlayerChat(PlayerChatEvent event){
-		
-	}
+	public void onPlayerChat(PlayerChatEvent event){}
 	public boolean onPlayerDropItem=false;
-	public void onPlayerDropItem(PlayerDropItemEvent event){
-		
-	}
+	public void onPlayerDropItem(PlayerDropItemEvent event){}
 	public boolean onPlayerEggThrow=false;
-	public void onPlayerEggThrow(PlayerEggThrowEvent event){
-		
-	}
+	public void onPlayerEggThrow(PlayerEggThrowEvent event){}
 	public boolean onPlayerInteract=false;
-	public void onPlayerInteract(PlayerInteractEvent event){
-		
-	}
+	public void onPlayerInteract(PlayerInteractEvent event){}
 	public boolean onPlayerInteractEntity=false;
-	public void onPlayerInteractEntity(PlayerInteractEntityEvent event){
-		
-	}
+	public void onPlayerInteractEntity(PlayerInteractEntityEvent event){}
 	public boolean onPlayerJoin=false;
-	public void onPlayerJoin(PlayerJoinEvent event){
-		
-	}
+	public void onPlayerJoin(PlayerJoinEvent event){}
 	public boolean onPlayerKick=false;
-	public void onPlayerKick(PlayerKickEvent event){
-		
-	}
+	public void onPlayerKick(PlayerKickEvent event){}
 	public boolean onPlayerLogin=false;
-	public void onPlayerLogin(PlayerLoginEvent event){
-		
-	}
+	public void onPlayerLogin(PlayerLoginEvent event){}
 	public boolean onPlayerMove=false;
-	public void onPlayerMove(PlayerMoveEvent event){
-		
-	}
+	public void onPlayerMove(PlayerMoveEvent event){}
 	public boolean onPlayerPickupItem=false;
-	public void onPlayerPickupItem(PlayerPickupItemEvent event){
-		
-	}
+	public void onPlayerPickupItem(PlayerPickupItemEvent event){}
 	public boolean onPlayerPortal=false;
-	public void onPlayerPortal(PlayerPortalEvent event){
-		
-	}
+	public void onPlayerPortal(PlayerPortalEvent event){}
 	public boolean onPlayerPreLogin=false;
-	public void onPlayerPreLogin(PlayerPreLoginEvent event){
-		
-	}
+	public void onPlayerPreLogin(PlayerPreLoginEvent event){}
 	public boolean onPlayerQuit=false;
-	public void onPlayerQuit(PlayerQuitEvent event){
-		
-	}
+	public void onPlayerQuit(PlayerQuitEvent event){}
 	public boolean onPlayerRespawn=false;
-	public void onPlayerRespawn(PlayerRespawnEvent event){
-		
-	}
+	public void onPlayerRespawn(PlayerRespawnEvent event){}
 	public boolean onPlayerTeleport=false;
-	public void onPlayerTeleport(PlayerTeleportEvent event){
-		
-	}
+	public void onPlayerTeleport(PlayerTeleportEvent event){}
 	public boolean onPlayerToggleSneak=false;
-	public void onPlayerToggleSneak(PlayerToggleSneakEvent event){
-		
-	}
+	public void onPlayerToggleSneak(PlayerToggleSneakEvent event){}
 	public boolean onLightningStrike=false;
-	public void onLightningStrike(LightningStrikeEvent event){
-		
-	}
+	public void onLightningStrike(LightningStrikeEvent event){}
 	public boolean onThunderChange=false;
-	public void onThunderChange(ThunderChangeEvent event){
-		
-	}
+	public void onThunderChange(ThunderChangeEvent event){}
 	public boolean onWeatherChange=false;
-	public void onWeatherChange(WeatherChangeEvent event){
-		
-	}
+	public void onWeatherChange(WeatherChangeEvent event){}
 	public boolean onVehicleBlockCollision=false;
-	public void onVehicleBlockCollision(VehicleBlockCollisionEvent event){
-		
-	}
+	public void onVehicleBlockCollision(VehicleBlockCollisionEvent event){}
 	public boolean onVehicleCreate=false;
-	public void onVehicleCreate(VehicleCreateEvent event){
-		
-	}
+	public void onVehicleCreate(VehicleCreateEvent event){}
 	public boolean onVehicleDamage=false;
-	public void onVehicleDamage(VehicleDamageEvent event){
-		
-	}
+	public void onVehicleDamage(VehicleDamageEvent event){}
 	public boolean onVehicleDestroy=false;
-	public void onVehicleDestroy(VehicleDestroyEvent event){
-		
-	}
+	public void onVehicleDestroy(VehicleDestroyEvent event){}
 	public boolean onVehicleEnter=false;
-	public void onVehicleEnter(VehicleEnterEvent event){
-		
-	}
+	public void onVehicleEnter(VehicleEnterEvent event){}
 	public boolean onVehicleEntityCollision=false;
-	public void onVehicleEntityCollision(VehicleEntityCollisionEvent event){
-		
-	}
+	public void onVehicleEntityCollision(VehicleEntityCollisionEvent event){}
 	public boolean onVehicleExit=false;
-	public void onVehicleExit(VehicleExitEvent event){
-		
-	}
+	public void onVehicleExit(VehicleExitEvent event){}
 	public boolean onVehicleMove=false;
-	public void onVehicleMove(VehicleMoveEvent event){
-		
-	}
+	public void onVehicleMove(VehicleMoveEvent event){}
 	public boolean onCreatureSpawn=false;
-	public void onCreatureSpawn(CreatureSpawnEvent event){
-		
-	}
+	public void onCreatureSpawn(CreatureSpawnEvent event){}
 	public boolean onCreeperPower=false;
-	public void onCreeperPower(CreeperPowerEvent event){
-		
-	}
+	public void onCreeperPower(CreeperPowerEvent event){}
 	public boolean onEntityCombust=false;
-	public void onEntityCombust(EntityCombustEvent event){
-		
-	}
+	public void onEntityCombust(EntityCombustEvent event){}
 	public boolean onEntityDamage=false;
-	public void onEntityDamage(EntityDamageEvent event){
-		
-	}
+	public void onEntityDamage(EntityDamageEvent event){}
 	public boolean onEntityDeath=false;
-	public void onEntityDeath(EntityDeathEvent event){
-		
-	}
+	public void onEntityDeath(EntityDeathEvent event){}
 	public boolean onEntityExplode=false;
-	public void onEntityExplode(EntityExplodeEvent event){
-		
-	}
+	public void onEntityExplode(EntityExplodeEvent event){}
 	public boolean onEntityInteract=false;
-	public void onEntityInteract(EntityInteractEvent event){
-		
-	}
+	public void onEntityInteract(EntityInteractEvent event){}
 	public boolean onEntityPortalEnter=false;
-	public void onEntityPortalEnter(EntityPortalEnterEvent event){
-		
-	}
+	public void onEntityPortalEnter(EntityPortalEnterEvent event){}
 	public boolean onEntityTame=false;
-	public void onEntityTame(EntityTameEvent event){
-		
-	}
+	public void onEntityTame(EntityTameEvent event){}
 	public boolean onEntityTarget=false;
-	public void onEntityTarget(EntityTargetEvent event){
-		
-	}
+	public void onEntityTarget(EntityTargetEvent event){}
 	public boolean onExplosionPrime=false;
-	public void onExplosionPrime(ExplosionPrimeEvent event){
-		
-	}
+	public void onExplosionPrime(ExplosionPrimeEvent event){}
 	public boolean onPaintingBreak=false;
-	public void onPaintingBreak(PaintingBreakEvent event){
-		
-	}
+	public void onPaintingBreak(PaintingBreakEvent event){}
 	public boolean onPaintingPlace=false;
-	public void onPaintingPlace(PaintingPlaceEvent event){
-		
-	}
+	public void onPaintingPlace(PaintingPlaceEvent event){}
 	public boolean onPigZap=false;
-	public void onPigZap(PigZapEvent event){
-		
-	}
+	public void onPigZap(PigZapEvent event){}
 }
