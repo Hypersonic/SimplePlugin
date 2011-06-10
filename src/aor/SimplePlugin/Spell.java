@@ -84,6 +84,10 @@ public class Spell implements Runnable{
 	}
 	/**
 	 * is run when the delayedRun function is used. It is here so that no errors are produced when delayedRun is used and a run function has not been defined in the spell
+	 * separate runnables ust complicate things and might be able to produce memory leaks. Instead, add the arguments to an arraylist for each argument. then use the run
+	 * function in the spell and use the arguments and remove the index 0, so that the next run uses the next set of arguments. If you have multiple things you want to
+	 * run, put an if and some else ifs that check the value of another arraylist of ints that determines which one to run and have separate array lists for the other set
+	 * of arguments. Its really not that complicated. See the example/template spell for something easier to understand.
 	 */
 	public void run(){
 		
