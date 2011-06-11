@@ -11,11 +11,11 @@ public class Runner implements Runnable{
 		plugin=instance;
 	}
 	public void run(){
-		if(main.size()>0){
-			//main.add(new ArrayList<int[]>(0));
-			for(int i=0;i<main.get(0).size();i++){
-				plugin.spellList.get(main.get(0).get(i)[0]).run(main.get(0).get(i)[1]);
-			}
+		if(main.size()==0){
+			main.add(new ArrayList<int[]>(0));
+		}
+		for(int i=0;i<main.get(0).size();i++){
+			plugin.spellList.get(main.get(0).get(i)[0]).run(main.get(0).get(i)[1]);
 		}
 		main.remove(0);
 		if(plugin.isDisabled){
