@@ -16,10 +16,8 @@ import java.util.ArrayList;
 
 /**
  * This is the main spell class that all spells must extend.
- * @author Jay
- *
  */
-public class Spell implements Runnable{
+public class Spell{
 	
 	public static SimplePlugin plugin;
 	
@@ -89,21 +87,27 @@ public class Spell implements Runnable{
 	}
 	/**
 	 * Is run when the delayedRun function is used. It is here so that no errors are produced when delayedRun is used and a run function has not been defined in the spell.
-	 * separate runnables just complicate things and might be able to produce memory leaks. Instead, add the arguments to an arraylist for each argument. then use the run
-	 * function in the spell and use the arguments and remove the index 0, so that the next run uses the next set of arguments. If you have multiple things you want to
-	 * run, put an if and some else ifs that check the value of another arraylist of ints that determines which one to run and have separate array lists for the other set
-	 * of arguments. Its really not that complicated. See the example/template spell for something easier to understand. If you need to use different delays, create a second
-	 * arraylist with the amount of time until the arguments are supposed to be used and insert arguments at the right point.
+	 * Separate runnables just complicate things and might be able to produce memory leaks, so they are now deprecated. Instead, add the arguments to an arraylist, one
+	 * for each argument. then use the run function in the spell and use the arguments and remove the index 0, so that the next run uses the next set of arguments. If you
+	 * have multiple things you want to run, put a switch in the run function that differentiates between which function is being called and in each case call a function.
+	 * You can have separate array lists for the other set of arguments. Its really not that complicated. See the example spell for something easier to understand. The
+	 * template spell shows the suggested switch format
 	 */
-	public void run(){
+	public void run(int arg){
 		
 	}
 	/**
-	 * an easier way of delaying the run function.
-	 * @param time-the amount of time before the run function is run in server ticks (20 server ticks = 1 second)
+	 * Runs the given run function after the given delay
+	 * @param timeDelay-the amount of time before the run function is run in server ticks (20 server ticks = 1 second)
+	 * @param runNumber-the number of the run function to run.
 	 */
-	public void delayedRun(int time){
-		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin,this, (long)time);
+	public void delayedRun(int timeDelay,int argument){
+		while(plugin.runner.main.size()<=timeDelay){
+			plugin.runner.main.add(new ArrayList<int[]>());
+		}
+		plugin.runner.main.get(timeDelay).add(new int[2]);
+		plugin.runner.main.get(timeDelay).get(plugin.runner.main.get(timeDelay).size()-1)[0]=plugin.spellList.indexOf(this);
+		plugin.runner.main.get(timeDelay).get(plugin.runner.main.get(timeDelay).size()-1)[1]=argument;
 	}
 	/**
 	 * checks if the given inventory has all of the requirements for the spell to be cast.
@@ -237,6 +241,11 @@ public class Spell implements Runnable{
 		}
 		return -1;
 	}
+	//It is hard to go over what each of these functions does, but in summary they are each run when a certain event occurs, such as when a block breaks. However, they only
+	//run when the variable before them with the same name is set to true. If you want to use one of these in your plugin, you must set the variable to true in the
+	//constructor. Changing it later has no effect whatsoever. If you want to disable it later, just put an if statement with your own variable and set it to false later.
+	public boolean onDisable=false;
+	public void onDisable(){}
 	public boolean onBlockBreak=false;
 	public void onBlockBreak(BlockBreakEvent event){}
 	public boolean onBlockBurn=false;

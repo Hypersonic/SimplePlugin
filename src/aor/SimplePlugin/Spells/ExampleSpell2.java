@@ -25,7 +25,8 @@ public class ExampleSpell2 extends Spell{
 		spellName="Example Spell 2";
 		//set the required items to use the spell.
 		setRequiredItems(new ItemStack[]{new ItemStack(Material.WOOL,6),new ItemStack(Material.LOG,2)});
-		//this enables the onBlockBreak event. This make the onBlockBreak function automatically run when a block has been broken.
+		//this enables the onBlockBreak event. This make the onBlockBreak function automatically run when a block has been broken. Changing this later will have no affect
+		//on the spell.
 		onBlockBreak=true;
 	}
 	//this function is run when the player casts the spell.
@@ -36,8 +37,10 @@ public class ExampleSpell2 extends Spell{
 			if(!watchedPlayers.contains(player)){
 				//once the player has payed for the spell, they get added to the watched player list. Any player on this list will get checked for placing blocks and moving.
 				watchedPlayers.add(player);
-				//run the run function in 60 seconds 60*20=1200
-				delayedRun(1200);
+				//run the run function in 60 seconds 60*20=1200. Note that this is a much better function to use than the bukkit scheduler, because if the plugin is disabled,
+				//in this function everything is just called early and you don't need to deal with onDisable, although you can if you want to. The 0 is the argument that
+				//the run function is called with.
+				delayedRun(1200,0);
 			}
 			else{
 				//tell the player that he/she has already cast the spell.
@@ -49,11 +52,12 @@ public class ExampleSpell2 extends Spell{
 			player.sendMessage("Sorry, you do not have the necesary materials for this spell!");
 		}
 	}
-	//although there is a delay function, it can only delay the run() function, so all necesary possibilities for what was delayed must be in this function. ex.
-	//if there are multiple messages after different amounts of time, you need to find a way of storing which case must be done by storing it in a variable.
-	public void run(){
+	//although there is a delay function, it can only delay the run() function, so all necesary possibilities for what was delayed must be in this function. However, we have
+	//set up a delayedRun function that takes arguments, making it easier to run different things. It is recommended that you use a switch with the argument to determine
+	//what to do, if you are in a situation where you might want multiple run functions.
+	public void run(int argument){
 		//send the player that cast the spell the longest ago a message telling them that the spell has expired.
-		watchedPlayers.get(0).sendMessage("Example Spell 2 has expired!");
+		watchedPlayers.get(0).sendMessage("Example Spell 2 has expired!"+argument);
 		//remove them from the list, so that the next time the function is run, the next player gets sent the message.
 		watchedPlayers.remove(0);
 	}

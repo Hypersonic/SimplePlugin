@@ -94,11 +94,19 @@ public class SimplePlugin extends JavaPlugin {
 	public ArrayList<Integer> spellOnPaintingBreakList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> spellOnPaintingPlaceList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> spellOnPigZapList=new ArrayList<Integer>(0);
+	public Runner runner=new Runner(this);
+	public boolean isDisabled=false;
 	Logger log = Logger.getLogger("Minecraft");//Define your logger
 	public void onDisable() {
+		isDisabled=true;
+		for(int i=0;i<spellList.size();i++){
+			spellList.get(i).onDisable();
+		}
 		log.info("SimplePlugin disabled");
 	}
 	public void onEnable() {
+		isDisabled=false;
+		this.getServer().getScheduler().scheduleSyncDelayedTask(this,runner,0L);
 		log.info("SimplePlugin enabling...");
 		spellList.add(new RapidfireSpell(this)); // Register the rapidfire spell.
 		spellList.add(new ExplosionSpell(this)); // Register explosion spell.

@@ -30,17 +30,19 @@ public class ExampleSpell extends Spell{
 		if(removeRequiredItemsFromInventory(player.getInventory())){
 			//once the player has payed for the spell, they get added to the watched player list. Any player on this list will get checked for placing blocks and moving.
 			watchedPlayers.add(player);
-			//run the run function in 10 seconds 10*20=200
-			delayedRun(200);
+			//run the run function in 10 seconds 10*20=200. Note that this is a much better function to use than the bukkit scheduler, because if the plugin is disabled,
+			//in this function everything is just called early and you don't need to deal with onDisable, although you can if you want to. The 0 is the argument that
+			//the run function is called with.
+			delayedRun(200,0);
 		}
 		else{
 			//Tell the player when he/she does not have all of the required materials.
 			player.sendMessage("Sorry, you do not have the necesary materials for this spell!");
 		}
 	}
-	//although there is a delay function, it can only delay the run() function, so all necesary possibilities for what was delayed must be in this function. ex.
-	//if there are multiple messages after different amounts of time, you need to find a way of storing which case must be done by storing it in a variable.
-	public void run(){
+	//although there is a delay function, it can only delay the run() function, so all necessary possibilities for what was delayed must be in this function. ex.
+	//if there are multiple messages after different amounts of time, you need to find a way of storing which case must be done by storing it in the argument variable.
+	public void run(int argument){
 		//send the player that cast the spell the longest ago a message telling them that they cast the spell 10 seconds ago.
 		watchedPlayers.get(0).sendMessage("You cast the example spell 10 seconds ago");
 		//remove them from the list, so that the next time the function is run, the next player gets sent the message.
