@@ -18,6 +18,7 @@ import aor.SimplePlugin.SpellBook;
 import aor.SimplePlugin.Spells.ExampleSpell;
 import aor.SimplePlugin.Spells.ExampleSpell2;
 import aor.SimplePlugin.Spells.ExplosionSpell;
+import aor.SimplePlugin.Spells.MidasTouch;
 import aor.SimplePlugin.Spells.RapidfireSpell;
 import aor.SimplePlugin.Spells.SpikeFortSpell;
 import aor.SimplePlugin.Spells.SpikeSpell;
@@ -114,8 +115,9 @@ public class SimplePlugin extends JavaPlugin {
 		spellList.add(new SpikeWallSpell(this));
 		spellList.add(new SpikeFortSpell(this));
 		spellList.add(new Tornado(this));
-		spellList.add(new ExampleSpell());
-		spellList.add(new ExampleSpell2());
+		spellList.add(new ExampleSpell(this));
+		spellList.add(new ExampleSpell2(this));
+		spellList.add(new MidasTouch(this));
 		for(int i=0;i<spellList.size();i++){
 			if(spellList.get(i).onBlockBreak){
 				spellOnBlockBreakList.add(i);

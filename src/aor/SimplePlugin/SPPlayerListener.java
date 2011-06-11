@@ -3,6 +3,7 @@ package aor.SimplePlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import aor.SimplePlugin.SpellBook;
 
@@ -19,6 +20,16 @@ public class SPPlayerListener extends PlayerListener {
 		}
 	}
 	public void onItemHeldChange(PlayerItemHeldEvent event){
+		if (event.getPlayer().getItemInHand().getType() == Material.GOLD_HOE){
+			if (plugin.spellList.get(SimplePlugin.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).checkInventoryRequirements(event.getPlayer().getInventory())) // If they have the right items...
+			{
+				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_GREEN + plugin.spellList.get(SimplePlugin.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).getName()); // Print spell with green.
+			}
+			else // If they don't.
+			{
+				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_RED + plugin.spellList.get(SimplePlugin.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).getName()); // Print spell with red.
+			}
+		}
 		for(int i=0;i<plugin.spellOnItemHeldChangeList.size();i++){
 			plugin.spellList.get(plugin.spellOnItemHeldChangeList.get(i)).onItemHeldChange(event);
 		}

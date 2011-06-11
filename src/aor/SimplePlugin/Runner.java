@@ -20,10 +20,8 @@ public class Runner implements Runnable{
 		main.remove(0);
 		if(plugin.isDisabled){
 			while(main.size()>0){
-				if(main.get(0)!=null){
-					for(int i=0;i<main.get(0).size();i++){
-						plugin.spellList.get(main.get(0).get(i)[0]).run(main.get(0).get(i)[1]);
-					}
+				for(int i=0;i<main.get(0).size();i++){
+					plugin.spellList.get(main.get(0).get(i)[0]).run(main.get(0).get(i)[1]);
 				}
 				main.remove(0);
 			}

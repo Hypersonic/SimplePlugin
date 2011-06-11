@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import aor.SimplePlugin.SimplePlugin;
 import aor.SimplePlugin.Spell;
 
 /**
@@ -16,7 +18,9 @@ public class ExampleSpell extends Spell{
 	//this arraylist stores the people that have cast the spell
 	public ArrayList<Player> watchedPlayers=new ArrayList<Player>();
 	//note that unlike in previous APIs, the constructor is only used once and there is only one central copy of each spell.
-	public ExampleSpell(){
+	public ExampleSpell(SimplePlugin instance){
+		//this allows for more functionality, especially the delayedRun function, because the spell must have a way to reference the main class
+		plugin=instance;
 		//set the description, short name and name of the spell
 		spellDescription="This is an example/template spell that shows how to use the new API";
 		shortName="example";

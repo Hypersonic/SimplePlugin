@@ -33,7 +33,6 @@ public class SpellBook {
 		}
 		return null;
 	}
-	
 	public int getSpellIndex(String searchingShortName)
 	{
 		for (int i = 0; i < spellRegistry.size(); i++)
