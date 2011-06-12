@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.*;
@@ -27,6 +28,7 @@ public class MidasTouch extends Spell{
 		setRequiredItems(new ItemStack(Material.GOLD_BLOCK,10));
 		onBlockDamage=true;
 		onPlayerMove=true;
+		onBlockBreak=true;
 	}
 	public void castSpell(Player player){
 		if(checkInventoryRequirements(player.getInventory()))
@@ -64,10 +66,11 @@ public class MidasTouch extends Spell{
 	}
 	public void onBlockDamage(BlockDamageEvent event){
 		if(isMidas){
-			for(int i=0;i<players.size();i++)
-			if(locations.get(players.get(i)).contains(event.getBlock().getLocation())){
-				event.setCancelled(true);
-				System.out.println("NOPE!!!");
+			for(int i=0;i<players.size();i++){
+				if(locations.get(players.get(i)).contains(event.getBlock().getLocation())){
+					event.setCancelled(true);
+					event.getPlayer().sendMessage("NOPE!!!");
+				}
 			}
 		}
 	}
@@ -84,8 +87,17 @@ public class MidasTouch extends Spell{
 			}
 		}
 	}
+	public void onBlockBreak(BlockBreakEvent event){
+		if(isMidas){
+			for(int i=0;i<players.size();i++){
+				if(locations.get(players.get(i)).contains(event.getBlock().getLocation())){
+					event.setCancelled(true);
+				}
+			}
+		}
+	}
 	public void changeToGold(Block block,Player player){
-		if(block.getType()==Material.BED_BLOCK||block.getType()==Material.BEDROCK||block.getType()==Material.BOAT||block.getType()==Material.BOOKSHELF||block.getType()==Material.BRICK||block.getType()==Material.BRICK||block.getType()==Material.CAKE_BLOCK||block.getType()==Material.COAL_ORE||block.getType()==Material.COBBLESTONE||block.getType()==Material.COBBLESTONE_STAIRS||block.getType()==Material.DEAD_BUSH||block.getType()==Material.DIAMOND_BLOCK||block.getType()==Material.DIAMOND_ORE||block.getType()==Material.DIRT||block.getType()==Material.FENCE||block.getType()==Material.GLASS||block.getType()==Material.GLOWING_REDSTONE_ORE||block.getType()==Material.GLOWSTONE||block.getType()==Material.GOLD_ORE||block.getType()==Material.GRASS||block.getType()==Material.GRAVEL||block.getType()==Material.ICE||block.getType()==Material.IRON_BLOCK||block.getType()==Material.IRON_DOOR_BLOCK||block.getType()==Material.IRON_ORE||block.getType()==Material.JACK_O_LANTERN||block.getType()==Material.LAPIS_BLOCK||block.getType()==Material.LAPIS_ORE||block.getType()==Material.LAVA||block.getType()==Material.LEAVES||block.getType()==Material.MOSSY_COBBLESTONE||block.getType()==Material.NETHERRACK||block.getType()==Material.OBSIDIAN||block.getType()==Material.PUMPKIN||block.getType()==Material.REDSTONE_ORE||block.getType()==Material.SNOW_BLOCK||block.getType()==Material.SOIL||block.getType()==Material.SOUL_SAND||block.getType()==Material.STATIONARY_LAVA||block.getType()==Material.STATIONARY_WATER||block.getType()==Material.STEP||block.getType()==Material.STONE||block.getType()==Material.SUGAR_CANE_BLOCK||block.getType()==Material.TNT||block.getType()==Material.TRAP_DOOR||block.getType()==Material.WOOD||block.getType()==Material.LOG||block.getType()==Material.WOOD_STAIRS||block.getType()==Material.WOODEN_DOOR||block.getType()==Material.WOOL||block.getType()==Material.WORKBENCH){
+		if(block.getType()==Material.BED_BLOCK||block.getType()==Material.BEDROCK||block.getType()==Material.BOAT||block.getType()==Material.BOOKSHELF||block.getType()==Material.BRICK||block.getType()==Material.BRICK||block.getType()==Material.CAKE_BLOCK||block.getType()==Material.COAL_ORE||block.getType()==Material.COBBLESTONE||block.getType()==Material.COBBLESTONE_STAIRS||block.getType()==Material.DEAD_BUSH||block.getType()==Material.DIAMOND_BLOCK||block.getType()==Material.DIAMOND_ORE||block.getType()==Material.DIRT||block.getType()==Material.FENCE||block.getType()==Material.GLASS||block.getType()==Material.GLOWING_REDSTONE_ORE||block.getType()==Material.GLOWSTONE||block.getType()==Material.GOLD_ORE||block.getType()==Material.GRASS||block.getType()==Material.GRAVEL||block.getType()==Material.ICE||block.getType()==Material.IRON_BLOCK||block.getType()==Material.IRON_DOOR_BLOCK||block.getType()==Material.IRON_ORE||block.getType()==Material.JACK_O_LANTERN||block.getType()==Material.LAPIS_BLOCK||block.getType()==Material.LAPIS_ORE||block.getType()==Material.LAVA||block.getType()==Material.LEAVES||block.getType()==Material.MOSSY_COBBLESTONE||block.getType()==Material.NETHERRACK||block.getType()==Material.OBSIDIAN||block.getType()==Material.PUMPKIN||block.getType()==Material.REDSTONE_ORE||block.getType()==Material.SAND||block.getType()==Material.SNOW_BLOCK||block.getType()==Material.SOIL||block.getType()==Material.SOUL_SAND||block.getType()==Material.STATIONARY_LAVA||block.getType()==Material.STATIONARY_WATER||block.getType()==Material.STEP||block.getType()==Material.STONE||block.getType()==Material.SUGAR_CANE_BLOCK||block.getType()==Material.TNT||block.getType()==Material.TRAP_DOOR||block.getType()==Material.WOOD||block.getType()==Material.LOG||block.getType()==Material.WOOD_STAIRS||block.getType()==Material.WOODEN_DOOR||block.getType()==Material.WOOL||block.getType()==Material.WORKBENCH){
 			System.out.println(block.getLocation());
 			locations.get(player).add(block.getLocation());
 			materials.get(player).add(block.getType());
