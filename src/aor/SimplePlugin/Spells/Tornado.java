@@ -17,6 +17,7 @@ import aor.SimplePlugin.Spell;
 
 public class Tornado extends Spell {
 	
+	public Player globalPlayer;
 	
 	public static SimplePlugin plugin;
 	
@@ -26,7 +27,7 @@ public class Tornado extends Spell {
 		spellName = "Tornado";
 		spellDescription = "Flings mobs around the player into the air.";
 		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
-		requiredItems.add(new ItemStack(Material.WATER_BUCKET, 1));
+//		requiredItems.add(new ItemStack(Material.WATER_BUCKET, 1));
 		requiredItems.add(new ItemStack(Material.REDSTONE, 4));
 		setRequiredItems(requiredItems);
 		shortName = "Tornado";// We need 1 bucket of water and 4 redstone.
@@ -36,6 +37,7 @@ public class Tornado extends Spell {
 	public void castSpell (Player player)
 	{
 		Random gen = new Random();
+		globalPlayer = player;
 		PlayerInventory inventory = player.getInventory();
 
 		if (removeRequiredItemsFromInventory(inventory))
@@ -43,12 +45,30 @@ public class Tornado extends Spell {
 			List<Entity> nearbyEntities;
 			nearbyEntities = player.getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
 			for (int i=0; i<nearbyEntities.size(); i++) {
-				Vector newVelocity = new Vector((gen.nextFloat() * 1), gen.nextFloat() * 1.5, gen.nextFloat() * 1); //Generate a random vector
+				Vector newVelocity = new Vector(((gen.nextFloat() - .3) * .8), gen.nextFloat(), (gen.nextFloat() - .3) * .8); //Generate a random vector
 				nearbyEntities.get(i).setVelocity(newVelocity);
+			}
+			
+			for (int i = 10; i < 16; i = i+2){
+				delayedRun(i,0);
 			}
 		}
 		
 		else {player.sendMessage("Could not cast! Spell requires 1 water bucket and 4 redstone."); } // They don't have the proper items.
 		
 	}
+
+
+	public void run(int argument){
+		Player player = globalPlayer;
+		Random gen = new Random();
+		List<Entity> nearbyEntities;
+		nearbyEntities = player.getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
+		for (int i=0; i<nearbyEntities.size(); i++) {
+			Vector newVelocity = new Vector(((gen.nextFloat() - .5) * .8), gen.nextFloat(), (gen.nextFloat() - .5) * .8); //Generate a random vector
+			nearbyEntities.get(i).setVelocity(newVelocity);
+		}
+
+	}
+	
 }
