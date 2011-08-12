@@ -473,7 +473,7 @@ public class SimplePlugin extends JavaPlugin {
 		pm.registerEvent(Event.Type.REDSTONE_CHANGE, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.LEAVES_DECAY, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.SIGN_CHANGE, blockListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.SNOW_FORM, blockListener, Event.Priority.Normal, this);
+//		pm.registerEvent(Event.Type.SNOW_FORM, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.LIGHTNING_STRIKE, weatherListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.THUNDER_CHANGE, weatherListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.WEATHER_CHANGE, weatherListener, Event.Priority.Normal, this);
