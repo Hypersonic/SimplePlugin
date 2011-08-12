@@ -45,19 +45,14 @@ public class ExplosionSpell extends Spell {
 			if (targetBlock.getType() != Material.AIR) // No explosions midair!
 			{
 				removeRequiredItemsFromInventory(inventory);
-				createExplosion(targetBlock, 5);
-			}
+				targetBlock.getWorld().createExplosion(targetBlock.getLocation().getX(), targetBlock.getLocation().getY(), targetBlock.getLocation().getZ(), 5, false);
+				}
 			else{
 				player.sendMessage("Could not cast! Invalid block type!");
 			}
 		}
 		else { player.sendMessage("Could not cast! Spell requires 2 arrows, 1 TNT!"); } // They don't have the proper items.
 
-	}
-
-	public void createExplosion(Block targetBlock, int size)
-	{
-		//((CraftWorld)targetBlock.getWorld()).getHandle().createExplosion(null, targetBlock.getLocation().getX(), targetBlock.getLocation().getY(), targetBlock.getLocation().getZ(), size, false);
 	}
 
 
