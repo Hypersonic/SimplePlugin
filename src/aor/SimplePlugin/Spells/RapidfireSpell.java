@@ -25,7 +25,7 @@ public class RapidfireSpell extends Spell {
 		spellName = "Rapidfire";
 		spellDescription = "Quickly fires off eight arrows. Needs four redstone.";
 		shortName = "Rapidfire";
-		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
+		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>(0);
 		requiredItems.add(new ItemStack(Material.ARROW, 8));
 		requiredItems.add(new ItemStack(Material.REDSTONE, 4));
 		setRequiredItems(requiredItems); // We need 8 arrows and 4 redstone.
