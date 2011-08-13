@@ -228,9 +228,12 @@ public class Spell{
 		if(inventory.contains(item.getType(), item.getAmount())){
 			while(amountLeft>0){
 				int firstFound=inventory.first(item.getType());
-				if(inventory.getItem(firstFound).getAmount()>=amountLeft){
+				if(inventory.getItem(firstFound).getAmount()>amountLeft){
 					inventory.getItem(firstFound).setAmount(inventory.getItem(firstFound).getAmount()-amountLeft);
-					amountLeft=0;
+					return firstFound;
+				}
+				else if(inventory.getItem(firstFound).getAmount()=amountLeft){
+					inventory.clear(inventory.first(item.getType()));
 					return firstFound;
 				}
 				else{
