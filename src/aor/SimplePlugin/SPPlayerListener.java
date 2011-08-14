@@ -157,37 +157,39 @@ public class SPPlayerListener extends PlayerListener {
 		// Left clicking air or a block event:
 		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they right clicked with the gold hoe...
 		{
-			SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
-			plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);
+			ArrayList<Double> playerDistances=new ArrayList<Double>();
+			ArrayList<String> playerNames=new ArrayList<String>();
+			for(int i=0;i<player.getWorld().getPlayers().size();i++){
+				playerDistances.add(distance(player.getWorld().getPlayers().get(i).getLocation(),player.getTargetBlock(null, 256).getLocation()));
+				playerNames.add(player.getWorld().getPlayers().get(i).getDisplayName());
+			}
+			double shortest=-1;
+			String name="";
+			while(playerDistances.size()>0){
+				if(playerDistances.get(0)>shortest){
+					shortest=playerDistances.get(0);
+					name=playerNames.get(0);
+				}
+				playerDistances.remove(0);
+				playerNames.remove(0);
+			}
+			if(shortest<6){
+				plugin.selectedPlayerNames.put(player.getName(), name);
+				player.sendMessage("You have selected "+name+".");
+			}
+			else{
+				SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
+				plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);
+			}
 		}
 		
 		// Right clicking air or a block event:
-		/*if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they left clicked with the gold hoe.
+		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they left clicked with the gold hoe.
 		{
 			SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
 			spellBook.nextSpell(player); // Scroll through spells.
-		}*/
+		}
 		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE){
-//			if(plugin.spellList.get(SimplePlugin.playerBooks.get(player.getName()).getCurrentSpell()).playerSelect){
-				ArrayList<Double> playerDistances=new ArrayList<Double>();
-				ArrayList<String> playerNames=new ArrayList<String>();
-				for(int i=0;i<player.getWorld().getPlayers().size();i++){
-					playerDistances.add(distance(player.getWorld().getPlayers().get(i).getLocation(),player.getTargetBlock(null, 256).getLocation()));
-					playerNames.add(player.getWorld().getPlayers().get(i).getDisplayName());
-				}
-				double shortest=-1;
-				String name="";
-				while(playerDistances.size()>0){
-					if(playerDistances.get(0)>shortest){
-						shortest=playerDistances.get(0);
-						name=playerNames.get(0);
-					}
-					playerDistances.remove(0);
-					playerNames.remove(0);
-				}
-				plugin.selectedPlayerNames.put(player.getName(), name);
-				player.sendMessage("You have selected "+name+".");
-//			}
 		}
 		for(int i=0;i<plugin.spellOnPlayerInteractList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerInteractList.get(i)).onPlayerInteract(event);
