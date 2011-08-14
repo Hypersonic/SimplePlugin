@@ -371,4 +371,6 @@ public class Spell{
 	public void onPaintingPlace(PaintingPlaceEvent event){}
 	public boolean onPigZap=false;
 	public void onPigZap(PigZapEvent event){}
+	public boolean playerSelect=false;
+	public HashMap<String,String> selectedPlayerNames=new HashMap<String,String>();
 }
