@@ -1,7 +1,6 @@
 package aor.SimplePlugin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.lang.Runnable;
 
 public class Runner implements Runnable{
