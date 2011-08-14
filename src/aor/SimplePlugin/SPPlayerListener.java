@@ -164,8 +164,33 @@ public class SPPlayerListener extends PlayerListener {
 			SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
 			spellBook.nextSpell(player); // Scroll through spells.
 		}
+		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE){
+			if(plugin.spellList.get(SimplePlugin.playerBooks.get(player.getName()).getCurrentSpell()).playerSelect){
+				ArrayList<Double> playerDistances=new ArrayList<Double>();
+				ArrayList<String> playerNames=new ArrayList<String>();
+				for(int i=0;i<player.getWorld().getPlayers().size();i++){
+					playerDistances.add(distance(player.getWorld().getPlayers().get(i).getLocation(),player.getTargetBlock(null, 256).getLocation()));
+					playerNames.add(player.getWorld().getPlayers().get(i).getDisplayName());
+				}
+				double shortest=-1;
+				String name="";
+				while(playerDistances.size()>0){
+					if(playerDistances.get(0)>shortest){
+						shortest=playerDistances.get(0);
+						name=playerNames.get(0);
+					}
+					playerDistances.remove(0);
+					playerNames.remove(0);
+				}
+				plugin.spellList.get(SimplePlugin.playerBooks.get(player.getName()).getCurrentSpell()).selectedPlayerNames.put(player.getName(), name);
+				player.sendMessage("You have selected "+name+".");
+			}
+		}
 		for(int i=0;i<plugin.spellOnPlayerInteractList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerInteractList.get(i)).onPlayerInteract(event);
 		}
+	}
+	public double distance(Location pos1,Location pos2){
+		return Math.hypot(pos1.getY()-pos2.getY(), Math.hypot(pos1.getX()-pos2.getX(),pos1.getZ()-pos1.getZ()));
 	}
 }
