@@ -13,7 +13,6 @@ import org.bukkit.event.vehicle.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * This is the main spell class that all spells must extend.
@@ -274,8 +273,8 @@ public class Spell{
 	public void onLeavesDecay(LeavesDecayEvent event) {}
 	public boolean onSignChange=false;
 	public void onSignChange(SignChangeEvent event) {}
-	public boolean onSnowForm=false;
-	public void onSnowForm(SnowFormEvent event) {}
+	public boolean onBlockForm=false;
+	public void onBlockForm(BlockFormEvent event) {}
 	public boolean onInventoryOpen=false;
 	public void onInventoryOpen(PlayerInventoryEvent event){}
 	public boolean onItemHeldChange=false;

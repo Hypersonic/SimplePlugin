@@ -46,7 +46,7 @@ public class SimplePlugin extends JavaPlugin {
 	public ArrayList<Integer> spellOnBlockRedstoneChangeList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> spellOnLeavesDecayList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> spellOnSignChangeList=new ArrayList<Integer>(0);
-	public ArrayList<Integer> spellOnSnowFormList=new ArrayList<Integer>(0);
+	public ArrayList<Integer> spellOnBlockFormList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> spellOnInventoryOpenList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> spellOnItemHeldChangeList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> spellOnPlayerAnimationList=new ArrayList<Integer>(0);
@@ -181,8 +181,8 @@ public class SimplePlugin extends JavaPlugin {
 			}
 		}
 		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onSnowForm){
-				spellOnSnowFormList.add(i);
+			if(spellList.get(i).onBlockForm){
+				spellOnBlockFormList.add(i);
 			}
 		}
 		for(int i=0;i<spellList.size();i++){
@@ -480,7 +480,7 @@ public class SimplePlugin extends JavaPlugin {
 		pm.registerEvent(Event.Type.REDSTONE_CHANGE, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.LEAVES_DECAY, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.SIGN_CHANGE, blockListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.SNOW_FORM, blockListener, Event.Priority.Normal, this);
+		pm.registerEvent(Event.Type.BLOCK_FORM, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.LIGHTNING_STRIKE, weatherListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.THUNDER_CHANGE, weatherListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.WEATHER_CHANGE, weatherListener, Event.Priority.Normal, this);
@@ -518,6 +518,7 @@ public class SimplePlugin extends JavaPlugin {
 	{
 		return SimplePlugin.playerBooks;
 	}
+	@SuppressWarnings("static-access")
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		if(cmd.getName().equalsIgnoreCase("spellinfo")) // If the command was /spellinfo
 		{

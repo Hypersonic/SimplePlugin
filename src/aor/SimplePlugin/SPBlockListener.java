@@ -68,9 +68,9 @@ public class SPBlockListener extends BlockListener{
 			plugin.spellList.get(plugin.spellOnSignChangeList.get(i)).onSignChange(event);
 		}
 	}
-	public void onSnowForm(SnowFormEvent event){
-		for(int i=0;i<plugin.spellOnSnowFormList.size();i++){
-			plugin.spellList.get(plugin.spellOnSnowFormList.get(i)).onSnowForm(event);
+	public void onSnowForm(BlockFormEvent event){
+		for(int i=0;i<plugin.spellOnBlockFormList.size();i++){
+			plugin.spellList.get(plugin.spellOnBlockFormList.get(i)).onBlockForm(event);
 		}
 	}
 }
