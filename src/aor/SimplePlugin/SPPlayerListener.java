@@ -23,7 +23,7 @@ public class SPPlayerListener extends PlayerListener {
 		}
 	}
 	public void onItemHeldChange(PlayerItemHeldEvent event){
-		if (event.getPlayer().getItemInHand().getType() == Material.GOLD_HOE){
+		if (event.getPlayer().getInventory().getItem(event.getNewSlot()).getType() == Material.GOLD_HOE){
 			if (plugin.spellList.get(SimplePlugin.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).checkInventoryRequirements(event.getPlayer().getInventory())) // If they have the right items...
 			{
 				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_GREEN + plugin.spellList.get(SimplePlugin.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).getName()); // Print spell with green.
@@ -162,13 +162,13 @@ public class SPPlayerListener extends PlayerListener {
 		}
 		
 		// Right clicking air or a block event:
-		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they left clicked with the gold hoe.
+		/*if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they left clicked with the gold hoe.
 		{
 			SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
 			spellBook.nextSpell(player); // Scroll through spells.
-		}
+		}*/
 		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE){
-			if(plugin.spellList.get(SimplePlugin.playerBooks.get(player.getName()).getCurrentSpell()).playerSelect){
+//			if(plugin.spellList.get(SimplePlugin.playerBooks.get(player.getName()).getCurrentSpell()).playerSelect){
 				ArrayList<Double> playerDistances=new ArrayList<Double>();
 				ArrayList<String> playerNames=new ArrayList<String>();
 				for(int i=0;i<player.getWorld().getPlayers().size();i++){
@@ -185,9 +185,9 @@ public class SPPlayerListener extends PlayerListener {
 					playerDistances.remove(0);
 					playerNames.remove(0);
 				}
-				plugin.spellList.get(SimplePlugin.playerBooks.get(player.getName()).getCurrentSpell()).selectedPlayerNames.put(player.getName(), name);
+				plugin.selectedPlayerNames.put(player.getName(), name);
 				player.sendMessage("You have selected "+name+".");
-			}
+//			}
 		}
 		for(int i=0;i<plugin.spellOnPlayerInteractList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerInteractList.get(i)).onPlayerInteract(event);

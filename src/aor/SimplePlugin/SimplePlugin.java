@@ -96,6 +96,7 @@ public class SimplePlugin extends JavaPlugin {
 	public ArrayList<Integer> spellOnPaintingPlaceList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> spellOnPigZapList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> playerSelect=new ArrayList<Integer>(0);
+	public HashMap<String,String> selectedPlayerNames=new HashMap<String,String>();
 	public Runner runner=new Runner(this);
 	public boolean isDisabled=false;
 	Logger log = Logger.getLogger("Minecraft");//Define your logger
