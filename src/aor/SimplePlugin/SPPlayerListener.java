@@ -1,9 +1,12 @@
 package aor.SimplePlugin;
 
+import java.util.ArrayList;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import aor.SimplePlugin.SpellBook;
 

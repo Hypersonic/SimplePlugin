@@ -13,6 +13,7 @@ import org.bukkit.event.vehicle.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This is the main spell class that all spells must extend.
@@ -232,7 +233,7 @@ public class Spell{
 					inventory.getItem(firstFound).setAmount(inventory.getItem(firstFound).getAmount()-amountLeft);
 					return firstFound;
 				}
-				else if(inventory.getItem(firstFound).getAmount()=amountLeft){
+				else if(inventory.getItem(firstFound).getAmount()==amountLeft){
 					inventory.clear(inventory.first(item.getType()));
 					return firstFound;
 				}
