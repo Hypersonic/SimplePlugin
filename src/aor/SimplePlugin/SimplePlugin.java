@@ -131,6 +131,7 @@ public class SimplePlugin extends JavaPlugin {
 		spellList.add(new ExampleSpell(this));
 		spellList.add(new ExampleSpell2(this));
 		spellList.add(new MidasTouch(this));
+		registerSpells();
 		for(int i=0;i<spellList.size();i++){
 			if(spellList.get(i).onBlockBreak){
 				spellOnBlockBreakList.add(i);
@@ -619,37 +620,35 @@ public class SimplePlugin extends JavaPlugin {
 	}
 	public void registerSpells(){
 		ArrayList<File> files=new ArrayList<File>(0);
-		File file=new File("..\\spells");
-		if(file.exists()){
-			if(file.isDirectory()){
-				for(int i=0;i<file.listFiles().length;i++){
-					files.add(file.listFiles()[i]);
-				}
-				for(File child:files){
-					if(child.isDirectory()){
-						files.remove(child);
-					}
-				}
-				for(File child:files){
-					try{
-						JarFile jar=new JarFile(child);
-						JarEntry entry=jar.getJarEntry(jar.getName());
-						Object object=entry.getClass();
-						if(object instanceof Spell){
-							spellList.add((Spell)object);
-						}
-					}
-					catch(Exception e){
-						log.log(Level.WARNING, "Unable to load "+child.getPath(), e);
-					}
+		File file=new File("spells");
+		if(!file.exists()){
+			
+		}
+		if(file.isDirectory()){
+			for(int i=0;i<file.listFiles().length;i++){
+				files.add(file.listFiles()[i]);
+			}
+			for(File child:files){
+				if(child.isDirectory()){
+					files.remove(child);
 				}
 			}
-			else{
-				log.log(Level.WARNING, "The spells folder is empty! Add spells to the folder!");
+			for(File child:files){
+				try{
+					JarFile jar=new JarFile(child);
+					JarEntry entry=jar.getJarEntry(jar.getName());
+					Object object=entry.getClass();
+					if(object instanceof Spell){
+						spellList.add((Spell)object);
+					}
+				}
+				catch(Exception e){
+					log.log(Level.WARNING, "Unable to load "+child.getPath(), e);
+				}
 			}
 		}
 		else{
-			log.log(Level.SEVERE, "Spells directory doesn't exist! Create a folder called spells in the plugins folder");
+			log.log(Level.WARNING, "The spells folder is empty! Add spells to the folder!");
 		}
 	}
 }
