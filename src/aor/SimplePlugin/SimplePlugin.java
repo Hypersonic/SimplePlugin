@@ -1,8 +1,17 @@
 package aor.SimplePlugin;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Set;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -607,5 +616,40 @@ public class SimplePlugin extends JavaPlugin {
 	}
 	public static double distance(Location pos1,Location pos2){
 		return Math.hypot(pos1.getY()-pos2.getY(), Math.hypot(pos1.getX()-pos2.getX(),pos1.getZ()-pos1.getZ()));
+	}
+	public void registerSpells(){
+		ArrayList<File> files=new ArrayList<File>(0);
+		File file=new File("..\\spells");
+		if(file.exists()){
+			if(file.isDirectory()){
+				for(int i=0;i<file.listFiles().length;i++){
+					files.add(file.listFiles()[i]);
+				}
+				for(File child:files){
+					if(child.isDirectory()){
+						files.remove(child);
+					}
+				}
+				for(File child:files){
+					try{
+						JarFile jar=new JarFile(child);
+						JarEntry entry=jar.getJarEntry(jar.getName());
+						Object object=entry.getClass();
+						if(object instanceof Spell){
+							spellList.add((Spell)object);
+						}
+					}
+					catch(Exception e){
+						log.log(Level.WARNING, "Unable to load "+child.getPath(), e);
+					}
+				}
+			}
+			else{
+				log.log(Level.WARNING, "The spells folder is empty! Add spells to the folder!");
+			}
+		}
+		else{
+			log.log(Level.SEVERE, "Spells directory doesn't exist! Create a folder called spells in the plugins folder");
+		}
 	}
 }
