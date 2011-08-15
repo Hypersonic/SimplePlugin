@@ -1,12 +1,10 @@
 package aor.SimplePlugin.Spells;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import java.lang.Math;
-
+import java.util.ArrayList;
 import aor.SimplePlugin.Runnables.RunnableDestroyCactus;
 import aor.SimplePlugin.Runnables.RunnableBuildCactus;
 
@@ -17,11 +15,13 @@ public class SpikeSpell extends Spell {
 	public SpikeSpell(SimplePlugin instance) // Constructor.
 	{
 		plugin = instance;
-		spellName = "Spikes";
+		spellName = "Spike";
 		spellDescription = "Summons a cactus on command. Needs 4 cacti, 1 sand.";
-		shortName = "Spikes";
-
-		setRequiredItems(new ItemStack(Material.CACTUS, 4), new ItemStack(Material.SAND, 1)); // 4 cactus, 1 sandblock.
+		shortName = "Spike";
+		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
+		requiredItems.add(new ItemStack(Material.CACTUS, 4));
+		requiredItems.add(new ItemStack(Material.SAND, 1));
+		setRequiredItems(requiredItems);
 	}
 
 	public boolean canPlaceCactus(Block targetBlock)
@@ -63,19 +63,7 @@ public class SpikeSpell extends Spell {
 		
 		return true; // If nothing turned up.
 	}
-	
-	public double distanceBetween(Location locA, Location locB)
-	{
-		// Distance formula.
-		double xdiff = locA.getX() - locB.getX();
-		double ydiff = locA.getZ() - locB.getZ();
-		double xdiffsq = xdiff * xdiff;
-		double ydiffsq = ydiff * ydiff;
-		double xyadd = xdiffsq + ydiffsq;
-		return Math.sqrt(xyadd);
-		// Distance formula.
-	}
-	
+
 	public void castSpell(Player player)
 	{
 		if (checkInventoryRequirements(player.getInventory())) // They have the required items.
@@ -87,13 +75,13 @@ public class SpikeSpell extends Spell {
 			if ((targetBlock.getType() != Material.AIR) && (targetBlock.getType() != Material.BEDROCK)) // Can't do it to air or bedrock.
 			{
 				
-				if (distanceBetween(targetBlock.getLocation(), player.getLocation()) < 30) // Maximum distance is 31.
+				if (SimplePlugin.distance(targetBlock.getLocation(), player.getLocation()) < 30) // Maximum distance is 31.
 				{
-					removeRequiredItemsFromInventory(player.getInventory()); // Remove required items here.
 					
 					
 					if (canPlaceCactus(targetBlock)) // If the space is compatable with a cactus
 					{
+						removeRequiredItemsFromInventory(player.getInventory()); // Remove required items here.
 						Material originalTargetMaterial = targetBlock.getType();
 						boolean sandstoneSupport = false;
 						
@@ -116,8 +104,6 @@ public class SpikeSpell extends Spell {
 						}
 						
 						player.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RunnableDestroyCactus(targetBlock, originalTargetMaterial, sandstoneSupport), 300); // We will destroy cactus in 15 seconds.
-						
-						player.sendMessage("SPIKES SPIKES SPIKES BABY");
 
 					}
 					else
