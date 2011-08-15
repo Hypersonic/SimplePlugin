@@ -59,7 +59,7 @@ public class Tornado extends Spell {
 	}
 
 
-	public void run(int argument){
+	public void run(Object... argument){
 		Player player = globalPlayer;
 		Random gen = new Random();
 		List<Entity> nearbyEntities;

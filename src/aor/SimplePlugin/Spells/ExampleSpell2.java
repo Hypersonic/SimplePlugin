@@ -59,7 +59,7 @@ public class ExampleSpell2 extends Spell{
 	//although there is a delay function, it can only delay the run() function, so all necesary possibilities for what was delayed must be in this function. However, we have
 	//set up a delayedRun function that takes arguments, making it easier to run different things. It is recommended that you use a switch with the argument to determine
 	//what to do, if you are in a situation where you might want multiple run functions.
-	public void run(int argument){
+	public void run(Object... argument){
 		//send the player that cast the spell the longest ago a message telling them that the spell has expired.
 		watchedPlayers.get(0).sendMessage("Example Spell 2 has expired!"+argument);
 		//remove them from the list, so that the next time the function is run, the next player gets sent the message.

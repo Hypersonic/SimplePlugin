@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * This is the main spell class that all spells must extend.
  */
-public class Spell{
+public abstract class Spell{
 	
 	public static SimplePlugin plugin;
 	
@@ -42,16 +42,15 @@ public class Spell{
 	 */
 	public String getShortName() { return shortName; }
 
-	public ArrayList<ItemStack> requiredItems = new ArrayList<ItemStack>(); // The required items arraylist of arrays.
+	public ArrayList<ItemStack> requiredItems = new ArrayList<ItemStack>(); // The required items arraylist.
+	public ArrayList<ItemStack> reusableItems = new ArrayList<ItemStack>(); // The required items arraylist, with items that aren't consumed.
 	/**
 	 * adds an arraylist of item stacks to the arraylist of itemstacks that are required for the spell to be used
 	 * @param items-the arraylist of the item stacks
 	 */
 	public void addRequiredItems(ArrayList<ItemStack> items)
 	{
-		for (int i = 0; i < items.size(); i++) {
-			requiredItems.add(items.get(i));
-		}
+		requiredItems.addAll(items);
 	}
 	/**
 	 * adds an item stack or itemstack array to the arraylist of item stacks that are required for the spell to be used
@@ -70,9 +69,7 @@ public class Spell{
 	{
 		requiredItems.clear();
 		requiredItems.trimToSize();
-		for (int i = 0; i < items.size(); i++) {
-			requiredItems.add(items.get(i));
-		}
+		requiredItems.addAll(items);
 	}
 	/**
 	 * sets the arraylist of itemstacks that are required for the spell to be used to an itemstack or an itemstack array
@@ -86,28 +83,62 @@ public class Spell{
 		}
 	}
 	/**
-	 * Is run when the delayedRun function is used. It is here so that no errors are produced when delayedRun is used and a run function has not been defined in the spell.
-	 * Separate runnables just complicate things and might be able to produce memory leaks, so they are now deprecated. Instead, add the arguments to an arraylist, one
-	 * for each argument. then use the run function in the spell and use the arguments and remove the index 0, so that the next run uses the next set of arguments. If you
-	 * have multiple things you want to run, put a switch in the run function that differentiates between which function is being called and in each case call a function.
-	 * You can have separate array lists for the other set of arguments. Its really not that complicated. See the example spell for something easier to understand. The
-	 * template spell shows the suggested switch format
+	 * adds an arraylist of item stacks to the arraylist of itemstacks that are required for the spell, but aren't consumed
+	 * @param items-the arraylist of the item stacks
 	 */
-	public void run(int arg){
+	public void addReusableItems(ArrayList<ItemStack> items)
+	{
+		reusableItems.addAll(items);
+	}
+	/**
+	 * adds an item stack or itemstack array to the arraylist of item stacks that are reusable for the spell
+	 * @param items-the item stack or array of item stacks
+	 */
+	public void addReusableItems(ItemStack... items){
+		for (int i = 0; i < items.length; i++) {
+			reusableItems.add(items[i]);
+		}
+	}
+	/**
+	 * sets the arraylist of itemstacks that are reusable for the spell to be used to an arraylist
+	 * @param items-the arraylist of the item stacks
+	 */
+	public void setReusableItems(ArrayList<ItemStack> items)
+	{
+		reusableItems.clear();
+		reusableItems.trimToSize();
+		reusableItems.addAll(items);
+	}
+	/**
+	 * sets the arraylist of itemstacks that are reusable for the spell to be used to an itemstack or an itemstack array
+	 * @param items-the the item stack or itemstack array
+	 */
+	public void setReusableItems(ItemStack... items){
+		reusableItems.clear();
+		reusableItems.trimToSize();
+		for (int i = 0; i < items.length; i++) {
+			reusableItems.add(items[i]);
+		}
+	}
+	/**
+	 * Is run when the delayedRun function is used. It is here so that no errors are produced when delayedRun is used and a run function has not been defined in the spell.
+	 * Separate runnables just complicate things and might be able to produce memory leaks, so they are now deprecated. Instead, add the necesary arguments to 
+	 */
+	public void run(Object... arg){
 		
 	}
 	/**
 	 * Runs the given run function after the given delay
 	 * @param timeDelay-the amount of time before the run function is run in server ticks (20 server ticks = 1 second)
-	 * @param runNumber-the number of the run function to run.
+	 * @param argument-the arguments to pass to the run function.
 	 */
-	public void delayedRun(int timeDelay,int argument){
+	public void delayedRun(int timeDelay,Object... argument){
 		while(plugin.runner.main.size()<=timeDelay){
-			plugin.runner.main.add(new ArrayList<int[]>());
+			plugin.runner.main.add(new ArrayList<Object[]>());
+			plugin.runner.spellId.add(new ArrayList<Integer>());
 		}
-		plugin.runner.main.get(timeDelay).add(new int[2]);
-		plugin.runner.main.get(timeDelay).get(plugin.runner.main.get(timeDelay).size()-1)[0]=plugin.spellList.indexOf(this);
-		plugin.runner.main.get(timeDelay).get(plugin.runner.main.get(timeDelay).size()-1)[1]=argument;
+		plugin.runner.main.get(timeDelay).add(argument);
+		plugin.runner.spellId.get(timeDelay).add(plugin.spellList.indexOf(this));
 	}
 	/**
 	 * checks if the given inventory has all of the requirements for the spell to be cast.
@@ -120,6 +151,12 @@ public class Spell{
 		for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
 		{
 			if (!inventory.contains(requiredItems.get(i).getType(), requiredItems.get(i).getAmount())) {
+				return false;
+			}  // If it doesn't return false.
+		}
+		for (int i = 0; i < reusableItems.size(); i++) // The loop for the requiredItems arraylist.
+		{
+			if (!inventory.contains(reusableItems.get(i).getType(), reusableItems.get(i).getAmount())) {
 				return false;
 			}  // If it doesn't return false.
 		}
@@ -186,7 +223,7 @@ public class Spell{
 	public void replaceInInventory(PlayerInventory inventory, ItemStack itemToRemove, ItemStack itemToReplaceWith){
 		int index=removeFromInventory(inventory,itemToRemove);
 		if(inventory.getItem(index)==null){
-			addItemToIndex(inventory,itemToReplaceWith,index);
+			inventory.setItem(index,itemToReplaceWith);
 		}
 		else{
 			addItemSafely(inventory,itemToReplaceWith);
@@ -202,7 +239,7 @@ public class Spell{
 	 */
 	public boolean addItemSafely(PlayerInventory inventory, ItemStack item){
 		if(inventory.firstEmpty()!=-1){
-			addItemToIndex(inventory,item,inventory.firstEmpty());
+			inventory.setItem(inventory.firstEmpty(),item);
 			return true;
 		}
 		return false;
@@ -228,12 +265,8 @@ public class Spell{
 		if(inventory.contains(item.getType(), item.getAmount())){
 			while(amountLeft>0){
 				int firstFound=inventory.first(item.getType());
-				if(inventory.getItem(firstFound).getAmount()>amountLeft){
+				if(inventory.getItem(firstFound).getAmount()>=amountLeft){
 					inventory.getItem(firstFound).setAmount(inventory.getItem(firstFound).getAmount()-amountLeft);
-					return firstFound;
-				}
-				else if(inventory.getItem(firstFound).getAmount()==amountLeft){
-					inventory.clear(inventory.first(item.getType()));
 					return firstFound;
 				}
 				else{

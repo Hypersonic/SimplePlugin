@@ -46,7 +46,7 @@ public class ExampleSpell extends Spell{
 	}
 	//although there is a delay function, it can only delay the run() function, so all necessary possibilities for what was delayed must be in this function. ex.
 	//if there are multiple messages after different amounts of time, you need to find a way of storing which case must be done by storing it in the argument variable.
-	public void run(int argument){
+	public void run(Object... argument){
 		//send the player that cast the spell the longest ago a message telling them that they cast the spell 10 seconds ago.
 		watchedPlayers.get(0).sendMessage("You cast the example spell 10 seconds ago");
 		//remove them from the list, so that the next time the function is run, the next player gets sent the message.

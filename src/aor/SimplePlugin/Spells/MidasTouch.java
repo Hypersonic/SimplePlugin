@@ -47,7 +47,7 @@ public class MidasTouch extends Spell{
 				onPlayerMove(new PlayerMoveEvent(player, null, null));
 			}
 	}
-	public void run(int arg){
+	public void run(Object... arg){
 		while(locations.get(players.get(0)).size()>0){
 			locations.get(players.get(0)).get(0).getWorld().getBlockAt(locations.get(players.get(0)).get(0)).setType(materials.get(players.get(0)).get(0));
 			locations.get(players.get(0)).get(0).getWorld().getBlockAt(locations.get(players.get(0)).get(0)).setData(bytes.get(players.get(0)).get(0));

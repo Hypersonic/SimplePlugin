@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -26,6 +27,7 @@ import aor.SimplePlugin.Spells.SpikeWallSpell;
 import aor.SimplePlugin.Spells.Tornado;
 
 public class SimplePlugin extends JavaPlugin {
+	public static final boolean selectPlayersFromADistance = true;
 	static HashMap<String, SpellBook> playerBooks = new HashMap<String, SpellBook>();
 	//ClassListeners
 	private final SPPlayerListener playerListener = new SPPlayerListener(this);
@@ -113,10 +115,10 @@ public class SimplePlugin extends JavaPlugin {
 		log.info("SimplePlugin enabling...");
 		spellList.add(new RapidfireSpell(this)); // Register the rapidfire spell.
 		spellList.add(new ExplosionSpell(this)); // Register explosion spell.
-		spellList.add(new SpikeSpell(this));
-		spellList.add(new SpikeWallSpell(this));
-		spellList.add(new SpikeFortSpell(this));
-		spellList.add(new Tornado(this));
+		spellList.add(new SpikeSpell(this));     //   .
+		spellList.add(new SpikeWallSpell(this)); //   .
+		spellList.add(new SpikeFortSpell(this)); //   .
+		spellList.add(new Tornado(this));        //  etc.
 		spellList.add(new ExampleSpell(this));
 		spellList.add(new ExampleSpell2(this));
 		spellList.add(new MidasTouch(this));
@@ -602,5 +604,8 @@ public class SimplePlugin extends JavaPlugin {
 			else { sender.sendMessage("This command can only be used in-game."); return false; } // They're not a player.
 		}
 		return false;
+	}
+	public static double distance(Location pos1,Location pos2){
+		return Math.hypot(pos1.getY()-pos2.getY(), Math.hypot(pos1.getX()-pos2.getX(),pos1.getZ()-pos1.getZ()));
 	}
 }

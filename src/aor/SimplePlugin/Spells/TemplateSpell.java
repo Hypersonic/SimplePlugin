@@ -22,10 +22,7 @@ public class TemplateSpell extends Spell{
 	public void castSpell(Player player){
 		
 	}
-	public void run(int argument){
-		switch(argument){
-			case 0:  break;
-			case 1:  break;
-		}
+	public void run(Object... argument){
+		
 	}
 }

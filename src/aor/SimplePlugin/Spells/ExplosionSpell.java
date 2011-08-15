@@ -35,7 +35,7 @@ public class ExplosionSpell extends Spell {
 		
 		PlayerInventory inventory = player.getInventory();
 
-		if (checkInventoryRequirements(inventory))
+		if (removeRequiredItemsFromInventory(inventory))
 		{
 			 // Remove the items.
 

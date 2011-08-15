@@ -29,19 +29,6 @@ public class SpikeFortSpell extends Spell {
 		setRequiredItems(requiredItems);
 	}
 
-	public double distanceBetween(Location locA, Location locB)
-	{
-		// Distance formula.
-		double xdiff = locA.getX() - locB.getX();
-		double ydiff = locA.getZ() - locB.getZ();
-		double xdiffsq = xdiff * xdiff;
-		double ydiffsq = ydiff * ydiff;
-		double xyadd = xdiffsq + ydiffsq;
-		return Math.sqrt(xyadd);
-		// Distance formula.
-	}
-
-
 	public Block[] blockSquare(Location center)
 	{
 		Block[] blocks = new Block[20];

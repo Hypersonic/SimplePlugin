@@ -1,11 +1,9 @@
 package aor.SimplePlugin.Spells;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import java.lang.Math;
 import java.util.ArrayList;
 import aor.SimplePlugin.Runnables.RunnableDestroyCactus;
 import aor.SimplePlugin.Runnables.RunnableBuildCactus;
@@ -65,19 +63,7 @@ public class SpikeSpell extends Spell {
 		
 		return true; // If nothing turned up.
 	}
-	
-	public double distanceBetween(Location locA, Location locB)
-	{
-		// Distance formula.
-		double xdiff = locA.getX() - locB.getX();
-		double ydiff = locA.getZ() - locB.getZ();
-		double xdiffsq = xdiff * xdiff;
-		double ydiffsq = ydiff * ydiff;
-		double xyadd = xdiffsq + ydiffsq;
-		return Math.sqrt(xyadd);
-		// Distance formula.
-	}
-	
+
 	public void castSpell(Player player)
 	{
 		if (checkInventoryRequirements(player.getInventory())) // They have the required items.
@@ -89,7 +75,7 @@ public class SpikeSpell extends Spell {
 			if ((targetBlock.getType() != Material.AIR) && (targetBlock.getType() != Material.BEDROCK)) // Can't do it to air or bedrock.
 			{
 				
-				if (distanceBetween(targetBlock.getLocation(), player.getLocation()) < 30) // Maximum distance is 31.
+				if (SimplePlugin.distance(targetBlock.getLocation(), player.getLocation()) < 30) // Maximum distance is 31.
 				{
 					
 					

@@ -2,11 +2,11 @@ package aor.SimplePlugin;
 
 import java.util.ArrayList;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import aor.SimplePlugin.SpellBook;
 
@@ -157,25 +157,37 @@ public class SPPlayerListener extends PlayerListener {
 		// Left clicking air or a block event:
 		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they right clicked with the gold hoe...
 		{
-			ArrayList<Double> playerDistances=new ArrayList<Double>();
-			ArrayList<String> playerNames=new ArrayList<String>();
-			for(int i=0;i<player.getWorld().getPlayers().size();i++){
-				playerDistances.add(distance(player.getWorld().getPlayers().get(i).getLocation(),player.getTargetBlock(null, 256).getLocation()));
-				playerNames.add(player.getWorld().getPlayers().get(i).getDisplayName());
-			}
-			double shortest=-1;
-			String name="";
-			while(playerDistances.size()>0){
-				if(playerDistances.get(0)>shortest){
-					shortest=playerDistances.get(0);
-					name=playerNames.get(0);
+			if(plugin.spellList.get(SimplePlugin.playerBooks.get(player.getName()).getCurrentSpell()).playerSelect&&SimplePlugin.selectPlayersFromADistance){
+				ArrayList<Double> playerDistances=new ArrayList<Double>();
+				ArrayList<String> playerNames=new ArrayList<String>();
+				ArrayList<Player> players=new ArrayList<Player>(0);
+				for(Entity entity:player.getNearbyEntities(128,128,128)){
+					if(entity instanceof Player){
+						players.add((Player)entity);
+					}
 				}
-				playerDistances.remove(0);
-				playerNames.remove(0);
-			}
-			if(shortest<6){
-				plugin.selectedPlayerNames.put(player.getName(), name);
-				player.sendMessage("You have selected "+name+".");
+				for(int i=0;i<players.size();i++){
+					playerDistances.add(SimplePlugin.distance(players.get(i).getLocation(),player.getTargetBlock(null, 256).getLocation()));
+					playerNames.add(players.get(i).getDisplayName());
+				}
+				double shortest=-1;
+				String name="";
+				while(playerDistances.size()>0){
+					if(playerDistances.get(0)>shortest){
+						shortest=playerDistances.get(0);
+						name=playerNames.get(0);
+					}
+					playerDistances.remove(0);
+					playerNames.remove(0);
+				}
+				if(shortest<6){
+					plugin.selectedPlayerNames.put(player.getName(), name);
+					player.sendMessage("You have selected "+name+".");
+				}
+				else{
+					SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
+					plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);
+				}
 			}
 			else{
 				SpellBook spellBook = SimplePlugin.playerBooks.get(player.getName());
@@ -194,8 +206,5 @@ public class SPPlayerListener extends PlayerListener {
 		for(int i=0;i<plugin.spellOnPlayerInteractList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerInteractList.get(i)).onPlayerInteract(event);
 		}
-	}
-	public double distance(Location pos1,Location pos2){
-		return Math.hypot(pos1.getY()-pos2.getY(), Math.hypot(pos1.getX()-pos2.getX(),pos1.getZ()-pos1.getZ()));
 	}
 }
