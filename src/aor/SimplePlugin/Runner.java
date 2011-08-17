@@ -3,6 +3,11 @@ package aor.SimplePlugin;
 import java.util.ArrayList;
 import java.lang.Runnable;
 
+/**
+ * 
+ * @author Jay
+ *
+ */
 public class Runner implements Runnable{
 	public static SimplePlugin plugin;
 	public ArrayList<ArrayList<Object[]>> main=new ArrayList<ArrayList<Object[]>>(0);

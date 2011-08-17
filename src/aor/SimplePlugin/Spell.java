@@ -22,6 +22,9 @@ public abstract class Spell{
 	public static SimplePlugin plugin;
 	
 	public Spell() { } // Empty constructor.
+	public void initialize(SimplePlugin instance) {
+		plugin=instance;
+	}
 	public String spellName="";
 	/**
 	 * gets the name of the spell

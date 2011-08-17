@@ -1,18 +1,17 @@
 package aor.SimplePlugin;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
-
+import aor.SimplePlugin.Spell;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -24,16 +23,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.ChatColor;
-import aor.SimplePlugin.SpellBook;
-import aor.SimplePlugin.Spells.ExampleSpell;
-import aor.SimplePlugin.Spells.ExampleSpell2;
-import aor.SimplePlugin.Spells.ExplosionSpell;
-import aor.SimplePlugin.Spells.MidasTouch;
-import aor.SimplePlugin.Spells.RapidfireSpell;
-import aor.SimplePlugin.Spells.SpikeFortSpell;
-import aor.SimplePlugin.Spells.SpikeSpell;
-import aor.SimplePlugin.Spells.SpikeWallSpell;
-import aor.SimplePlugin.Spells.Tornado;
 
 public class SimplePlugin extends JavaPlugin {
 	public static final boolean selectPlayersFromADistance = true;
@@ -120,18 +109,16 @@ public class SimplePlugin extends JavaPlugin {
 	}
 	public void onEnable() {
 		isDisabled=false;
-		this.getServer().getScheduler().scheduleSyncDelayedTask(this,runner,0L);
 		log.info("SimplePlugin enabling...");
-		spellList.add(new RapidfireSpell(this)); // Register the rapidfire spell.
-		spellList.add(new ExplosionSpell(this)); // Register explosion spell.
-		spellList.add(new SpikeSpell(this));     //   .
-		spellList.add(new SpikeWallSpell(this)); //   .
-		spellList.add(new SpikeFortSpell(this)); //   .
-		spellList.add(new Tornado(this));        //  etc.
-		spellList.add(new ExampleSpell(this));
-		spellList.add(new ExampleSpell2(this));
-		spellList.add(new MidasTouch(this));
 		registerSpells();
+		if(spellList.size()==0){
+			log.log(Level.SEVERE,"No Spells Loaded!");
+			onDisable();
+			return;
+		}
+		else{
+			log.log(Level.INFO,spellList.size()+" spells have been enabled.");
+		}
 		for(int i=0;i<spellList.size();i++){
 			if(spellList.get(i).onBlockBreak){
 				spellOnBlockBreakList.add(i);
@@ -524,6 +511,7 @@ public class SimplePlugin extends JavaPlugin {
 		{
 			SimplePlugin.playerBooks.put(onlinePlayers[i].getName(), new SpellBook(onlinePlayers[i], this)); // Add a new spellbook for the player to the hashmap.
 		}
+		this.getServer().getScheduler().scheduleSyncDelayedTask(this,runner,0L);
 		log.info("SimplePlugin enabled!");
 	}
 	public HashMap<String, SpellBook> getPlayerBooks()
@@ -618,37 +606,73 @@ public class SimplePlugin extends JavaPlugin {
 	public static double distance(Location pos1,Location pos2){
 		return Math.hypot(pos1.getY()-pos2.getY(), Math.hypot(pos1.getX()-pos2.getX(),pos1.getZ()-pos1.getZ()));
 	}
+	/**
+	 * Registers all of the spells from external jars in the spells folder
+	 */
 	public void registerSpells(){
-		ArrayList<File> files=new ArrayList<File>(0);
-		File file=new File("spells");
+		File file=new File("plugins\\spells");//spell location
 		if(!file.exists()){
-			
+			File plugindir=new File("plugins\\");
+			if(plugindir.canWrite()){
+				file.mkdir();
+				log.log(Level.SEVERE,"No spells folder existed, so a new one was created.");
+			}
+			else{
+				log.log(Level.SEVERE,"No spells folder exists in the plugins folder and spells couldn't create the folder, because it doesn't have write permissions.");
+				onDisable();
+			}
 		}
-		if(file.isDirectory()){
-			for(int i=0;i<file.listFiles().length;i++){
+		ArrayList<File> files=new ArrayList<File>(0);//the files within the spells directory
+		if(file.listFiles().length>0){
+			for(int i=0;i<file.listFiles().length;i++){//add the files in the directory to the files arrayList
 				files.add(file.listFiles()[i]);
 			}
 			for(File child:files){
-				if(child.isDirectory()){
-					files.remove(child);
-				}
-			}
-			for(File child:files){
-				try{
-					JarFile jar=new JarFile(child);
-					JarEntry entry=jar.getJarEntry(jar.getName());
-					Object object=entry.getClass();
-					if(object instanceof Spell){
-						spellList.add((Spell)object);
+				try{				
+					JarFile jarFile = new JarFile(child);//converts the file to a jar file. If it can't, it gets caught and moves onto the next file
+					Enumeration<JarEntry> entries = jarFile.entries();//gets all of the files withing the jar
+					boolean foundMain=false;//the variable keeps track of whether or not the main class of the spell was found.
+					while (entries.hasMoreElements()) {//goes through all of the elements
+						JarEntry element = entries.nextElement();
+						log.log(Level.INFO, "Element: "+element.getName()+" Child: "+format(child.getName()));//just for debugging purposes
+						if (element.getName().equalsIgnoreCase(format(child.getName()))) {//if the entry is what should be the main class (spellname.spellname)
+							try{
+								URL[] urls = new URL[1];
+								urls[0] = file.toURI().toURL();//turns the file into a url[] for the class loader to read
+								URLClassLoader classLoader=new URLClassLoader(urls, getClass().getClassLoader());//initializes the class loader
+				/*ERROR!*/		Class<?> jarClass = Class.forName(format2(child.getName()+"."+child.getName()), true, classLoader);//gets the main class from the jar
+								Class<? extends Spell> spell = jarClass.asSubclass(Spell.class);//turns the class into a class the extends spell. If it isn't, it's caught.
+								Constructor<? extends Spell> spellConstructor=spell.getConstructor(SimplePlugin.class);//gets the spell's constructor that takes a SimplePlugin as the argument
+								Spell result=spellConstructor.newInstance(this);//create a new instance of the spell, with this as the argument
+								spellList.add(result);//add the spell to the spell list
+								log.log(Level.INFO,result.spellName+" was successfully loaded!");
+							}
+							catch(Throwable e){
+								log.log(Level.WARNING,"Error while loading spell "+format2(child.getName())+": ",e);
+							}
+							foundMain=true;
+							break;
+						}
 					}
-				}
-				catch(Exception e){
-					log.log(Level.WARNING, "Unable to load "+child.getPath(), e);
+					if(!foundMain){
+						log.log(Level.WARNING, "The main class of the spell was not found. It should be in the package spellname.");
+					}
+				} catch(Exception e){
+					log.log(Level.WARNING, "Unable to load "+child.getName()+":", e);
 				}
 			}
 		}
 		else{
-			log.log(Level.WARNING, "The spells folder is empty! Add spells to the folder!");
+			log.log(Level.SEVERE, "The spells folder is empty! Add spells to the folder!");
+			onDisable();//disable the plugin, because there are no spells.
 		}
+	}
+	public static String format(String string) {
+		string=format2(string);
+		string+="/"+string+".class";
+		return string;
+	}
+	public static String format2(String string){
+		return string.replaceAll(".jar", "");
 	}
 }
