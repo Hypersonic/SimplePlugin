@@ -1,5 +1,6 @@
 package aor.Spells.Spells;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -17,11 +18,9 @@ public class SpikeSpell extends Spell {
 		plugin = instance;
 		spellName = "Spike";
 		spellDescription = "Summons a cactus on command. Needs 4 cacti, 1 sand.";
-		shortName = "Spike";
-		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
-		requiredItems.add(new ItemStack(Material.CACTUS, 4));
-		requiredItems.add(new ItemStack(Material.SAND, 1));
-		setRequiredItems(requiredItems);
+		shortName = "Spikes";
+
+		setRequiredItems(new ItemStack(Material.CACTUS, 4), new ItemStack(Material.SAND, 1)); // 4 cactus, 1 sandblock.
 	}
 
 	public boolean canPlaceCactus(Block targetBlock)
@@ -63,7 +62,18 @@ public class SpikeSpell extends Spell {
 		
 		return true; // If nothing turned up.
 	}
-
+	public double distanceBetween(Location locA, Location locB)
+	{
+		// Distance formula.
+		double xdiff = locA.getX() - locB.getX();
+		double ydiff = locA.getZ() - locB.getZ();
+		double xdiffsq = xdiff * xdiff;
+		double ydiffsq = ydiff * ydiff;
+		double xyadd = xdiffsq + ydiffsq;
+		return Math.sqrt(xyadd);
+		// Distance formula.
+	}
+	
 	public void castSpell(Player player)
 	{
 		if (checkInventoryRequirements(player.getInventory())) // They have the required items.
@@ -75,7 +85,7 @@ public class SpikeSpell extends Spell {
 			if ((targetBlock.getType() != Material.AIR) && (targetBlock.getType() != Material.BEDROCK)) // Can't do it to air or bedrock.
 			{
 				
-				if (SimplePlugin.distance(targetBlock.getLocation(), player.getLocation()) < 30) // Maximum distance is 31.
+				if (distanceBetween(targetBlock.getLocation(), player.getLocation()) < 30) // Maximum distance is 31.
 				{
 					
 					
