@@ -3,9 +3,8 @@ package aor.Spells.Spells;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.craftbukkit.entity.CraftItem;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ItemStack;
@@ -42,8 +41,7 @@ public class NetSpell extends Spell {
 			for (int i = 0; i < nearbyEntities.size(); i++) {
 				Entity currentCreature = nearbyEntities.get(i);
 				try {
-					if (currentCreature.getClass() != CraftPlayer.class
-							&& currentCreature.getClass() != CraftItem.class) // You can't freeze players or items with this spell.
+					if (!(currentCreature instanceof Player || currentCreature instanceof Item)) // You can't freeze players or items with this spell.
 					{
 						Location loc = currentCreature.getLocation();
 						blockLocs.add(loc);
