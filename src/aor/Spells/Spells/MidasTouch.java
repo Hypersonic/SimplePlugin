@@ -20,7 +20,7 @@ public class MidasTouch extends Spell{
 	public HashMap<Player,ArrayList<Material>> materials=new HashMap<Player,ArrayList<Material>>();
 	public HashMap<Player,ArrayList<Byte>> bytes=new HashMap<Player,ArrayList<Byte>>();
 	public boolean isMidas=false;
-	public MidasTouch(SimplePlugin instance){
+	public MidasTouch(Spells instance){
 		plugin=instance;
 		spellDescription="This spell turns every block you touch into a gold block for one minute.";
 		shortName="Midas";

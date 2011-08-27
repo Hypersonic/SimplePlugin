@@ -11,12 +11,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.entity.Player;
 
 import aor.Spells.Runnables.RunnableBuildWallCactus;
-import aor.Spells.SimplePlugin;
+import aor.Spells.Spells;
 import aor.Spells.Spell;
 
 public class SpikeWallSpell extends Spell {
 
-	public SpikeWallSpell(SimplePlugin instance) // Constructor.
+	public SpikeWallSpell(Spells instance) // Constructor.
 	{
 		plugin = instance;
 		spellName = "Spike Wall";

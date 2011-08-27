@@ -3,9 +3,9 @@ package aor.Spells;
 import org.bukkit.event.block.*;
 
 public class SPBlockListener extends BlockListener{
-	public static SimplePlugin plugin;
+	public static Spells plugin;
 	
-	public SPBlockListener(SimplePlugin instance){
+	public SPBlockListener(Spells instance){
 		plugin=instance;
 	}
 	public void onBlockBreak(BlockBreakEvent event){

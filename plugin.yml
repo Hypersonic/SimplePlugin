@@ -1,5 +1,5 @@
-name: SimplePlugin
-main: aor.SimplePlugin.SimplePlugin
+name: Spells
+main: aor.Spells.Spells
 version: 1.0
 commands:
    spellinfo:

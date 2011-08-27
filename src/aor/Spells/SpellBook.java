@@ -7,9 +7,9 @@ import java.lang.String;
 
 public class SpellBook {
 
-	public static SimplePlugin plugin;
+	public static Spells plugin;
 
-	public SpellBook(Player player, SimplePlugin instance) // We take player for possible permissions/op spell disable/enable.
+	public SpellBook(Player player, Spells instance) // We take player for possible permissions/op spell disable/enable.
 	{
 		plugin = instance;
 		for(int i=0; i<plugin.spellList.size();i++){

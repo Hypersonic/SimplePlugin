@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.lang.Runnable;
 
 public class Runner implements Runnable{
-	public static SimplePlugin plugin;
+	public static Spells plugin;
 	public ArrayList<ArrayList<Object[]>> main=new ArrayList<ArrayList<Object[]>>(0);
 	public ArrayList<ArrayList<Integer>> spellId=new ArrayList<ArrayList<Integer>>(0);
-	public Runner(SimplePlugin instance){
+	public Runner(Spells instance){
 		plugin=instance;
 	}
 	public void run(){

@@ -14,16 +14,16 @@ import org.bukkit.Material;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Creature;
 
-import aor.Spells.SimplePlugin;
+import aor.Spells.Spells;
 import aor.Spells.Spell;
 
 
 public class DecoySpell extends Spell {
 	
 	
-	public static SimplePlugin plugin;
+	public static Spells plugin;
 	int MAXDISTANCE = 50;
-	public DecoySpell(SimplePlugin instance) // Constructor.
+	public DecoySpell(Spells instance) // Constructor.
 	{
 		plugin = instance;
 		spellName = "Decoy";
