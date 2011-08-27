@@ -3,3 +3,8 @@ bin/*
 *.ctxt
 *.class
 +libs
+.settings/org.eclipse.jdt.core.prefs
+
+.classpath
+
+.externalToolBuilders/PluginBuild.launch

@@ -54,7 +54,9 @@ public class Tornado extends Spell {
 			}
 		}
 		
-		else {player.sendMessage("Could not cast! Spell requires 1 water bucket and 4 redstone."); } // They don't have the proper items.
+		else {
+			player.sendMessage("Could not cast! Spell requires 1 water bucket and 4 redstone.");
+			} // They don't have the proper items.
 		
 	}
 
