@@ -40,17 +40,11 @@ public class NetSpell extends Spell {
 			ArrayList<Location> blockLocs = new ArrayList<Location>();
 			for (int i = 0; i < nearbyEntities.size(); i++) {
 				Entity currentCreature = nearbyEntities.get(i);
-				try {
-					if (!(currentCreature instanceof Player || currentCreature instanceof Item)) // You can't freeze players or items with this spell.
-					{
-						Location loc = currentCreature.getLocation();
-						blockLocs.add(loc);
-						loc.getWorld().getBlockAt(loc).setType(Material.WEB);
-						
-					}
-				} catch (Exception e) {
-					e.printStackTrace(); // If there is an error, we want
-											// reports!
+				if (!(currentCreature instanceof Player || currentCreature instanceof Item)) // You can't freeze players or items with this spell.
+				{
+					Location loc = currentCreature.getLocation();
+					blockLocs.add(loc);
+					loc.getWorld().getBlockAt(loc).setType(Material.WEB);
 				}
 			}
 			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new NetRunnables(blockLocs), 200L);

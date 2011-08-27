@@ -51,13 +51,9 @@ public class DecoySpell extends Spell {
 				List<Entity> nearCow = cow.getNearbyEntities(10, 10, 10);
 				for (int i = 0; i < nearCow.size();i++){
 					Entity currentCreature = nearCow.get(i);
-					try {
-						if (!(currentCreature instanceof Player || currentCreature instanceof Item || currentCreature instanceof Arrow)) //You can't make no player or item target nothin'!
-						{
-							((Creature) currentCreature).setTarget(cow);
-						}
-					} catch (Exception e){
-						e.printStackTrace();	//If there is an error, we want reports!
+					if (!(currentCreature instanceof Player || currentCreature instanceof Item || currentCreature instanceof Arrow)) //You can't make no player or item target nothin'!
+					{
+						((Creature) currentCreature).setTarget(cow);
 					}
 				}
 			}
