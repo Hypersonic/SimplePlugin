@@ -11,15 +11,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import aor.Spells.Runnables.NetRunnables;
-import aor.Spells.Spells;
+import aor.Spells.SpellsMain;
 import aor.Spells.Spell;
 
 public class NetSpell extends Spell {
 
-	public static Spells plugin;
+	public static SpellsMain plugin;
 	int MAXDISTANCE = 50;
 
-	public NetSpell(Spells instance) // Constructor.
+	public NetSpell(SpellsMain instance) // Constructor.
 	{
 		plugin = instance;
 		spellName = "Net";

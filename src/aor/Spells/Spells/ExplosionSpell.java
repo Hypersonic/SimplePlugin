@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import aor.Spells.Spells;
+import aor.Spells.SpellsMain;
 import aor.Spells.Spell;
 
 import org.bukkit.block.Block;
@@ -19,7 +19,7 @@ public class ExplosionSpell extends Spell {
 	private static final int MAXDISTANCE = 200; // Sets the maximum distance.
 
 
-	public ExplosionSpell(Spells instance) // Constructor.
+	public ExplosionSpell(SpellsMain instance) // Constructor.
 	{
 		plugin = instance;
 		spellName = "Explosion";

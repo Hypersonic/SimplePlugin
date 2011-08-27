@@ -4,9 +4,9 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.painting.*;
 
 public class SPEntityListener extends EntityListener{
-	public static Spells plugin;
+	public static SpellsMain plugin;
 	
-	public SPEntityListener(Spells instance){
+	public SPEntityListener(SpellsMain instance){
 		plugin=instance;
 	}
 	public void onCreatureSpawn(CreatureSpawnEvent event){

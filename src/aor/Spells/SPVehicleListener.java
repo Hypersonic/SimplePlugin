@@ -3,9 +3,9 @@ package aor.Spells;
 import org.bukkit.event.vehicle.*;
 
 public class SPVehicleListener extends VehicleListener{
-    public static Spells plugin;
+    public static SpellsMain plugin;
     
-    public SPVehicleListener(Spells instance){
+    public SPVehicleListener(SpellsMain instance){
         plugin=instance;
     }
 	public boolean onVehicleBlockCollision=false;

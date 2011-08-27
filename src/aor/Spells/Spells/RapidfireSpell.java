@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
 
 import aor.Spells.Runnables.RunnableShootArrow;
-import aor.Spells.Spells;
+import aor.Spells.SpellsMain;
 import aor.Spells.Spell;
 
 
@@ -16,10 +16,10 @@ import aor.Spells.Spell;
 public class RapidfireSpell extends Spell {
 
 
-	public static Spells plugin;
+	public static SpellsMain plugin;
 
 
-	public RapidfireSpell(Spells instance) // Constructor.
+	public RapidfireSpell(SpellsMain instance) // Constructor.
 	{
 		plugin = instance;
 		spellName = "Rapidfire";

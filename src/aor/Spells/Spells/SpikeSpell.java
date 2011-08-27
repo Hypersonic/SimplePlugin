@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import aor.Spells.Runnables.RunnableDestroyCactus;
 import aor.Spells.Runnables.RunnableBuildCactus;
 
-import aor.Spells.Spells;
+import aor.Spells.SpellsMain;
 import aor.Spells.Spell;
 
 public class SpikeSpell extends Spell {
-	public SpikeSpell(Spells instance) // Constructor.
+	public SpikeSpell(SpellsMain instance) // Constructor.
 	{
 		plugin = instance;
 		spellName = "Spike";

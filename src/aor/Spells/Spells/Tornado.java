@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.bukkit.Material;
 
-import aor.Spells.Spells;
+import aor.Spells.SpellsMain;
 import aor.Spells.Spell;
 
 
@@ -19,9 +19,9 @@ public class Tornado extends Spell {
 	
 	public Player globalPlayer;
 	
-	public static Spells plugin;
+	public static SpellsMain plugin;
 	
-	public Tornado(Spells instance) // Constructor.
+	public Tornado(SpellsMain instance) // Constructor.
 	{
 		plugin = instance;
 		spellName = "Tornado";

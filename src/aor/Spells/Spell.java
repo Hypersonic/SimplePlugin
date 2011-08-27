@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public abstract class Spell{
 	
-	public static Spells plugin;
+	public static SpellsMain plugin;
 	
 	public Spell() { } // Empty constructor.
 	public String spellName="";

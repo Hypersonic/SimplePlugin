@@ -12,9 +12,9 @@ import org.bukkit.Material;
 import aor.Spells.SpellBook;
 
 public class SPPlayerListener extends PlayerListener {
-	public static Spells plugin;
+	public static SpellsMain plugin;
 
-	public SPPlayerListener(Spells instance) {
+	public SPPlayerListener(SpellsMain instance) {
 		plugin = instance;
 	}
 
@@ -25,13 +25,13 @@ public class SPPlayerListener extends PlayerListener {
 	}
 	public void onItemHeldChange(PlayerItemHeldEvent event){
 		if (event.getPlayer().getInventory().getItem(event.getNewSlot()).getType() == Material.GOLD_HOE){
-			if (plugin.spellList.get(Spells.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).checkInventoryRequirements(event.getPlayer().getInventory())) // If they have the right items...
+			if (plugin.spellList.get(SpellsMain.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).checkInventoryRequirements(event.getPlayer().getInventory())) // If they have the right items...
 			{
-				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_GREEN + plugin.spellList.get(Spells.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).getName()); // Print spell with green.
+				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_GREEN + plugin.spellList.get(SpellsMain.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).getName()); // Print spell with green.
 			}
 			else // If they don't.
 			{
-				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_RED + plugin.spellList.get(Spells.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).getName()); // Print spell with red.
+				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_RED + plugin.spellList.get(SpellsMain.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).getName()); // Print spell with red.
 			}
 		}
 		for(int i=0;i<plugin.spellOnItemHeldChangeList.size();i++){
@@ -131,7 +131,7 @@ public class SPPlayerListener extends PlayerListener {
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
 		Player player = event.getPlayer(); // Set the player object.
-		Spells.playerBooks.put(player.getName(), new SpellBook(player, plugin)); // Add a new spellbook for the player to the hashmap.
+		SpellsMain.playerBooks.put(player.getName(), new SpellBook(player, plugin)); // Add a new spellbook for the player to the hashmap.
 		for(int i=0;i<plugin.spellOnPlayerJoinList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerJoinList.get(i)).onPlayerJoin(event);
 		}
@@ -140,7 +140,7 @@ public class SPPlayerListener extends PlayerListener {
 	public void onPlayerQuit(PlayerQuitEvent event)
 	{
 		Player player = event.getPlayer(); // Set the player object.
-		Spells.playerBooks.remove(player.getName()); // Remove the player's spellbook from the hashmap.
+		SpellsMain.playerBooks.remove(player.getName()); // Remove the player's spellbook from the hashmap.
 		for(int i=0;i<plugin.spellOnPlayerQuitList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerQuitList.get(i)).onPlayerQuit(event);
 		}
@@ -158,7 +158,7 @@ public class SPPlayerListener extends PlayerListener {
 		// Left clicking air or a block event:
 		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they right clicked with the gold hoe...
 		{
-			if(plugin.spellList.get(Spells.playerBooks.get(player.getName()).getCurrentSpell()).playerSelect&&Spells.selectPlayersFromADistance){
+			if(plugin.spellList.get(SpellsMain.playerBooks.get(player.getName()).getCurrentSpell()).playerSelect&&SpellsMain.selectPlayersFromADistance){
 				ArrayList<Double> playerDistances=new ArrayList<Double>();
 				ArrayList<String> playerNames=new ArrayList<String>();
 				ArrayList<Player> players=new ArrayList<Player>(0);
@@ -168,7 +168,7 @@ public class SPPlayerListener extends PlayerListener {
 					}
 				}
 				for(int i=0;i<players.size();i++){
-					playerDistances.add(Spells.distance(players.get(i).getLocation(),player.getTargetBlock(null, 256).getLocation()));
+					playerDistances.add(SpellsMain.distance(players.get(i).getLocation(),player.getTargetBlock(null, 256).getLocation()));
 					playerNames.add(players.get(i).getDisplayName());
 				}
 				double shortest=-1;
@@ -186,12 +186,12 @@ public class SPPlayerListener extends PlayerListener {
 					player.sendMessage("You have selected "+name+".");
 				}
 				else{
-					SpellBook spellBook = Spells.playerBooks.get(player.getName());
+					SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
 					plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);
 				}
 			}
 			else{
-				SpellBook spellBook = Spells.playerBooks.get(player.getName());
+				SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
 				plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);
 			}
 		}
@@ -199,7 +199,7 @@ public class SPPlayerListener extends PlayerListener {
 		// Right clicking air or a block event:
 		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they left clicked with the gold hoe.
 		{
-			SpellBook spellBook = Spells.playerBooks.get(player.getName());
+			SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
 			spellBook.nextSpell(player); // Scroll through spells.
 		}
 		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE){

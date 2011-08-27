@@ -8,15 +8,15 @@ import org.bukkit.inventory.ItemStack;
 
 import aor.Spells.Runnables.RunnableBuildCactus;
 import aor.Spells.Runnables.RunnableDestroyCactus;
-import aor.Spells.Spells;
+import aor.Spells.SpellsMain;
 
 public class RunnableBuildWallCactus implements Runnable {
 
 	public Block targetBlock;
 	public Player player;
-	public Spells plugin;
+	public SpellsMain plugin;
 
-	public RunnableBuildWallCactus (Block i_targetBlock, Player i_player, Spells instance)
+	public RunnableBuildWallCactus (Block i_targetBlock, Player i_player, SpellsMain instance)
 	{
 		targetBlock = i_targetBlock;
 		player = i_player;

@@ -1,5 +1,5 @@
 name: Spells
-main: aor.Spells.Spells
+main: aor.Spells.SpellsMain
 version: 1.0
 commands:
    spellinfo:

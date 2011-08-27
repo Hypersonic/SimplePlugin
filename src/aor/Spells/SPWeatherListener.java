@@ -3,9 +3,9 @@ package aor.Spells;
 import org.bukkit.event.weather.*;
 
 public class SPWeatherListener extends WeatherListener{
-    public static Spells plugin;
+    public static SpellsMain plugin;
     
-    public SPWeatherListener(Spells instance){
+    public SPWeatherListener(SpellsMain instance){
         plugin=instance;
     }
     public void onLightningStrike(LightningStrikeEvent event){
