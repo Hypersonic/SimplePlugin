@@ -27,7 +27,7 @@ public class Tornado extends Spell {
 		spellName = "Tornado";
 		spellDescription = "Flings mobs around the player into the air.";
 		ArrayList<ItemStack> requiredItems=new ArrayList<ItemStack>();
-//		requiredItems.add(new ItemStack(Material.WATER_BUCKET, 1));
+		requiredItems.add(new ItemStack(Material.WATER_BUCKET, 1));
 		requiredItems.add(new ItemStack(Material.REDSTONE, 4));
 		setRequiredItems(requiredItems);
 		shortName = "Tornado";// We need 1 bucket of water and 4 redstone.
