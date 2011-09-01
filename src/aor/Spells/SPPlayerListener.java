@@ -167,9 +167,19 @@ public class SPPlayerListener extends PlayerListener {
 						players.add((Player)entity);
 					}
 				}
+				for(Player player3:event.getPlayer().getWorld().getPlayers()){
+					for(int i=0;i<players.size();i++){
+						player3.sendMessage(players.get(i).getName());
+					}
+				}
 				for(int i=0;i<players.size();i++){
 					playerDistances.add(SpellsMain.distance(players.get(i).getLocation(),player.getTargetBlock(null, 256).getLocation()));
 					playerNames.add(players.get(i).getDisplayName());
+				}
+				for(Player player2:event.getPlayer().getWorld().getPlayers()){
+					for(int i=0;i<playerDistances.size();i++){
+						player2.sendMessage(playerNames.get(i)+" "+playerDistances.get(i));
+					}
 				}
 				double shortest=-1;
 				String name="";
@@ -181,7 +191,7 @@ public class SPPlayerListener extends PlayerListener {
 					playerDistances.remove(0);
 					playerNames.remove(0);
 				}
-				if(shortest<6){
+				if(shortest<600){
 					plugin.selectedPlayerNames.put(player.getName(), name);
 					player.sendMessage("You have selected "+name+".");
 				}
