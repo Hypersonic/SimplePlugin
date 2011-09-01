@@ -32,6 +32,7 @@ public class MidasTouch extends Spell{
 	}
 	public void castSpell(Player player){
 		if(checkInventoryRequirements(player.getInventory()))
+		{
 			if(players.contains(player)){
 				player.sendMessage("Are you really that greedy?");
 			}
@@ -46,6 +47,9 @@ public class MidasTouch extends Spell{
 				delayedRun(1200,0);
 				onPlayerMove(new PlayerMoveEvent(player, null, null));
 			}
+		} else player.sendMessage("Could not cast! Spell requires 10 gold blocks.");
+
+		
 	}
 	public void run(Object... arg){
 		while(locations.get(players.get(0)).size()>0){

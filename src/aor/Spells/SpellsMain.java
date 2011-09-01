@@ -19,6 +19,7 @@ import aor.Spells.Spells.ExampleSpell;
 import aor.Spells.Spells.ExampleSpell2;
 import aor.Spells.Spells.ExplosionSpell;
 import aor.Spells.Spells.MidasTouch;
+import aor.Spells.Spells.NetSpell;
 import aor.Spells.Spells.RapidfireSpell;
 import aor.Spells.Spells.SpikeFortSpell;
 import aor.Spells.Spells.SpikeSpell;
@@ -119,6 +120,7 @@ public class SpellsMain extends JavaPlugin {
 		spellList.add(new SpikeWallSpell(this)); //   .
 		spellList.add(new SpikeFortSpell(this)); //   .
 		spellList.add(new Tornado(this));        //  etc.
+		spellList.add(new NetSpell(this));
 		spellList.add(new ExampleSpell(this));
 		spellList.add(new ExampleSpell2(this));
 		spellList.add(new MidasTouch(this));
