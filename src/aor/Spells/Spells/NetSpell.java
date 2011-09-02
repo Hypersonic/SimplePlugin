@@ -8,6 +8,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import aor.Spells.Runnables.NetRunnables;
@@ -45,8 +46,26 @@ public class NetSpell extends Spell {
 					Location loc = currentCreature.getLocation();
 					blockLocs.add(loc);
 					loc.getWorld().getBlockAt(loc).setType(Material.WEB);
+					loc.add(0, 1, 0);
+					for (int q = 0; q < 10; q++){
+					loc.getWorld().playEffect(loc, Effect.SMOKE, 31, 1000);
+					}
+					loc.getWorld().playEffect(loc, Effect.EXTINGUISH, 10, 1000);
+
 				}
 			}
+			Location smokeLoc = player.getLocation();
+			for (int i = -10; i < 10; i++){
+				for (int q = -5; q < 5; q++){
+					smokeLoc.add(1, q,0);
+				//	smokeLoc.getWorld().playEffect(smokeLoc, Effect.SMOKE, 31, 1000);
+				//	smokeLoc.getWorld().playEffect(smokeLoc, Effect.EXTINGUISH, 10, 1000);
+
+					smokeLoc = player.getLocation();
+					
+				}
+			}
+			
 			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new NetRunnables(blockLocs), 200L);
 
 		} else {
