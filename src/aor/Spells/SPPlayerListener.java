@@ -1,11 +1,14 @@
 package aor.Spells;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
@@ -192,7 +195,14 @@ public class SPPlayerListener extends PlayerListener {
 			}
 			else{
 				SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
-				plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);
+				if(plugin.spellList.get(spellBook.getCurrentSpell()).removeRequiredItemsFromInventory(event.getPlayer().getInventory())){
+					plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);		//Cast the spell that is selected.
+					
+					//TODO: Remove the spell remove item statements from all the spells.
+				}
+				else {
+					event.getPlayer().sendMessage(returnPrettySpellReqs(spellBook.getCurrentSpell()));
+				}
 			}
 		}
 		
@@ -208,4 +218,44 @@ public class SPPlayerListener extends PlayerListener {
 			plugin.spellList.get(plugin.spellOnPlayerInteractList.get(i)).onPlayerInteract(event);
 		}
 	}
+	
+	
+	public String prettifyItemStack(ItemStack stack){
+		String prettyfiedStackName = "";
+
+		int size = stack.getAmount();
+		boolean multiple = false;
+		if (size > 1 && !stack.getType().name().endsWith("S")){			//More than 1 and doesn't end with "S"
+			multiple = true;
+		}
+		String name = stack.getType().name().toLowerCase().replaceAll("_"," ");
+		if (multiple == true) name += "(s)";	//weird with most items. We might need a list of items that aren't plural by default Q.Q
+		
+		
+		prettyfiedStackName += size + " " + name;
+		return prettyfiedStackName;
+		
+		
+	}
+	
+	public String returnPrettySpellReqs(int spell){
+		String prettySpellReqs = "You need ";
+		
+		ArrayList<ItemStack> requirements = plugin.spellList.get(spell).requiredItems;
+		
+		for (ItemStack itemNeeded:requirements){
+			
+			prettySpellReqs += prettifyItemStack(itemNeeded) + ", ";
+			
+		}
+		
+		prettySpellReqs = prettySpellReqs.trim(); 	//remove the trailing whitespace
+		prettySpellReqs += ".";
+		prettySpellReqs = prettySpellReqs.replace(",.", ".");
+		
+		return prettySpellReqs;
+	}
+	
+	
+	
 }
