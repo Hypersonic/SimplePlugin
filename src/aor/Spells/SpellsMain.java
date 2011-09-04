@@ -15,6 +15,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.ChatColor;
+
+import aor.Spells.Spells.DecoySpell;
 import aor.Spells.Spells.ExampleSpell;
 import aor.Spells.Spells.ExampleSpell2;
 import aor.Spells.Spells.ExplosionSpell;
@@ -124,6 +126,7 @@ public class SpellsMain extends JavaPlugin {
 		spellList.add(new ExampleSpell(this));
 		spellList.add(new ExampleSpell2(this));
 		spellList.add(new MidasTouch(this));
+		spellList.add(new DecoySpell(this));
 		for(int i=0;i<spellList.size();i++){
 			if(spellList.get(i).onBlockBreak){
 				spellOnBlockBreakList.add(i);
