@@ -184,7 +184,7 @@ public abstract class Spell{
 	public boolean removeRequiredItemsFromInventory(PlayerInventory inventory)
 	{
 		if(checkInventoryRequirements(inventory)){
-			for (int i = 0; i < requiredItems.size(); i++) // The loop for the requiredItems arraylist.
+			for (int i = 0; i <= requiredItems.size() - 1; i++) // The loop for the requiredItems arraylist.
 			{
 				removeFromInventory(inventory,requiredItems.get(i));
 			}
@@ -265,7 +265,7 @@ public abstract class Spell{
 		if(inventory.contains(item.getType(), item.getAmount())){
 			while(amountLeft>0){
 				int firstFound=inventory.first(item.getType());
-				if(inventory.getItem(firstFound).getAmount()>=amountLeft){
+				if(inventory.getItem(firstFound).getAmount() > amountLeft){
 					inventory.getItem(firstFound).setAmount(inventory.getItem(firstFound).getAmount()-amountLeft);
 					return firstFound;
 				}

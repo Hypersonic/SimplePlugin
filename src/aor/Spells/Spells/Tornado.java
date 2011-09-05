@@ -45,11 +45,11 @@ public class Tornado extends Spell {
 			List<Entity> nearbyEntities;
 			nearbyEntities = player.getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
 			for (int i=0; i<nearbyEntities.size(); i++) {
-				Vector newVelocity = new Vector(((gen.nextFloat() - .3) * .8), gen.nextFloat(), (gen.nextFloat() - .3) * .8); //Generate a random vector
+				Vector newVelocity = new Vector(((gen.nextFloat() - .3) * .8), gen.nextFloat() * 20, (gen.nextFloat() - .3) * .8); //Generate a random vector
 				nearbyEntities.get(i).setVelocity(newVelocity);
 			}
 			
-			for (int i = 10; i < 16; i = i+2){
+			for (int i = 200; i < 16; i = i+4){
 				delayedRun(i,0);
 			}
 		}
@@ -67,7 +67,7 @@ public class Tornado extends Spell {
 		List<Entity> nearbyEntities;
 		nearbyEntities = player.getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
 		for (int i=0; i<nearbyEntities.size(); i++) {
-			Vector newVelocity = new Vector(((gen.nextFloat() - .5) * .8), gen.nextFloat(), (gen.nextFloat() - .5) * .8); //Generate a random vector
+			Vector newVelocity = new Vector(((gen.nextFloat() - .5) * .8), gen.nextFloat() * 5, (gen.nextFloat() - .5) * .8); //Generate a random vector
 			nearbyEntities.get(i).setVelocity(newVelocity);
 		}
 
