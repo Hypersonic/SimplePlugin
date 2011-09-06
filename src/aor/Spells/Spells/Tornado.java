@@ -67,7 +67,7 @@ public class Tornado extends Spell {
 		List<Entity> nearbyEntities;
 		nearbyEntities = player.getNearbyEntities(5,5,5); //Selects entities near the player within a 10x10x10 cube.
 		for (int i=0; i<nearbyEntities.size(); i++) {
-			Vector newVelocity = new Vector(((gen.nextFloat() - .5) * .8), gen.nextFloat() * 5, (gen.nextFloat() - .5) * .8); //Generate a random vector
+			Vector newVelocity = new Vector(((gen.nextFloat() - .5) * .8), gen.nextFloat() * 1.2, (gen.nextFloat() - .5) * .8); //Generate a random vector
 			nearbyEntities.get(i).setVelocity(newVelocity);
 		}
 
