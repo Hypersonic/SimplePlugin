@@ -26,13 +26,13 @@ public class SPPlayerListener extends PlayerListener {
 	}
 	public void onItemHeldChange(PlayerItemHeldEvent event){
 		if (event.getPlayer().getInventory().getItem(event.getNewSlot()).getType() == Material.GOLD_HOE){
-			if (plugin.spellList.get(SpellsMain.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).checkInventoryRequirements(event.getPlayer().getInventory())) // If they have the right items...
+			if (plugin.spellList.get(SpellsMain.playerBooks.get(event.getPlayer().getDisplayName()).getCurrentSpell()).checkInventoryRequirements(event.getPlayer().getInventory())) // If they have the right items...
 			{
-				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_GREEN + plugin.spellList.get(SpellsMain.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).getName()); // Print spell with green.
+				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_GREEN + plugin.spellList.get(SpellsMain.playerBooks.get(event.getPlayer().getDisplayName()).getCurrentSpell()).getName()); // Print spell with green.
 			}
 			else // If they don't.
 			{
-				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_RED + plugin.spellList.get(SpellsMain.playerBooks.get(event.getPlayer().getName()).getCurrentSpell()).getName()); // Print spell with red.
+				event.getPlayer().sendMessage("Selected spell: " + ChatColor.DARK_RED + plugin.spellList.get(SpellsMain.playerBooks.get(event.getPlayer().getDisplayName()).getCurrentSpell()).getName()); // Print spell with red.
 			}
 		}
 		for(int i=0;i<plugin.spellOnItemHeldChangeList.size();i++){
@@ -85,114 +85,114 @@ public class SPPlayerListener extends PlayerListener {
 			Entity entity=event.getRightClicked();
 			if(entity instanceof LivingEntity){
 				if(entity instanceof HumanEntity){
-					plugin.lastHumanEntity.put(event.getPlayer().getName(),(HumanEntity)entity);
+					plugin.lastHumanEntity.put(event.getPlayer().getDisplayName(),(HumanEntity)entity);
 					if(entity instanceof Player){
-						plugin.lastPlayer.put(event.getPlayer().getName(),(Player)entity);
+						plugin.lastPlayer.put(event.getPlayer().getDisplayName(),(Player)entity);
 					}
 				}
 				else if(entity instanceof Creature){
-					plugin.lastCreature.put(event.getPlayer().getName(), (Creature)entity);
+					plugin.lastCreature.put(event.getPlayer().getDisplayName(), (Creature)entity);
 					if(entity instanceof WaterMob){
-						plugin.lastWaterMob.put(event.getPlayer().getName(), (WaterMob)entity);
+						plugin.lastWaterMob.put(event.getPlayer().getDisplayName(), (WaterMob)entity);
 						if(entity instanceof Squid){
-							plugin.lastSquid.put(event.getPlayer().getName(),(Squid)entity);
+							plugin.lastSquid.put(event.getPlayer().getDisplayName(),(Squid)entity);
 						}
 					}
 					else if(entity instanceof Animals){
-						plugin.lastAnimal.put(event.getPlayer().getName(),(Animals)entity);
+						plugin.lastAnimal.put(event.getPlayer().getDisplayName(),(Animals)entity);
 						if(entity instanceof Chicken){
-							plugin.lastChicken.put(event.getPlayer().getName(),(Chicken)entity);
+							plugin.lastChicken.put(event.getPlayer().getDisplayName(),(Chicken)entity);
 						}
 						else if(entity instanceof Cow){
-							plugin.lastCow.put(event.getPlayer().getName(),(Cow)entity);
+							plugin.lastCow.put(event.getPlayer().getDisplayName(),(Cow)entity);
 						}
 						else if(entity instanceof Pig){
-							plugin.lastPig.put(event.getPlayer().getName(),(Pig)entity);
+							plugin.lastPig.put(event.getPlayer().getDisplayName(),(Pig)entity);
 						}
 						else if(entity instanceof Sheep){
-							plugin.lastSheep.put(event.getPlayer().getName(),(Sheep)entity);
+							plugin.lastSheep.put(event.getPlayer().getDisplayName(),(Sheep)entity);
 						}
 						else if(entity instanceof Wolf){
-							plugin.lastWolf.put(event.getPlayer().getName(),(Wolf)entity);
+							plugin.lastWolf.put(event.getPlayer().getDisplayName(),(Wolf)entity);
 						}
 					}
 					else if(entity instanceof Monster){
-						plugin.lastMonster.put(event.getPlayer().getName(), (Monster)entity);
+						plugin.lastMonster.put(event.getPlayer().getDisplayName(), (Monster)entity);
 						if(entity instanceof Zombie){
-							plugin.lastZombie.put(event.getPlayer().getName(), (Zombie)entity);
+							plugin.lastZombie.put(event.getPlayer().getDisplayName(), (Zombie)entity);
 							if(entity instanceof PigZombie){
-								plugin.lastPigZombie.put(event.getPlayer().getName(),(PigZombie)entity);
+								plugin.lastPigZombie.put(event.getPlayer().getDisplayName(),(PigZombie)entity);
 							}
 						}
 						else if(entity instanceof Creeper){
-							plugin.lastCreeper.put(event.getPlayer().getName(),(Creeper)entity);
+							plugin.lastCreeper.put(event.getPlayer().getDisplayName(),(Creeper)entity);
 						}
 						else if(entity instanceof Giant){
-							plugin.lastGiant.put(event.getPlayer().getName(),(Giant)entity);
+							plugin.lastGiant.put(event.getPlayer().getDisplayName(),(Giant)entity);
 						}
 						else if(entity instanceof Skeleton){
-							plugin.lastSkeleton.put(event.getPlayer().getName(),(Skeleton)entity);
+							plugin.lastSkeleton.put(event.getPlayer().getDisplayName(),(Skeleton)entity);
 						}
 						else if(entity instanceof Spider){
-							plugin.lastSpider.put(event.getPlayer().getName(),(Spider)entity);
+							plugin.lastSpider.put(event.getPlayer().getDisplayName(),(Spider)entity);
 						}
 					}
 					else if(entity instanceof Flying){
-						plugin.lastFlying.put(event.getPlayer().getName(),(Flying)entity);
+						plugin.lastFlying.put(event.getPlayer().getDisplayName(),(Flying)entity);
 						if(entity instanceof Ghast){
-							plugin.lastGhast.put(event.getPlayer().getName(),(Ghast)entity);
+							plugin.lastGhast.put(event.getPlayer().getDisplayName(),(Ghast)entity);
 						}
 					}
 					else if(entity instanceof Slime){
-						plugin.lastSlime.put(event.getPlayer().getName(),(Slime)entity);
+						plugin.lastSlime.put(event.getPlayer().getDisplayName(),(Slime)entity);
 					}
 				}
 				else{
-					plugin.lastNotLivingEntity.put(event.getPlayer().getName(), entity);
+					plugin.lastNotLivingEntity.put(event.getPlayer().getDisplayName(), entity);
 					if(entity instanceof Projectile && !(entity instanceof Fireball)){
-						plugin.lastProjectile.put(event.getPlayer().getName(),(Projectile)entity);
+						plugin.lastProjectile.put(event.getPlayer().getDisplayName(),(Projectile)entity);
 						if(entity instanceof Arrow){
-							plugin.lastArrow.put(event.getPlayer().getName(),(Arrow)entity);
+							plugin.lastArrow.put(event.getPlayer().getDisplayName(),(Arrow)entity);
 						}
 						else if(entity instanceof Egg){
-							plugin.lastEgg.put(event.getPlayer().getName(),(Egg)entity);
+							plugin.lastEgg.put(event.getPlayer().getDisplayName(),(Egg)entity);
 						}
 						else if(entity instanceof Snowball){
-							plugin.lastSnowball.put(event.getPlayer().getName(),(Snowball)entity);
+							plugin.lastSnowball.put(event.getPlayer().getDisplayName(),(Snowball)entity);
 						}
 					}
 					else if(entity instanceof Vehicle && !(entity instanceof Pig)){
-						plugin.lastVehicle.put(event.getPlayer().getName(),(Vehicle)entity);
+						plugin.lastVehicle.put(event.getPlayer().getDisplayName(),(Vehicle)entity);
 						if(entity instanceof Boat){
-							plugin.lastBoat.put(event.getPlayer().getName(),(Boat)entity);
+							plugin.lastBoat.put(event.getPlayer().getDisplayName(),(Boat)entity);
 						}
 						else if(entity instanceof Minecart){
-							plugin.lastMinecart.put(event.getPlayer().getName(),(Minecart)entity);
+							plugin.lastMinecart.put(event.getPlayer().getDisplayName(),(Minecart)entity);
 						}
 						else if(entity instanceof PoweredMinecart){
-							plugin.lastPoweredMinecart.put(event.getPlayer().getName(),(PoweredMinecart)entity);
+							plugin.lastPoweredMinecart.put(event.getPlayer().getDisplayName(),(PoweredMinecart)entity);
 						}
 						else if(entity instanceof StorageMinecart){
-							plugin.lastStorageMinecart.put(event.getPlayer().getName(),(StorageMinecart)entity);
+							plugin.lastStorageMinecart.put(event.getPlayer().getDisplayName(),(StorageMinecart)entity);
 						}
 					}
 					else if(entity instanceof Explosive){
-						plugin.lastExplosive.put(event.getPlayer().getName(),(Explosive)entity);
+						plugin.lastExplosive.put(event.getPlayer().getDisplayName(),(Explosive)entity);
 						if(entity instanceof Fireball){
-							plugin.lastFireball.put(event.getPlayer().getName(),(Fireball)entity);
+							plugin.lastFireball.put(event.getPlayer().getDisplayName(),(Fireball)entity);
 						}
 						else if(entity instanceof TNTPrimed){
-							plugin.lastTNTPrimed.put(event.getPlayer().getName(),(TNTPrimed)entity);
+							plugin.lastTNTPrimed.put(event.getPlayer().getDisplayName(),(TNTPrimed)entity);
 						}
 					}
 					else if(entity instanceof FallingSand){
-						plugin.lastFallingSand.put(event.getPlayer().getName(),(FallingSand)entity);
+						plugin.lastFallingSand.put(event.getPlayer().getDisplayName(),(FallingSand)entity);
 					}
 					else if(entity instanceof Item){
-						plugin.lastItem.put(event.getPlayer().getName(),(Item)entity);
+						plugin.lastItem.put(event.getPlayer().getDisplayName(),(Item)entity);
 					}
 					else if(entity instanceof Painting){
-						plugin.lastPainting.put(event.getPlayer().getName(),(Painting)entity);
+						plugin.lastPainting.put(event.getPlayer().getDisplayName(),(Painting)entity);
 					}
 				}
 			}
@@ -250,7 +250,7 @@ public class SPPlayerListener extends PlayerListener {
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
 		Player player = event.getPlayer(); // Set the player object.
-		SpellsMain.playerBooks.put(player.getName(), new SpellBook(player, plugin)); // Add a new spellbook for the player to the hashmap.
+		SpellsMain.playerBooks.put(player.getDisplayName(), new SpellBook(player, plugin)); // Add a new spellbook for the player to the hashmap.
 		for(int i=0;i<plugin.spellOnPlayerJoinList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerJoinList.get(i)).onPlayerJoin(event);
 		}
@@ -259,7 +259,7 @@ public class SPPlayerListener extends PlayerListener {
 	public void onPlayerQuit(PlayerQuitEvent event)
 	{
 		Player player = event.getPlayer(); // Set the player object.
-		SpellsMain.playerBooks.remove(player.getName()); // Remove the player's spellbook from the hashmap.
+		SpellsMain.playerBooks.remove(player.getDisplayName()); // Remove the player's spellbook from the hashmap.
 		for(int i=0;i<plugin.spellOnPlayerQuitList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerQuitList.get(i)).onPlayerQuit(event);
 		}
@@ -271,11 +271,12 @@ public class SPPlayerListener extends PlayerListener {
 		Player player = event.getPlayer(); // Set the player object.		
 		
 		if (player.getItemInHand().getType() == Material.GOLD_HOE){
-			if(!plugin.cooldowns.containsKey(event.getPlayer().getName())){
+			if(!plugin.cooldowns.containsKey(event.getPlayer().getDisplayName())){
 				ArrayList<Integer> cooldowns=new ArrayList<Integer>(0);
 				for(int i=0;i<plugin.spellList.size();i++){
 					cooldowns.add(0);
 				}
+				plugin.playersWithCooldowns.add(event.getPlayer().getDisplayName());
 			}
 			event.setCancelled(true);	//Cancel the event. This only overrides the default gold hoe behavior, not calls to plugins.
 		}
@@ -283,16 +284,16 @@ public class SPPlayerListener extends PlayerListener {
 		// Left clicking air or a block event:
 		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they right clicked with the gold hoe...
 		{
-			if(plugin.spellList.get(SpellsMain.playerBooks.get(player.getName()).getCurrentSpell()).playerSelect){
-				SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
+			if(plugin.spellList.get(SpellsMain.playerBooks.get(player.getDisplayName()).getCurrentSpell()).playerSelect){
+				SpellBook spellBook = SpellsMain.playerBooks.get(player.getDisplayName());
 				plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);
 			}
 			else{
-				SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
+				SpellBook spellBook = SpellsMain.playerBooks.get(player.getDisplayName());
 				if(plugin.cooldowns.get(event.getPlayer()).get(spellBook.getCurrentSpell())==0){
 					if(plugin.spellList.get(spellBook.getCurrentSpell()).removeRequiredItemsFromInventory(event.getPlayer().getInventory())){
 						plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);		//Cast the spell that is selected.
-						ArrayList<Integer> cooldowns = plugin.cooldowns.get(event.getPlayer().getName());
+						ArrayList<Integer> cooldowns = plugin.cooldowns.get(event.getPlayer().getDisplayName());
 						cooldowns.set(cooldowns.get(spellBook.getCurrentSpell()), plugin.spellList.get(spellBook.getCurrentSpell()).cooldown);
 						//TODO: Remove the spell remove item statements from all the spells.
 					}
@@ -301,11 +302,11 @@ public class SPPlayerListener extends PlayerListener {
 					}
 				}
 				else{
-					if(plugin.spellList.get(spellBook.getCurrentSpell()).checkInventoryRequirements(player.getInventory())){
+					if(plugin.spellList.get(spellBook.getCurrentSpell()).checkInventoryRequirements(event.getPlayer().getInventory())){
 						event.getPlayer().sendMessage(returnPrettySpellReqs(spellBook.getCurrentSpell()));
 					}
 					else{
-						event.getPlayer().sendMessage("You can't cast this spell yet, because you used it too recently. You can use it in "+plugin.cooldowns.get(event.getPlayer().getName()).get(spellBook.getCurrentSpell())/20+"seconds");
+						event.getPlayer().sendMessage("You can't cast this spell yet, because you used it too recently. You can use it in "+plugin.cooldowns.get(event.getPlayer().getDisplayName()).get(spellBook.getCurrentSpell())/20+"seconds");
 					}
 				}
 			}
@@ -314,7 +315,7 @@ public class SPPlayerListener extends PlayerListener {
 		// Right clicking air or a block event:
 		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they left clicked with the gold hoe.
 		{
-			SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
+			SpellBook spellBook = SpellsMain.playerBooks.get(player.getDisplayName());
 			spellBook.nextSpell(player); // Scroll through spells.
 		}
 		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE){
