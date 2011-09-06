@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * This is the main spell class that all spells must extend.
  */
 public abstract class Spell{
-	
+	public final int cooldown=0;
 	public static SpellsMain plugin;
 	
 	public Spell() { } // Empty constructor.

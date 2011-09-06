@@ -41,7 +41,6 @@ public class SpellBook {
 			{
 				return i;
 			}
-			else { }
 		}
 		return spellRegistry.size() + 1;
 	}

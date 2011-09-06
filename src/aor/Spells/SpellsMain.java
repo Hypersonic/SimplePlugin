@@ -16,17 +16,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.ChatColor;
 
-import aor.Spells.Spells.DecoySpell;
-import aor.Spells.Spells.ExampleSpell;
-import aor.Spells.Spells.ExampleSpell2;
-import aor.Spells.Spells.ExplosionSpell;
-import aor.Spells.Spells.MidasTouch;
-import aor.Spells.Spells.NetSpell;
-import aor.Spells.Spells.RapidfireSpell;
-import aor.Spells.Spells.SpikeFortSpell;
-import aor.Spells.Spells.SpikeSpell;
-import aor.Spells.Spells.SpikeWallSpell;
-import aor.Spells.Spells.Tornado;
+import aor.Spells.Spells.*;
 import aor.Spells.SpellBook;
 
 public class SpellsMain extends JavaPlugin {
@@ -144,6 +134,7 @@ public class SpellsMain extends JavaPlugin {
 	public HashMap<String,WaterMob> lastWaterMob=new HashMap<String,WaterMob>();
 	public HashMap<String,Wolf> lastWolf=new HashMap<String,Wolf>();
 	public HashMap<String,Zombie> lastZombie=new HashMap<String,Zombie>();
+	public HashMap<String,ArrayList<Integer>> cooldowns=new HashMap<String,ArrayList<Integer>>();
 	public void onDisable() {
 		isDisabled=true;
 		for(int i=0;i<spellList.size();i++){

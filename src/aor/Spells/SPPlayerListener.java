@@ -271,6 +271,12 @@ public class SPPlayerListener extends PlayerListener {
 		Player player = event.getPlayer(); // Set the player object.		
 		
 		if (player.getItemInHand().getType() == Material.GOLD_HOE){
+			if(!plugin.cooldowns.containsKey(event.getPlayer().getName())){
+				ArrayList<Integer> cooldowns=new ArrayList<Integer>(0);
+				for(int i=0;i<plugin.spellList.size();i++){
+					cooldowns.add(0);
+				}
+			}
 			event.setCancelled(true);	//Cancel the event. This only overrides the default gold hoe behavior, not calls to plugins.
 		}
 		
@@ -283,13 +289,24 @@ public class SPPlayerListener extends PlayerListener {
 			}
 			else{
 				SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
-				if(plugin.spellList.get(spellBook.getCurrentSpell()).removeRequiredItemsFromInventory(event.getPlayer().getInventory())){
-					plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);		//Cast the spell that is selected.
-					
-					//TODO: Remove the spell remove item statements from all the spells.
+				if(plugin.cooldowns.get(event.getPlayer()).get(spellBook.getCurrentSpell())==0){
+					if(plugin.spellList.get(spellBook.getCurrentSpell()).removeRequiredItemsFromInventory(event.getPlayer().getInventory())){
+						plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);		//Cast the spell that is selected.
+						ArrayList<Integer> cooldowns = plugin.cooldowns.get(event.getPlayer().getName());
+						cooldowns.set(cooldowns.get(spellBook.getCurrentSpell()), plugin.spellList.get(spellBook.getCurrentSpell()).cooldown);
+						//TODO: Remove the spell remove item statements from all the spells.
+					}
+					else {
+						event.getPlayer().sendMessage(returnPrettySpellReqs(spellBook.getCurrentSpell()));
+					}
 				}
-				else {
-					event.getPlayer().sendMessage(returnPrettySpellReqs(spellBook.getCurrentSpell()));
+				else{
+					if(plugin.spellList.get(spellBook.getCurrentSpell()).checkInventoryRequirements(player.getInventory())){
+						event.getPlayer().sendMessage(returnPrettySpellReqs(spellBook.getCurrentSpell()));
+					}
+					else{
+						event.getPlayer().sendMessage("You can't cast this spell yet, because you used it too recently. You can use it in "+plugin.cooldowns.get(event.getPlayer().getName()).get(spellBook.getCurrentSpell())/20+"seconds");
+					}
 				}
 			}
 		}
@@ -301,6 +318,7 @@ public class SPPlayerListener extends PlayerListener {
 			spellBook.nextSpell(player); // Scroll through spells.
 		}
 		if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE){
+			
 		}
 		for(int i=0;i<plugin.spellOnPlayerInteractList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerInteractList.get(i)).onPlayerInteract(event);
