@@ -406,6 +406,6 @@ public abstract class Spell{
 	public void onPigZap(PigZapEvent event){}
 	public boolean playerSelect=false;
 	public Player lastSelectedPlayer(Player player){
-		return plugin.lastPlayer.get(player);
+		return plugin.lastPlayer.get(player.getName());
 	}
 }
