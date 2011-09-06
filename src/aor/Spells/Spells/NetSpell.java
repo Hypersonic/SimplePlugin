@@ -48,7 +48,7 @@ public class NetSpell extends Spell {
 					loc.getWorld().getBlockAt(loc).setType(Material.WEB);
 					loc.add(0, 1, 0);
 					for (int q = 0; q < 10; q++){
-					loc.getWorld().playEffect(loc, Effect.SMOKE, 31, 1000);
+						loc.getWorld().playEffect(loc, Effect.SMOKE, 31, 1000);
 					}
 					loc.getWorld().playEffect(loc, Effect.EXTINGUISH, 10, 1000);
 

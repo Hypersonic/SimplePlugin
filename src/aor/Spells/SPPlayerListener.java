@@ -1,11 +1,9 @@
 package aor.Spells;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
@@ -82,6 +80,123 @@ public class SPPlayerListener extends PlayerListener {
 		}
 	}
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent event){
+		if(event.getPlayer().getItemInHand().getType()==Material.GOLD_HOE){
+			event.setCancelled(true);
+			Entity entity=event.getRightClicked();
+			if(entity instanceof LivingEntity){
+				if(entity instanceof HumanEntity){
+					plugin.lastHumanEntity.put(event.getPlayer().getName(),(HumanEntity)entity);
+					if(entity instanceof Player){
+						plugin.lastPlayer.put(event.getPlayer().getName(),(Player)entity);
+					}
+				}
+				else if(entity instanceof Creature){
+					plugin.lastCreature.put(event.getPlayer().getName(), (Creature)entity);
+					if(entity instanceof WaterMob){
+						plugin.lastWaterMob.put(event.getPlayer().getName(), (WaterMob)entity);
+						if(entity instanceof Squid){
+							plugin.lastSquid.put(event.getPlayer().getName(),(Squid)entity);
+						}
+					}
+					else if(entity instanceof Animals){
+						plugin.lastAnimal.put(event.getPlayer().getName(),(Animals)entity);
+						if(entity instanceof Chicken){
+							plugin.lastChicken.put(event.getPlayer().getName(),(Chicken)entity);
+						}
+						else if(entity instanceof Cow){
+							plugin.lastCow.put(event.getPlayer().getName(),(Cow)entity);
+						}
+						else if(entity instanceof Pig){
+							plugin.lastPig.put(event.getPlayer().getName(),(Pig)entity);
+						}
+						else if(entity instanceof Sheep){
+							plugin.lastSheep.put(event.getPlayer().getName(),(Sheep)entity);
+						}
+						else if(entity instanceof Wolf){
+							plugin.lastWolf.put(event.getPlayer().getName(),(Wolf)entity);
+						}
+					}
+					else if(entity instanceof Monster){
+						plugin.lastMonster.put(event.getPlayer().getName(), (Monster)entity);
+						if(entity instanceof Zombie){
+							plugin.lastZombie.put(event.getPlayer().getName(), (Zombie)entity);
+							if(entity instanceof PigZombie){
+								plugin.lastPigZombie.put(event.getPlayer().getName(),(PigZombie)entity);
+							}
+						}
+						else if(entity instanceof Creeper){
+							plugin.lastCreeper.put(event.getPlayer().getName(),(Creeper)entity);
+						}
+						else if(entity instanceof Giant){
+							plugin.lastGiant.put(event.getPlayer().getName(),(Giant)entity);
+						}
+						else if(entity instanceof Skeleton){
+							plugin.lastSkeleton.put(event.getPlayer().getName(),(Skeleton)entity);
+						}
+						else if(entity instanceof Spider){
+							plugin.lastSpider.put(event.getPlayer().getName(),(Spider)entity);
+						}
+					}
+					else if(entity instanceof Flying){
+						plugin.lastFlying.put(event.getPlayer().getName(),(Flying)entity);
+						if(entity instanceof Ghast){
+							plugin.lastGhast.put(event.getPlayer().getName(),(Ghast)entity);
+						}
+					}
+					else if(entity instanceof Slime){
+						plugin.lastSlime.put(event.getPlayer().getName(),(Slime)entity);
+					}
+				}
+				else{
+					plugin.lastNotLivingEntity.put(event.getPlayer().getName(), entity);
+					if(entity instanceof Projectile && !(entity instanceof Fireball)){
+						plugin.lastProjectile.put(event.getPlayer().getName(),(Projectile)entity);
+						if(entity instanceof Arrow){
+							plugin.lastArrow.put(event.getPlayer().getName(),(Arrow)entity);
+						}
+						else if(entity instanceof Egg){
+							plugin.lastEgg.put(event.getPlayer().getName(),(Egg)entity);
+						}
+						else if(entity instanceof Snowball){
+							plugin.lastSnowball.put(event.getPlayer().getName(),(Snowball)entity);
+						}
+					}
+					else if(entity instanceof Vehicle && !(entity instanceof Pig)){
+						plugin.lastVehicle.put(event.getPlayer().getName(),(Vehicle)entity);
+						if(entity instanceof Boat){
+							plugin.lastBoat.put(event.getPlayer().getName(),(Boat)entity);
+						}
+						else if(entity instanceof Minecart){
+							plugin.lastMinecart.put(event.getPlayer().getName(),(Minecart)entity);
+						}
+						else if(entity instanceof PoweredMinecart){
+							plugin.lastPoweredMinecart.put(event.getPlayer().getName(),(PoweredMinecart)entity);
+						}
+						else if(entity instanceof StorageMinecart){
+							plugin.lastStorageMinecart.put(event.getPlayer().getName(),(StorageMinecart)entity);
+						}
+					}
+					else if(entity instanceof Explosive){
+						plugin.lastExplosive.put(event.getPlayer().getName(),(Explosive)entity);
+						if(entity instanceof Fireball){
+							plugin.lastFireball.put(event.getPlayer().getName(),(Fireball)entity);
+						}
+						else if(entity instanceof TNTPrimed){
+							plugin.lastTNTPrimed.put(event.getPlayer().getName(),(TNTPrimed)entity);
+						}
+					}
+					else if(entity instanceof FallingSand){
+						plugin.lastFallingSand.put(event.getPlayer().getName(),(FallingSand)entity);
+					}
+					else if(entity instanceof Item){
+						plugin.lastItem.put(event.getPlayer().getName(),(Item)entity);
+					}
+					else if(entity instanceof Painting){
+						plugin.lastPainting.put(event.getPlayer().getName(),(Painting)entity);
+					}
+				}
+			}
+		}
 		for(int i=0;i<plugin.spellOnPlayerInteractEntityList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerInteractEntityList.get(i)).onPlayerInteractEntity(event);
 		}
@@ -90,6 +205,7 @@ public class SPPlayerListener extends PlayerListener {
 		for(int i=0;i<plugin.spellOnPlayerKickList.size();i++){
 			plugin.spellList.get(plugin.spellOnPlayerKickList.get(i)).onPlayerKick(event);
 		}
+		
 	}
 	public void onPlayerLogin(PlayerLoginEvent event){
 		for(int i=0;i<plugin.spellOnPlayerLoginList.size();i++){
@@ -161,47 +277,9 @@ public class SPPlayerListener extends PlayerListener {
 		// Left clicking air or a block event:
 		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they right clicked with the gold hoe...
 		{
-			if(plugin.spellList.get(SpellsMain.playerBooks.get(player.getName()).getCurrentSpell()).playerSelect&&SpellsMain.selectPlayersFromADistance){
-				ArrayList<Double> playerDistances=new ArrayList<Double>();
-				ArrayList<String> playerNames=new ArrayList<String>();
-				ArrayList<Player> players=new ArrayList<Player>(0);
-				for(Entity entity:player.getNearbyEntities(128,128,128)){
-					if(entity instanceof Player){
-						players.add((Player)entity);
-					}
-				}
-				for(Player player3:event.getPlayer().getWorld().getPlayers()){
-					for(int i=0;i<players.size();i++){
-						player3.sendMessage(players.get(i).getName());
-					}
-				}
-				for(int i=0;i<players.size();i++){
-					playerDistances.add(SpellsMain.distance(players.get(i).getLocation(),player.getTargetBlock(null, 256).getLocation()));
-					playerNames.add(players.get(i).getDisplayName());
-				}
-				for(Player player2:event.getPlayer().getWorld().getPlayers()){
-					for(int i=0;i<playerDistances.size();i++){
-						player2.sendMessage(playerNames.get(i)+" "+playerDistances.get(i));
-					}
-				}
-				double shortest=-1;
-				String name="";
-				while(playerDistances.size()>0){
-					if(playerDistances.get(0)>shortest){
-						shortest=playerDistances.get(0);
-						name=playerNames.get(0);
-					}
-					playerDistances.remove(0);
-					playerNames.remove(0);
-				}
-				if(shortest<600){
-					plugin.selectedPlayerNames.put(player.getName(), name);
-					player.sendMessage("You have selected "+name+".");
-				}
-				else{
-					SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
-					plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);
-				}
+			if(plugin.spellList.get(SpellsMain.playerBooks.get(player.getName()).getCurrentSpell()).playerSelect){
+				SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
+				plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);
 			}
 			else{
 				SpellBook spellBook = SpellsMain.playerBooks.get(player.getName());
@@ -239,7 +317,7 @@ public class SPPlayerListener extends PlayerListener {
 			multiple = true;
 		}
 		String name = stack.getType().name().toLowerCase().replaceAll("_"," ");
-		if (multiple == true) name += "(s)";	//weird with most items. We might need a list of items that aren't plural by default Q.Q
+		if (multiple == true) name += "s";	//weird with most items. We might need a list of items that aren't plural by default Q.Q
 		
 		
 		prettyfiedStackName += size + " " + name;
