@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * This is the main spell class that all spells must extend.
  */
 public abstract class Spell{
-	
+	public final int cooldown=0;
 	public static SpellsMain plugin;
 	
 	public Spell() { } // Empty constructor.
@@ -406,6 +406,6 @@ public abstract class Spell{
 	public void onPigZap(PigZapEvent event){}
 	public boolean playerSelect=false;
 	public Player lastSelectedPlayer(Player player){
-		return plugin.lastPlayer.get(player.getName());
+		return plugin.lastPlayer.get(player.getDisplayName());
 	}
 }

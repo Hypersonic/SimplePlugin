@@ -16,17 +16,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.ChatColor;
 
-import aor.Spells.Spells.DecoySpell;
-import aor.Spells.Spells.ExampleSpell;
-import aor.Spells.Spells.ExampleSpell2;
-import aor.Spells.Spells.ExplosionSpell;
-import aor.Spells.Spells.MidasTouch;
-import aor.Spells.Spells.NetSpell;
-import aor.Spells.Spells.RapidfireSpell;
-import aor.Spells.Spells.SpikeFortSpell;
-import aor.Spells.Spells.SpikeSpell;
-import aor.Spells.Spells.SpikeWallSpell;
-import aor.Spells.Spells.Tornado;
+import aor.Spells.Spells.*;
 import aor.Spells.SpellBook;
 
 public class SpellsMain extends JavaPlugin {
@@ -144,6 +134,8 @@ public class SpellsMain extends JavaPlugin {
 	public HashMap<String,WaterMob> lastWaterMob=new HashMap<String,WaterMob>();
 	public HashMap<String,Wolf> lastWolf=new HashMap<String,Wolf>();
 	public HashMap<String,Zombie> lastZombie=new HashMap<String,Zombie>();
+	public HashMap<String,ArrayList<Integer>> cooldowns=new HashMap<String,ArrayList<Integer>>();
+	public ArrayList<String> playersWithCooldowns=new ArrayList<String>();
 	public void onDisable() {
 		isDisabled=true;
 		for(int i=0;i<spellList.size();i++){
@@ -166,6 +158,7 @@ public class SpellsMain extends JavaPlugin {
 		spellList.add(new ExampleSpell2(this));
 		spellList.add(new MidasTouch(this));
 		spellList.add(new DecoySpell(this));
+		spellList.add(new EnchantmentSpell(this));
 		for(int i=0;i<spellList.size();i++){
 			if(spellList.get(i).onBlockBreak){
 				spellOnBlockBreakList.add(i);
@@ -556,7 +549,7 @@ public class SpellsMain extends JavaPlugin {
 		Player[] onlinePlayers = this.getServer().getOnlinePlayers();
 		for (int i = 0; i < onlinePlayers.length; i++) // For every online players...
 		{
-			SpellsMain.playerBooks.put(onlinePlayers[i].getName(), new SpellBook(onlinePlayers[i], this)); // Add a new spellbook for the player to the hashmap.
+			SpellsMain.playerBooks.put(onlinePlayers[i].getDisplayName(), new SpellBook(onlinePlayers[i], this)); // Add a new spellbook for the player to the hashmap.
 		}
 		log.info("Spells Alpha-0.01 enabled!");
 		log.info("Please note that this is a development build of Spells, and, while mostly stable, is still in ALPHA. Please report all bugs at http://dev.bukkit.org/server-mods/spells/");
@@ -574,24 +567,24 @@ public class SpellsMain extends JavaPlugin {
 				Player player = (Player)sender;
 				if (args.length == 0) // They didn't give an arg.
 				{
-					if ((spellList.get(SpellsMain.playerBooks.get(player.getName()).getCurrentSpell())).checkInventoryRequirements(player.getInventory())) // If they have the materials.
+					if ((spellList.get(SpellsMain.playerBooks.get(player.getDisplayName()).getCurrentSpell())).checkInventoryRequirements(player.getInventory())) // If they have the materials.
 					{
-						sender.sendMessage("Current spell " + ChatColor.DARK_GREEN + "(" + spellList.get(SpellsMain.playerBooks.get(player.getName()).getCurrentSpell()).getName() + ")" + ChatColor.WHITE + ": " + spellList.get(SpellsMain.playerBooks.get(player.getName()).getCurrentSpell()).getDescription()); // Give them the current spell description in green.
+						sender.sendMessage("Current spell " + ChatColor.DARK_GREEN + "(" + spellList.get(SpellsMain.playerBooks.get(player.getDisplayName()).getCurrentSpell()).getName() + ")" + ChatColor.WHITE + ": " + spellList.get(SpellsMain.playerBooks.get(player.getDisplayName()).getCurrentSpell()).getDescription()); // Give them the current spell description in green.
 					}
 					else // If they don't...
 					{
-						sender.sendMessage("Current spell " + ChatColor.DARK_RED + "(" + spellList.get(SpellsMain.playerBooks.get(player.getName()).getCurrentSpell()).getName() + ")" + ChatColor.WHITE + ": " + spellList.get(SpellsMain.playerBooks.get(player.getName()).getCurrentSpell()).getDescription()); // Give them the current spell description in red.
+						sender.sendMessage("Current spell " + ChatColor.DARK_RED + "(" + spellList.get(SpellsMain.playerBooks.get(player.getDisplayName()).getCurrentSpell()).getName() + ")" + ChatColor.WHITE + ": " + spellList.get(SpellsMain.playerBooks.get(player.getDisplayName()).getCurrentSpell()).getDescription()); // Give them the current spell description in red.
 					}
 				}
-				else if (this.playerBooks.get(player.getName()).getSpell(args[0]) != null) // They gave an arg that matches a spel.
+				else if (this.playerBooks.get(player.getDisplayName()).getSpell(args[0]) != null) // They gave an arg that matches a spel.
 				{
-					if (spellList.get(this.playerBooks.get(player.getName()).getSpell(args[0])).checkInventoryRequirements(player.getInventory())) // If they have the materials...
+					if (spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).checkInventoryRequirements(player.getInventory())) // If they have the materials...
 					{
-					sender.sendMessage(ChatColor.DARK_GREEN + spellList.get(this.playerBooks.get(player.getName()).getSpell(args[0])).getName() + ChatColor.WHITE + ": " + spellList.get(this.playerBooks.get(player.getName()).getSpell(args[0])).getDescription()); // Give them the spell description in green.
+					sender.sendMessage(ChatColor.DARK_GREEN + spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).getName() + ChatColor.WHITE + ": " + spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).getDescription()); // Give them the spell description in green.
 					}
 					else // If they don't ...
 					{
-						sender.sendMessage(ChatColor.DARK_RED + spellList.get(this.playerBooks.get(player.getName()).getSpell(args[0])).getName() + ChatColor.WHITE + ": " + spellList.get(this.playerBooks.get(player.getName()).getSpell(args[0])).getDescription()); // Give them the spell description in red.
+						sender.sendMessage(ChatColor.DARK_RED + spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).getName() + ChatColor.WHITE + ": " + spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).getDescription()); // Give them the spell description in red.
 					}
 				}
 				else
@@ -608,7 +601,7 @@ public class SpellsMain extends JavaPlugin {
 			if (sender instanceof Player) // If they're a player.
 			{
 				Player player = (Player)sender; // The player.
-				SpellBook playerBook = SpellsMain.playerBooks.get(player.getName());
+				SpellBook playerBook = SpellsMain.playerBooks.get(player.getDisplayName());
 				ArrayList<Integer> spellRegistry = playerBook.spellRegistry; // The player's spell registry.
 				sender.sendMessage("Currently available spells (arrow denotes selection):"); // Begin the list.
 				for (int i = 0; i < spellRegistry.size(); i++) // Go through the spell registry...
@@ -634,10 +627,10 @@ public class SpellsMain extends JavaPlugin {
 			{
 				Player player = (Player)sender; // The player.
 				
-				if (this.playerBooks.get(player.getName()).getSpell(args[0]) != null) // If the argument was a spell...
+				if (this.playerBooks.get(player.getDisplayName()).getSpell(args[0]) != null) // If the argument was a spell...
 				{
-					this.playerBooks.get(player.getName()).setSpell(this.playerBooks.get(player.getName()).getSpellIndex(args[0]));
-					sender.sendMessage("Set current spell to: " + this.playerBooks.get(player.getName()).spellFormat(this.playerBooks.get(player.getName()).getSpell(args[0]), player) + spellList.get(this.playerBooks.get(player.getName()).getSpell(args[0])).getName());
+					this.playerBooks.get(player.getDisplayName()).setSpell(this.playerBooks.get(player.getDisplayName()).getSpellIndex(args[0]));
+					sender.sendMessage("Set current spell to: " + this.playerBooks.get(player.getDisplayName()).spellFormat(this.playerBooks.get(player.getDisplayName()).getSpell(args[0]), player) + spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).getName());
 					return true;
 				}
 				else // The argument wasn't a spell.
