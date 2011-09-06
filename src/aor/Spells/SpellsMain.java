@@ -158,321 +158,86 @@ public class SpellsMain extends JavaPlugin {
 		spellList.add(new ExampleSpell2(this));
 		spellList.add(new MidasTouch(this));
 		spellList.add(new DecoySpell(this));
-		spellList.add(new EnchantmentSpell(this));
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockBreak){
-				spellOnBlockBreakList.add(i);
-			}
+
+		for(int i=0;i<spellList.size();i++)
+		{
+			final Spell spell = spellList.get(i);
+			if(spell.onBlockBreak) spellOnBlockBreakList.add(i);
+			if(spell.onBlockBurn) spellOnBlockBurnList.add(i);
+			if(spell.onBlockCanBuild) spellOnBlockCanBuildList.add(i);		
+			if(spell.onBlockDamage) spellOnBlockDamageList.add(i);
+			if(spell.onBlockDispence) spellOnBlockDispenceList.add(i);
+			if(spell.onBlockFromTo) spellOnBlockFromToList.add(i);
+			if(spell.onBlockIgnite) spellOnBlockIgniteList.add(i);
+			if(spell.onBlockPhysics) spellOnBlockPhysicsList.add(i);
+			if(spell.onBlockPlace) spellOnBlockPlaceList.add(i);
+			if(spell.onBlockRedstoneChange) spellOnBlockRedstoneChangeList.add(i);
+			
+			if(spell.onLeavesDecay) spellOnLeavesDecayList.add(i);
+			if(spell.onSignChange) spellOnSignChangeList.add(i);
+			if(spell.onBlockForm) spellOnBlockFormList.add(i);
+			if(spell.onInventoryOpen) spellOnInventoryOpenList.add(i);
+			if(spell.onItemHeldChange) spellOnItemHeldChangeList.add(i);
+			
+			if(spell.onPlayerAnimation) spellOnPlayerAnimationList.add(i);
+			if(spell.onPlayerBedEnter) spellOnPlayerBedEnterList.add(i);
+			if(spell.onPlayerBedLeave) spellOnPlayerBedLeaveList.add(i);
+			if(spell.onPlayerBucketEmpty) spellOnPlayerBucketEmptyList.add(i);
+			if(spell.onPlayerBucketFill) spellOnPlayerBucketFillList.add(i);
+			if(spell.onPlayerChat) spellOnPlayerChatList.add(i);
+			if(spell.onPlayerDropItem) spellOnPlayerDropItemList.add(i);
+			if(spell.onPlayerEggThrow) spellOnPlayerEggThrowList.add(i);
+			if(spell.onPlayerInteract) spellOnPlayerInteractList.add(i);
+			if(spell.onPlayerInteractEntity) spellOnPlayerInteractEntityList.add(i);
+			if(spell.onPlayerJoin) spellOnPlayerJoinList.add(i);
+			if(spell.onPlayerKick) spellOnPlayerKickList.add(i);
+			if(spell.onPlayerLogin) spellOnPlayerLoginList.add(i);
+			if(spell.onPlayerMove) spellOnPlayerMoveList.add(i);
+			if(spell.onPlayerPickupItem) spellOnPlayerPickupItemList.add(i);
+			if(spell.onPlayerPortal) spellOnPlayerPortalList.add(i);
+			if(spell.onPlayerPreLogin) spellOnPlayerPreLoginList.add(i);
+			if(spell.onPlayerQuit) spellOnPlayerQuitList.add(i);
+			if(spell.onPlayerRespawn) spellOnPlayerRespawnList.add(i);
+			if(spell.onPlayerTeleport) spellOnPlayerTeleportList.add(i);
+			if(spell.onPlayerToggleSneak) spellOnPlayerToggleSneakList.add(i);
+			
+			if(spell.onLightningStrike) spellOnLightningStrikeList.add(i);
+			if(spell.onThunderChange) spellOnThunderChangeList.add(i);
+			if(spell.onWeatherChange) spellOnWeatherChangeList.add(i);
+			
+			if(spell.onVehicleBlockCollision) spellOnVehicleBlockCollisionList.add(i);
+			if(spell.onVehicleCreate) spellOnVehicleCreateList.add(i);
+			if(spell.onVehicleDamage) spellOnVehicleDamageList.add(i);
+			if(spell.onVehicleDestroy) spellOnVehicleDestroyList.add(i);
+			if(spell.onVehicleEnter) spellOnVehicleEnterList.add(i);
+			if(spell.onVehicleEntityCollision) spellOnVehicleEntityCollisionList.add(i);
+			if(spell.onVehicleExit) spellOnVehicleExitList.add(i);
+			if(spell.onVehicleMove) spellOnVehicleMoveList.add(i);
+			
+			if(spell.onCreatureSpawn) spellOnCreatureSpawnList.add(i);
+			if(spell.onCreeperPower) spellOnCreeperPowerList.add(i);
+			
+			if(spell.onEntityCombust) spellOnEntityCombustList.add(i);
+			if(spell.onEntityDamage) spellOnEntityDamageList.add(i);
+			if(spell.onEntityDeath) spellOnEntityDeathList.add(i);
+			if(spell.onEntityExplode) spellOnEntityExplodeList.add(i);
+			if(spell.onEntityInteract) spellOnEntityInteractList.add(i);
+			if(spell.onEntityPortalEnter) spellOnEntityPortalEnterList.add(i);
+			if(spell.onEntityTame) spellOnEntityTameList.add(i);
+			if(spell.onEntityTarget) spellOnEntityTargetList.add(i);
+			
+			if(spell.onExplosionPrime) spellOnExplosionPrimeList.add(i);
+			if(spell.onPigZap) spellOnPigZapList.add(i);
+			if(spell.playerSelect) playerSelect.add(i);
+			
+			if(spell.onPaintingBreak) spellOnPaintingBreakList.add(i);
+			if(spell.onPaintingPlace) spellOnPaintingPlaceList.add(i);
 		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockBurn){
-				spellOnBlockBurnList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockCanBuild){
-				spellOnBlockCanBuildList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockDamage){
-				spellOnBlockDamageList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockDispence){
-				spellOnBlockDispenceList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockFromTo){
-				spellOnBlockFromToList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockIgnite){
-				spellOnBlockIgniteList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockPhysics){
-				spellOnBlockPhysicsList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockPlace){
-				spellOnBlockPlaceList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockRedstoneChange){
-				spellOnBlockRedstoneChangeList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onLeavesDecay){
-				spellOnLeavesDecayList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onSignChange){
-				spellOnSignChangeList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onBlockForm){
-				spellOnBlockFormList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onInventoryOpen){
-				spellOnInventoryOpenList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onItemHeldChange){
-				spellOnItemHeldChangeList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerAnimation){
-				spellOnPlayerAnimationList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerBedEnter){
-				spellOnPlayerBedEnterList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerBedLeave){
-				spellOnPlayerBedLeaveList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerBucketEmpty){
-				spellOnPlayerBucketEmptyList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerBucketFill){
-				spellOnPlayerBucketFillList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerChat){
-				spellOnPlayerChatList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerDropItem){
-				spellOnPlayerDropItemList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerEggThrow){
-				spellOnPlayerEggThrowList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerInteract){
-				spellOnPlayerInteractList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerInteractEntity){
-				spellOnPlayerInteractEntityList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerJoin){
-				spellOnPlayerJoinList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerKick){
-				spellOnPlayerKickList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerLogin){
-				spellOnPlayerLoginList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerMove){
-				spellOnPlayerMoveList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerPickupItem){
-				spellOnPlayerPickupItemList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerPortal){
-				spellOnPlayerPortalList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerPreLogin){
-				spellOnPlayerPreLoginList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerQuit){
-				spellOnPlayerQuitList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerRespawn){
-				spellOnPlayerRespawnList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerTeleport){
-				spellOnPlayerTeleportList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPlayerToggleSneak){
-				spellOnPlayerToggleSneakList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onLightningStrike){
-				spellOnLightningStrikeList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onThunderChange){
-				spellOnThunderChangeList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onWeatherChange){
-				spellOnWeatherChangeList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onVehicleBlockCollision){
-				spellOnVehicleBlockCollisionList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onVehicleCreate){
-				spellOnVehicleCreateList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onVehicleDamage){
-				spellOnVehicleDamageList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onVehicleDestroy){
-				spellOnVehicleDestroyList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onVehicleEnter){
-				spellOnVehicleEnterList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onVehicleEntityCollision){
-				spellOnVehicleEntityCollisionList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onVehicleExit){
-				spellOnVehicleExitList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onVehicleMove){
-				spellOnVehicleMoveList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onCreatureSpawn){
-				spellOnCreatureSpawnList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onCreeperPower){
-				spellOnCreeperPowerList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onEntityCombust){
-				spellOnEntityCombustList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onEntityDamage){
-				spellOnEntityDamageList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onEntityDeath){
-				spellOnEntityDeathList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onEntityExplode){
-				spellOnEntityExplodeList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onEntityInteract){
-				spellOnEntityInteractList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onEntityPortalEnter){
-				spellOnEntityPortalEnterList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onEntityTame){
-				spellOnEntityTameList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onEntityTarget){
-				spellOnEntityTargetList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onExplosionPrime){
-				spellOnExplosionPrimeList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPaintingBreak){
-				spellOnPaintingBreakList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPaintingPlace){
-				spellOnPaintingPlaceList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).onPigZap){
-				spellOnPigZapList.add(i);
-			}
-		}
-		for(int i=0;i<spellList.size();i++){
-			if(spellList.get(i).playerSelect){
-				playerSelect.add(i);
-			}
-		}
-		PluginManager pm = this.getServer().getPluginManager();
+		final PluginManager pm = this.getServer().getPluginManager();
+
 		//Custom recipe
-		ItemStack hoe = new ItemStack(Material.GOLD_HOE,1);
-		ShapedRecipe sceptre = new ShapedRecipe(hoe);
+		final ItemStack hoe = new ItemStack(Material.GOLD_HOE,1);
+		final ShapedRecipe sceptre = new ShapedRecipe(hoe);
 		sceptre.shape("123","456","789");
 		// Set the ingredients for the custom crafting recipe
 		sceptre.setIngredient('1', Material.STICK);
@@ -546,7 +311,7 @@ public class SpellsMain extends JavaPlugin {
 		pm.registerEvent(Event.Type.PAINTING_PLACE, entityListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PIG_ZAP, entityListener, Event.Priority.Normal, this);
 		// Register players, if any.
-		Player[] onlinePlayers = this.getServer().getOnlinePlayers();
+		final Player[] onlinePlayers = this.getServer().getOnlinePlayers();
 		for (int i = 0; i < onlinePlayers.length; i++) // For every online players...
 		{
 			SpellsMain.playerBooks.put(onlinePlayers[i].getDisplayName(), new SpellBook(onlinePlayers[i], this)); // Add a new spellbook for the player to the hashmap.
@@ -558,7 +323,7 @@ public class SpellsMain extends JavaPlugin {
 	{
 		return SpellsMain.playerBooks;
 	}
-	@SuppressWarnings("static-access")
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		if(cmd.getName().equalsIgnoreCase("spellinfo")) // If the command was /spellinfo
 		{
@@ -576,15 +341,15 @@ public class SpellsMain extends JavaPlugin {
 						sender.sendMessage("Current spell " + ChatColor.DARK_RED + "(" + spellList.get(SpellsMain.playerBooks.get(player.getDisplayName()).getCurrentSpell()).getName() + ")" + ChatColor.WHITE + ": " + spellList.get(SpellsMain.playerBooks.get(player.getDisplayName()).getCurrentSpell()).getDescription()); // Give them the current spell description in red.
 					}
 				}
-				else if (this.playerBooks.get(player.getDisplayName()).getSpell(args[0]) != null) // They gave an arg that matches a spel.
+				else if (SpellsMain.playerBooks.get(player.getName()).getSpell(args[0]) != null) // They gave an arg that matches a spel.
 				{
-					if (spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).checkInventoryRequirements(player.getInventory())) // If they have the materials...
+					if (spellList.get(SpellsMain.playerBooks.get(player.getName()).getSpell(args[0])).checkInventoryRequirements(player.getInventory())) // If they have the materials...
 					{
-					sender.sendMessage(ChatColor.DARK_GREEN + spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).getName() + ChatColor.WHITE + ": " + spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).getDescription()); // Give them the spell description in green.
+					sender.sendMessage(ChatColor.DARK_GREEN + spellList.get(SpellsMain.playerBooks.get(player.getName()).getSpell(args[0])).getName() + ChatColor.WHITE + ": " + spellList.get(SpellsMain.playerBooks.get(player.getName()).getSpell(args[0])).getDescription()); // Give them the spell description in green.
 					}
 					else // If they don't ...
 					{
-						sender.sendMessage(ChatColor.DARK_RED + spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).getName() + ChatColor.WHITE + ": " + spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).getDescription()); // Give them the spell description in red.
+						sender.sendMessage(ChatColor.DARK_RED + spellList.get(SpellsMain.playerBooks.get(player.getName()).getSpell(args[0])).getName() + ChatColor.WHITE + ": " + spellList.get(SpellsMain.playerBooks.get(player.getName()).getSpell(args[0])).getDescription()); // Give them the spell description in red.
 					}
 				}
 				else
@@ -626,12 +391,12 @@ public class SpellsMain extends JavaPlugin {
 			if (sender instanceof Player) // If they're a player
 			{
 				Player player = (Player)sender; // The player.
-				
-				if (this.playerBooks.get(player.getDisplayName()).getSpell(args[0]) != null) // If the argument was a spell...
+
+				if (SpellsMain.playerBooks.get(player.getName()).getSpell(args[0]) != null) // If the argument was a spell...
 				{
-					this.playerBooks.get(player.getDisplayName()).setSpell(this.playerBooks.get(player.getDisplayName()).getSpellIndex(args[0]));
-					sender.sendMessage("Set current spell to: " + this.playerBooks.get(player.getDisplayName()).spellFormat(this.playerBooks.get(player.getDisplayName()).getSpell(args[0]), player) + spellList.get(this.playerBooks.get(player.getDisplayName()).getSpell(args[0])).getName());
-					return true;
+					SpellsMain.playerBooks.get(player.getName()).setSpell(SpellsMain.playerBooks.get(player.getName()).getSpellIndex(args[0]));
+					sender.sendMessage("Set current spell to: " + SpellsMain.playerBooks.get(player.getName()).spellFormat(SpellsMain.playerBooks.get(player.getName()).getSpell(args[0]), player) + spellList.get(SpellsMain.playerBooks.get(player.getName()).getSpell(args[0])).getName());
+ 					return true;
 				}
 				else // The argument wasn't a spell.
 				{
@@ -642,6 +407,7 @@ public class SpellsMain extends JavaPlugin {
 			else { sender.sendMessage("This command can only be used in-game."); return false; } // They're not a player.
 		}
 		return false;
+		
 	}
 	public static double distance(Location pos1,Location pos2){
 		return Math.hypot(pos1.getY()-pos2.getY(), Math.hypot(pos1.getX()-pos2.getX(),pos1.getZ()-pos1.getZ()));

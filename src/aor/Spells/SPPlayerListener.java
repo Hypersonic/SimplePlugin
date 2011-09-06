@@ -284,6 +284,7 @@ public class SPPlayerListener extends PlayerListener {
 		// Left clicking air or a block event:
 		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.GOLD_HOE) // If they right clicked with the gold hoe...
 		{
+
 //			if(plugin.spellList.get(SpellsMain.playerBooks.get(player.getDisplayName()).getCurrentSpell()).playerSelect){
 				SpellBook spellBook = SpellsMain.playerBooks.get(player.getDisplayName());
 				plugin.spellList.get(spellBook.getCurrentSpell()).castSpell(player);
