@@ -22,13 +22,20 @@ import aor.Spells.SpellBook;
 public class SpellsMain extends JavaPlugin {
 	public static final boolean selectPlayersFromADistance = true;
 	static HashMap<String, SpellBook> playerBooks = new HashMap<String, SpellBook>();
+	
+	
+	
 	//ClassListeners
 	private final SPPlayerListener playerListener = new SPPlayerListener(this);
 	private final SPBlockListener blockListener = new SPBlockListener(this);
 	private final SPVehicleListener vehicleListener = new SPVehicleListener(this);
 	private final SPEntityListener entityListener = new SPEntityListener(this);
 	private final SPWeatherListener weatherListener = new SPWeatherListener(this);
+	
+	
 	public ArrayList<Spell> spellList = new ArrayList<Spell>();
+	
+	
 	public ArrayList<Integer> spellOnBlockBreakList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> spellOnBlockBurnList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> spellOnBlockCanBuildList=new ArrayList<Integer>(0);
@@ -92,9 +99,13 @@ public class SpellsMain extends JavaPlugin {
 	public ArrayList<Integer> spellOnPigZapList=new ArrayList<Integer>(0);
 	public ArrayList<Integer> playerSelect=new ArrayList<Integer>(0);
 	public HashMap<String,String> selectedPlayerNames=new HashMap<String,String>();
+	
+	
 	public Runner runner=new Runner(this);
 	public boolean isDisabled=false;
 	Logger log = Logger.getLogger("Minecraft");//Define your logger
+	
+	
 	public HashMap<String,Animals> lastAnimal=new HashMap<String,Animals>();
 	public HashMap<String,Arrow> lastArrow=new HashMap<String,Arrow>();
 	public HashMap<String,Boat> lastBoat=new HashMap<String,Boat>();
@@ -136,6 +147,8 @@ public class SpellsMain extends JavaPlugin {
 	public HashMap<String,Zombie> lastZombie=new HashMap<String,Zombie>();
 	public HashMap<String,ArrayList<Integer>> cooldowns=new HashMap<String,ArrayList<Integer>>();
 	public ArrayList<String> playersWithCooldowns=new ArrayList<String>();
+	
+	
 	public void onDisable() {
 		isDisabled=true;
 		for(int i=0;i<spellList.size();i++){
@@ -147,6 +160,11 @@ public class SpellsMain extends JavaPlugin {
 		isDisabled=false;
 		this.getServer().getScheduler().scheduleSyncDelayedTask(this,runner,0L);
 		log.info("SimplePlugin enabling...");
+		
+		
+		
+		
+		//Spell Registration
 		spellList.add(new RapidfireSpell(this)); // Register the rapidfire spell.
 		spellList.add(new ExplosionSpell(this)); // Register explosion spell.
 		spellList.add(new SpikeSpell(this));     //   .
@@ -158,7 +176,11 @@ public class SpellsMain extends JavaPlugin {
 		spellList.add(new ExampleSpell2(this));
 		spellList.add(new MidasTouch(this));
 		spellList.add(new DecoySpell(this));
-
+		spellList.add(new EnchantmentSpell(this));
+		//End Spell Registration
+		
+		
+		//Event Registration for Spells
 		for(int i=0;i<spellList.size();i++)
 		{
 			final Spell spell = spellList.get(i);
@@ -233,8 +255,11 @@ public class SpellsMain extends JavaPlugin {
 			if(spell.onPaintingBreak) spellOnPaintingBreakList.add(i);
 			if(spell.onPaintingPlace) spellOnPaintingPlaceList.add(i);
 		}
-		final PluginManager pm = this.getServer().getPluginManager();
-
+		//End Event Registration for Spells
+		
+		
+		
+		
 		//Custom recipe
 		final ItemStack hoe = new ItemStack(Material.GOLD_HOE,1);
 		final ShapedRecipe sceptre = new ShapedRecipe(hoe);
@@ -247,7 +272,12 @@ public class SpellsMain extends JavaPlugin {
 		sceptre.setIngredient('8', Material.STICK);
 		//Give it to the server. YEAAAH!
 		this.getServer().addRecipe(sceptre);
-		//Custom recipe
+		//End Custom recipe
+		
+		
+		
+		final PluginManager pm = this.getServer().getPluginManager();
+
 		// Register the listeners.
 		pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Event.Priority.Normal, this);
@@ -310,15 +340,30 @@ public class SpellsMain extends JavaPlugin {
 		pm.registerEvent(Event.Type.PAINTING_BREAK, entityListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PAINTING_PLACE, entityListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PIG_ZAP, entityListener, Event.Priority.Normal, this);
+		//End register listeners
+		
+		
+		
 		// Register players, if any.
 		final Player[] onlinePlayers = this.getServer().getOnlinePlayers();
 		for (int i = 0; i < onlinePlayers.length; i++) // For every online players...
 		{
 			SpellsMain.playerBooks.put(onlinePlayers[i].getDisplayName(), new SpellBook(onlinePlayers[i], this)); // Add a new spellbook for the player to the hashmap.
 		}
+		//End player registration
+		
+		
+		
+		//We're enabled, so give that (with a version number) and a disclaimer to the server log.
 		log.info("Spells Alpha-0.01 enabled!");
-		log.info("Please note that this is a development build of Spells, and, while mostly stable, is still in ALPHA. Please report all bugs at http://dev.bukkit.org/server-mods/spells/");
+		log.info("Please note that this is a development build of Spells, and, while mostly stable, is still in ALPHA. "
+				+ "Please report all bugs at http://dev.bukkit.org/server-mods/spells/");
+		
+		
+		
 	}
+	
+	
 	public HashMap<String, SpellBook> getPlayerBooks()
 	{
 		return SpellsMain.playerBooks;
